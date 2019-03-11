@@ -15,7 +15,8 @@ public class AsdGame extends ApplicationAdapter {
 	float h;
 
 	SpriteBatch batch;
-	Texture playerTexture;
+    Texture playerTexture;
+    Texture bulletTexture;
 	Sprite playerSprite;
 	ArrayList<Sprite> sprites;
 
@@ -25,7 +26,8 @@ public class AsdGame extends ApplicationAdapter {
         h = Gdx.graphics.getHeight();
 
 		batch = new SpriteBatch();
-		playerTexture = new Texture("ship.png");
+        playerTexture = new Texture("ship.png");
+        bulletTexture = new Texture("bullet.png");
 
 		playerSprite = new Sprite(playerTexture);
 		playerSprite.setPosition(w / 2 - playerSprite.getWidth() / 2, h / 2 - playerSprite.getHeight() / 2);
