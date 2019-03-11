@@ -17,7 +17,7 @@ public class InputHandler {
         playerMovement();
 
         if (Gdx.input.isKeyPressed(Input.Keys.J)) {
-            player.shoot();
+            player.shoot(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT));
         }
     }
 

@@ -4,7 +4,7 @@ package com.mygdx.game.entity.bullet;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class BasicBullet implements Bullet {
+public class StarBullet implements Bullet {
     private float x;
     private float y;
     private double speed;
@@ -13,14 +13,14 @@ public class BasicBullet implements Bullet {
     private Texture texture;
     private Sprite sprite;
 
-    public BasicBullet(float x, float y, float angle) {
-        this.x = x;
+    public StarBullet(float x, float y, float angle) {
+        this.x = x-32;
         this.y = y;
         this.angle = Math.toRadians(angle);
         this.speed = 10;
         this.acceleration = 0;
 
-        this.texture = new Texture("whitebullet.png");
+        this.texture = new Texture("star.png");
         this.sprite = new Sprite(texture);
     }
 
@@ -37,5 +37,6 @@ public class BasicBullet implements Bullet {
         y += speed * Math.cos(angle);
 
         sprite.setPosition(x, y);
+        sprite.setRotation(sprite.getRotation() + 5);
     }
 }
