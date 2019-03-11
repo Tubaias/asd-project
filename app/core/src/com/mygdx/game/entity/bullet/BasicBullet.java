@@ -15,9 +15,14 @@ public class BasicBullet implements Bullet {
         this.x = x;
         this.y = y;
         this.angle = Math.toRadians(angle);
-        this.speed = 3;
+        this.speed = 10;
         this.acceleration = 0;
         this.sprite = sprite;
+    }
+
+    @Override
+    public Sprite getSprite() {
+        return this.sprite;
     }
 
     @Override

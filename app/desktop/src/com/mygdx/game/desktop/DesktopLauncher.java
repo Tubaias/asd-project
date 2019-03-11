@@ -7,6 +7,9 @@ import com.mygdx.game.AsdGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.height = 900;
+		config.width = 600;
+
 		new LwjglApplication(new AsdGame(), config);
 	}
 }

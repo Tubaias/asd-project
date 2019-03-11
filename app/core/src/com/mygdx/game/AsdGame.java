@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,11 +11,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
-import com.mygdx.game.entity.bullet.BasicBullet;
+import com.mygdx.game.utility.InputHandler;
 
 public class AsdGame extends ApplicationAdapter {
 	float w;
 	float h;
+
+	InputHandler inputHandler;
 
 	SpriteBatch batch;
     Texture playerTexture;
@@ -24,13 +25,16 @@ public class AsdGame extends ApplicationAdapter {
     Sprite playerSprite;
 
     Player player;
-    ArrayList<Sprite> sprites;
-    ArrayList<Bullet> bullets;
+	ArrayList<Bullet> bullets;
+	ArrayList<Bullet> playerBullets;
 
-    float accumulator = 0;
+    float deltaAccumulator = 0;
 
 	@Override
 	public void create () {
+		bullets = new ArrayList<>();
+		playerBullets = new ArrayList<>();
+
 		w = Gdx.graphics.getWidth();
         h = Gdx.graphics.getHeight();
 
@@ -40,42 +44,34 @@ public class AsdGame extends ApplicationAdapter {
 
 		playerSprite = new Sprite(playerTexture);
 
-        player = new Player(w / 2 - playerSprite.getWidth() / 2, h / 2 - playerSprite.getHeight() / 2, playerSprite);
+		float spawnX = w / 2 - playerSprite.getWidth() / 2;
+		float spawnY = h / 2 - playerSprite.getHeight() / 2;
+        player = new Player(spawnX, spawnY, playerSprite, playerBullets);
 
-        sprites = new ArrayList<>();
-        bullets = new ArrayList<>();
+		inputHandler = new InputHandler(player);
 	}
 
 	@Override
 	public void render () {
         float delta = Gdx.graphics.getDeltaTime();
-        accumulator += delta;
+        deltaAccumulator += delta;
 		System.out.println(1 / Gdx.graphics.getDeltaTime());
 
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
 
-        while (accumulator > 1) {
-            Sprite bulletSprite = new Sprite(bulletTexture);
-            Bullet bullet = new BasicBullet(player.position.x + 32 - 8, player.position.y + 128, 0, bulletSprite);
-            sprites.add(bulletSprite);
-            bullets.add(bullet);
-            accumulator--;
-        }
-
-
-        handleInputs();
-
+        inputHandler.handlePlayerInputs();
 
         for (Bullet b : bullets) {
-            b.move();
-        }
+			b.move();
+			b.getSprite().draw(batch);
+		}
 
-		for (Sprite s : sprites) {
-            s.draw(batch);
+		for (Bullet b : playerBullets) {
+			b.move();
+			b.getSprite().draw(batch);
         }
-
 
         player.move();
 		player.sprite.draw(batch);
@@ -87,38 +83,4 @@ public class AsdGame extends ApplicationAdapter {
 		batch.dispose();
 		playerTexture.dispose();
 	}
-
-	private void handleInputs() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-                player.position.x += (-3f);
-            } else {
-                player.position.x += (-7f);
-            }
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-                player.position.x += (3f);
-            } else {
-                player.position.x += (7f);
-            }
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-                player.position.y += (3f);
-            } else {
-                player.position.y += (7f);
-            }
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-                player.position.y += (-3f);
-            } else {
-                player.position.y += (-7f);
-            }
-        }
-    }
 }
