@@ -41,14 +41,14 @@ public class Player {
 
         if (focused) {
             int bulletAngle = 15;
-            bullet1 = new StarBullet(position.x + 32 - 8, position.y + 128, 0);
-            bullet2 = new StarBullet(position.x + 32 - 8, position.y + 128, -bulletAngle);
-            bullet3 = new StarBullet(position.x + 32 - 8, position.y + 128, bulletAngle);
+            bullet1 = new StarBullet(position.x + 32 - 8, position.y + 64, 0);
+            bullet2 = new StarBullet(position.x + 32 - 8, position.y + 64, -bulletAngle);
+            bullet3 = new StarBullet(position.x + 32 - 8, position.y + 64, bulletAngle);
         } else {
             int bulletAngle = 30;
-            bullet1 = new BasicBullet(position.x + 32 - 8, position.y + 128, 0);
-            bullet2 = new BasicBullet(position.x + 32 - 8, position.y + 128, -bulletAngle);
-            bullet3 = new BasicBullet(position.x + 32 - 8, position.y + 128, bulletAngle);
+            bullet1 = new BasicBullet(position.x + 32 - 8, position.y + 64, 0);
+            bullet2 = new BasicBullet(position.x + 32 - 8, position.y + 64, -bulletAngle);
+            bullet3 = new BasicBullet(position.x + 32 - 8, position.y + 64, bulletAngle);
         }
 
         bullets.add(bullet1);
