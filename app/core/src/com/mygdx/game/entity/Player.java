@@ -30,6 +30,10 @@ public class Player {
         sprite.setPosition(position.x, position.y);
     }
 
+    public void setBullets(ArrayList<Bullet> bullets) {
+      this.bullets = bullets;
+    }
+
     public void shoot(boolean focused) {
         Bullet bullet1;
         Bullet bullet2;

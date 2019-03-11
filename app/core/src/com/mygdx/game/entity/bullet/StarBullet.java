@@ -1,6 +1,8 @@
 
 package com.mygdx.game.entity.bullet;
 
+import java.util.Random;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -14,6 +16,7 @@ public class StarBullet implements Bullet {
     private Sprite sprite;
 
     public StarBullet(float x, float y, float angle) {
+        Random rand = new Random();
         this.x = x-32;
         this.y = y;
         this.angle = Math.toRadians(angle);
@@ -22,11 +25,17 @@ public class StarBullet implements Bullet {
 
         this.texture = new Texture("star.png");
         this.sprite = new Sprite(texture);
+        sprite.setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
     }
 
     @Override
     public Sprite getSprite() {
         return this.sprite;
+    }
+
+    @Override
+    public float getY() {
+        return y;
     }
 
     @Override

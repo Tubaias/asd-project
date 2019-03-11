@@ -19,6 +19,10 @@ public class InputHandler {
         if (Gdx.input.isKeyPressed(Input.Keys.J)) {
             player.shoot(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT));
         }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            Gdx.app.exit();
+        }
     }
 
     private void playerMovement() {
@@ -43,7 +47,6 @@ public class InputHandler {
         movement.nor();
 
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-            System.out.println("asd");
             movement.scl(3.5f);
         } else {
             movement.scl(7f);

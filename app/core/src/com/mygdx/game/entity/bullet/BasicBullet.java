@@ -22,11 +22,17 @@ public class BasicBullet implements Bullet {
 
         this.texture = new Texture("whitebullet.png");
         this.sprite = new Sprite(texture);
+        sprite.setColor(1, 0, 0, 1f);
     }
 
     @Override
     public Sprite getSprite() {
         return this.sprite;
+    }
+
+    @Override
+    public float getY() {
+        return y;
     }
 
     @Override
