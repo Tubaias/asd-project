@@ -17,7 +17,7 @@ public class BasicBullet implements Bullet {
         this.x = x;
         this.y = y;
         this.angle = Math.toRadians(angle);
-        this.speed = 10;
+        this.speed = 20;
         this.acceleration = 0;
 
         this.texture = new Texture("whitebullet.png");
