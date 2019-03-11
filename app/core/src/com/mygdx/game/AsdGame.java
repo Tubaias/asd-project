@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -28,7 +29,8 @@ public class AsdGame extends ApplicationAdapter {
 	ArrayList<Bullet> bullets;
 	ArrayList<Bullet> playerBullets;
 
-    float deltaAccumulator = 0;
+	float deltaAccumulator = 0;
+	Random rand;
 
 	@Override
 	public void create () {
@@ -40,7 +42,7 @@ public class AsdGame extends ApplicationAdapter {
 
 		batch = new SpriteBatch();
         playerTexture = new Texture("ship.png");
-        bulletTexture = new Texture("bullet.png");
+        bulletTexture = new Texture("whitebullet.png");
 
 		playerSprite = new Sprite(playerTexture);
 
@@ -49,6 +51,7 @@ public class AsdGame extends ApplicationAdapter {
         player = new Player(spawnX, spawnY, playerSprite, playerBullets);
 
 		inputHandler = new InputHandler(player);
+		rand = new Random();
 	}
 
 	@Override
@@ -70,6 +73,7 @@ public class AsdGame extends ApplicationAdapter {
 
 		for (Bullet b : playerBullets) {
 			b.move();
+			b.getSprite().setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
 			b.getSprite().draw(batch);
         }
 

@@ -23,7 +23,7 @@ public class Player {
         this.sprite.setPosition(x, y);
         this.bullets = bulletList;
 
-        bulletTexture = new Texture("bullet.png");
+        bulletTexture = new Texture("whitebullet.png");
     }
 
     public void move() {
