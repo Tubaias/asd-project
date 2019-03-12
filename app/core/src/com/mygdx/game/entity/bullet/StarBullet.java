@@ -15,16 +15,18 @@ public class StarBullet implements Bullet {
     private Texture texture;
     private Sprite sprite;
 
-    public StarBullet(float x, float y, float angle) {
+    public StarBullet(float x, float y, float scale, float angle) {
         Random rand = new Random();
         this.x = x-32;
         this.y = y;
         this.angle = Math.toRadians(angle);
-        this.speed = 10;
+        this.speed = 10 * scale;
         this.acceleration = 0;
 
         this.texture = new Texture("star.png");
         this.sprite = new Sprite(texture);
+        this.sprite.setSize(sprite.getWidth() * scale, sprite.getHeight() * scale);
+        this.sprite.setOriginCenter();
         sprite.setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
     }
 

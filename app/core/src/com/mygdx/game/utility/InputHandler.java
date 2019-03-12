@@ -8,9 +8,11 @@ import com.mygdx.game.entity.Player;
 
 public class InputHandler {
     private Player player;
+    private float scale;
 
-    public InputHandler(Player player) {
+    public InputHandler(Player player, float scale) {
         this.player = player;
+        this.scale = scale;
     }
 
     public void handlePlayerInputs() {
@@ -47,9 +49,9 @@ public class InputHandler {
         movement.nor();
 
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-            movement.scl(3.5f);
+            movement.scl(3.5f * scale);
         } else {
-            movement.scl(7f);
+            movement.scl(7f * scale);
         }
 
         player.position.add(movement);
