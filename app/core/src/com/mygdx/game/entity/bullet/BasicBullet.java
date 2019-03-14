@@ -3,10 +3,10 @@ package com.mygdx.game.entity.bullet;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 public class BasicBullet implements Bullet {
-    private float x;
-    private float y;
+    private Vector2 position;
     private double speed;
     private double acceleration;
     private double angle;
@@ -14,8 +14,7 @@ public class BasicBullet implements Bullet {
     private Sprite sprite;
 
     public BasicBullet(float x, float y, float scale, float angle) {
-        this.x = x;
-        this.y = y;
+        this.position = new Vector2(x, y);
         this.angle = Math.toRadians(angle);
         this.speed = 20 * scale;
         this.acceleration = 0;
@@ -34,17 +33,22 @@ public class BasicBullet implements Bullet {
     }
 
     @Override
-    public float getY() {
-        return y;
-    }
-
-    @Override
     public void move() {
         speed += acceleration;
 
-        x += speed * Math.sin(angle);
-        y += speed * Math.cos(angle);
+        position.x += speed * Math.sin(angle);
+        position.y += speed * Math.cos(angle);
 
-        sprite.setPosition(x, y);
+        sprite.setPosition(position.x, position.y);
+    }
+
+    @Override
+    public Vector2 getPosition() {
+        return this.position;
+    }
+
+    @Override
+    public void setPosition(Vector2 position) {
+        this.position = position;
     }
 }

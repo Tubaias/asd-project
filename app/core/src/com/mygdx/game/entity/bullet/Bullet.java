@@ -1,10 +1,8 @@
 
 package com.mygdx.game.entity.bullet;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mygdx.game.entity.Entity;
 
-public interface Bullet {
+public interface Bullet extends Entity {
     void move();
-    Sprite getSprite();
-    float getY();
 }

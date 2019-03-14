@@ -1,8 +1,6 @@
 
 package com.mygdx.game.entity;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -10,15 +8,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.BasicBullet;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.bullet.StarBullet;
+import com.mygdx.game.utility.EntityStore;
 
-public class Player {
-    public Vector2 position;
-    public Vector2 speed;
-    public Sprite sprite;
+public class Player implements Entity {
+    private Vector2 position;
+    private Vector2 speed;
+    private Sprite sprite;
     private float scale;
-    private ArrayList<Bullet> bullets;
+    private EntityStore store;
 
-    public Player(float scale, ArrayList<Bullet> bulletList) {
+    public Player(float scale) {
         this.sprite = new Sprite(new Texture("ship.png"));
         this.sprite.setSize(sprite.getWidth() * scale, sprite.getHeight() * scale);
 
@@ -28,8 +27,11 @@ public class Player {
         this.sprite.setPosition(x, y);
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, 0);
-        this.bullets = bulletList;
         this.scale = scale;
+    }
+
+    public void setStore(EntityStore store) {
+        this.store = store;
     }
 
     public void move() {
@@ -37,10 +39,6 @@ public class Player {
         position.y += speed.y;
 
         sprite.setPosition(position.x, position.y);
-    }
-
-    public void setBullets(ArrayList<Bullet> bullets) {
-      this.bullets = bullets;
     }
 
     public void shoot(boolean focused) {
@@ -60,8 +58,27 @@ public class Player {
             bullet3 = new BasicBullet(position.x + (32 - 8), position.y + 64 * scale, scale, bulletAngle);
         }
 
-        bullets.add(bullet1);
-        bullets.add(bullet2);
-        bullets.add(bullet3);
+        store.playerBullets.add(bullet1);
+        store.playerBullets.add(bullet2);
+        store.playerBullets.add(bullet3);
+    }
+
+    @Override
+    public Sprite getSprite() {
+        return this.sprite;
+    }
+
+    @Override
+    public Vector2 getPosition() {
+        return this.position;
+    }
+
+    public Vector2 getSpeed() {
+        return this.speed;
+    }
+
+    @Override
+    public void setPosition(Vector2 position) {
+        this.position = position;
     }
 }

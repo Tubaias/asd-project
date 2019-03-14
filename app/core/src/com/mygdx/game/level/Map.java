@@ -23,16 +23,11 @@ public class Map {
         this.sprite1 = new Sprite(texture);
         this.sprite2 = new Sprite(texture);
 
-        //sprite1.setScale(scale);
-        //sprite2.setScale(scale);
-
         sprite1.setSize(sprite1.getWidth() * scale, sprite1.getHeight() * scale);
         sprite2.setSize(sprite2.getWidth() * scale, sprite2.getHeight() * scale);
 
         sprite1.setPosition(spawnX, y1);
         sprite2.setPosition(spawnX, y2);
-
-        System.out.println(height + "");
     }
 
     public Sprite getSprite1() {

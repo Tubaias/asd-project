@@ -54,6 +54,6 @@ public class InputHandler {
             movement.scl(7f * scale);
         }
 
-        player.position.add(movement);
+        player.getPosition().add(movement);
     }
 }
