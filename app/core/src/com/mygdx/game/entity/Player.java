@@ -12,7 +12,6 @@ import com.mygdx.game.utility.EntityStore;
 
 public class Player implements Entity {
     private Vector2 position;
-    private Vector2 speed;
     private Sprite sprite;
     private float scale;
     private EntityStore store;
@@ -26,7 +25,6 @@ public class Player implements Entity {
 
         this.sprite.setPosition(x, y);
         this.position = new Vector2(x, y);
-        this.speed = new Vector2(0, 0);
         this.scale = scale;
     }
 
@@ -35,9 +33,6 @@ public class Player implements Entity {
     }
 
     public void move() {
-        position.x += speed.x;
-        position.y += speed.y;
-
         sprite.setPosition(position.x, position.y);
     }
 
@@ -71,10 +66,6 @@ public class Player implements Entity {
     @Override
     public Vector2 getPosition() {
         return this.position;
-    }
-
-    public Vector2 getSpeed() {
-        return this.speed;
     }
 
     @Override

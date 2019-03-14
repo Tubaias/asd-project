@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.entity.bullet.Bullet;
+import com.mygdx.game.entity.enemy.Enemy;
 
 public class Drawer implements Disposable {
     private EntityStore store;
@@ -37,13 +38,15 @@ public class Drawer implements Disposable {
         store.foregroundMap.getSprite1().draw(batch);
         store.foregroundMap.getSprite2().draw(batch);
 
+        for (Enemy e : store.enemies) {
+            e.getSprite().draw(batch);
+        }
+
         for (Bullet b : store.bullets) {
-			b.move();
 			b.getSprite().draw(batch);
 		}
 
 		for (Bullet b : store.playerBullets) {
-			b.move();
             b.getSprite().draw(batch);
         }
 

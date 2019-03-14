@@ -15,15 +15,17 @@ public class InputHandler {
         this.scale = scale;
     }
 
+    public void handleSystemKeys() {
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            Gdx.app.exit();
+        }
+    }
+
     public void handlePlayerInputs() {
         playerMovement();
 
         if (Gdx.input.isKeyPressed(Input.Keys.J)) {
             player.shoot(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT));
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
         }
     }
 
