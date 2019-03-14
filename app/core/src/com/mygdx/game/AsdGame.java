@@ -19,8 +19,8 @@ import com.mygdx.game.utility.InputHandler;
 import com.mygdx.game.level.Map;
 
 public class AsdGame extends ApplicationAdapter {
-	float targetW;
-	float targetH;
+	float width;
+	float height;
 	float windowW;
 	float windowH;
 	float playFieldW;
@@ -42,22 +42,15 @@ public class AsdGame extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		targetW = 600;
-		targetH = 800;
+		width = 600;
+		height = 800;
 
-		windowW = Gdx.graphics.getWidth();
-        windowH = Gdx.graphics.getHeight();
-		playFieldH = windowH;
-		playFieldW = windowH / 4 * 3;
-		resolutionScale = windowH / targetH;
+		foregroundMap = new Map(new Texture("fg.png"), 5);
+		backgroundMap = new Map(new Texture("bg.png"), 3);
 
-		float centerX = windowW / 2;
-		foregroundMap = new Map(resolutionScale, centerX, new Texture("fg.png"), 5);
-		backgroundMap = new Map(resolutionScale, centerX, new Texture("bg.png"), 3);
-
-		player = new Player(resolutionScale);
+		player = new Player();
 		store = new EntityStore(player, foregroundMap, backgroundMap);
-		inputHandler = new InputHandler(player, resolutionScale);
+		inputHandler = new InputHandler(player);
 		drawer = new Drawer(store);
 		player.setStore(store);
 	}
@@ -98,7 +91,7 @@ public class AsdGame extends ApplicationAdapter {
 
 	private void addEnemy() {
 		Random rng = new Random();
-		store.enemies.add(new TestEnemy(rng.nextInt((int) playFieldW), playFieldH - 20 * resolutionScale, resolutionScale));
+		store.enemies.add(new TestEnemy(rng.nextInt((int) width), height - 20));
 	}
 
 	@Override
@@ -107,7 +100,7 @@ public class AsdGame extends ApplicationAdapter {
     }
 
     private void cleanup() {
-        ArrayList<Bullet> pb = store.playerBullets.stream().filter(b -> b.getPosition().y < playFieldH).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Bullet> pb = store.playerBullets.stream().filter(b -> b.getPosition().y < height).collect(Collectors.toCollection(ArrayList::new));
 
         store.playerBullets = pb;
     }

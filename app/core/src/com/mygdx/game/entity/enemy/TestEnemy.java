@@ -9,35 +9,31 @@ public class TestEnemy implements Enemy {
     private Vector2 position;
     private Vector2 speed;
     private Sprite sprite;
-    private float scale;
 
-    private float angle;
+    private float sinewaveAngle;
 
-    public TestEnemy(float x, float y, float scale) {
+    public TestEnemy(float x, float y) {
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, -2);
 
         this.sprite = new Sprite(new Texture("skull.png"));
-        this.sprite.setSize(sprite.getWidth() * scale, sprite.getHeight() * scale);
         this.sprite.setPosition(x, y);
-
-        this.scale = scale;
     }
 
     @Override
     public void move() {
-        position.add(speed.scl(scale));
+        position.add(speed);
         updateSpeed();
         sprite.setPosition(position.x, position.y);
     }
 
     private void updateSpeed() {
-        speed.set((float) Math.sin(angle) * 3, speed.y - 0.05f);
+        speed.set((float) Math.sin(sinewaveAngle) * 3, speed.y - 0.05f);
 
-        angle += 0.1;
+        sinewaveAngle += 0.1;
 
-        if (angle > 360) {
-            angle = 0;
+        if (sinewaveAngle > 360) {
+            sinewaveAngle = 0;
         }
     }
 

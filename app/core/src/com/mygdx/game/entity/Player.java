@@ -13,19 +13,16 @@ import com.mygdx.game.utility.EntityStore;
 public class Player implements Entity {
     private Vector2 position;
     private Sprite sprite;
-    private float scale;
     private EntityStore store;
 
-    public Player(float scale) {
+    public Player() {
         this.sprite = new Sprite(new Texture("ship.png"));
-        this.sprite.setSize(sprite.getWidth() * scale, sprite.getHeight() * scale);
 
-        float x = Gdx.graphics.getWidth() / 2 - sprite.getWidth() * scale / 2;
-        float y = Gdx.graphics.getHeight() / 2 - sprite.getHeight() * scale / 2;
+        float x = Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2;
+        float y = Gdx.graphics.getHeight() / 2 - sprite.getHeight() / 2;
 
         this.sprite.setPosition(x, y);
         this.position = new Vector2(x, y);
-        this.scale = scale;
     }
 
     public void setStore(EntityStore store) {
@@ -43,14 +40,14 @@ public class Player implements Entity {
 
         if (focused) {
             int bulletAngle = 15;
-            bullet1 = new StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, 0);
-            bullet2 = new StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, -bulletAngle);
-            bullet3 = new StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, bulletAngle);
+            bullet1 = new StarBullet(position.x + (32 - 8), position.y + 64, 0);
+            bullet2 = new StarBullet(position.x + (32 - 8), position.y + 64, -bulletAngle);
+            bullet3 = new StarBullet(position.x + (32 - 8), position.y + 64, bulletAngle);
         } else {
             int bulletAngle = 30;
-            bullet1 = new BasicBullet(position.x + (32 - 8), position.y + 64 * scale, scale, 0);
-            bullet2 = new BasicBullet(position.x + (32 - 8), position.y + 64 * scale, scale, -bulletAngle);
-            bullet3 = new BasicBullet(position.x + (32 - 8), position.y + 64 * scale, scale, bulletAngle);
+            bullet1 = new BasicBullet(position.x + (32 - 8), position.y + 64, 0);
+            bullet2 = new BasicBullet(position.x + (32 - 8), position.y + 64, -bulletAngle);
+            bullet3 = new BasicBullet(position.x + (32 - 8), position.y + 64, bulletAngle);
         }
 
         store.playerBullets.add(bullet1);

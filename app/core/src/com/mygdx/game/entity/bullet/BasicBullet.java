@@ -13,16 +13,14 @@ public class BasicBullet implements Bullet {
     private Texture texture;
     private Sprite sprite;
 
-    public BasicBullet(float x, float y, float scale, float angle) {
+    public BasicBullet(float x, float y, float angle) {
         this.position = new Vector2(x, y);
         this.angle = Math.toRadians(angle);
-        this.speed = 20 * scale;
+        this.speed = 20;
         this.acceleration = 0;
 
         this.texture = new Texture("whitebullet.png");
         this.sprite = new Sprite(texture);
-
-        this.sprite.setSize(sprite.getWidth() * scale, sprite.getHeight() * scale);
         this.sprite.setOriginCenter();
         this.sprite.setColor(1, 0, 0, 1f);
     }

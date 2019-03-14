@@ -3,31 +3,27 @@ package com.mygdx.game.level;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 public class Map {
     private float y1;
     private float y2;
-    private float spawnX;
-    private float speed;
+    private int speed;
     private float height;
     private Sprite sprite1;
     private Sprite sprite2;
 
-    public Map(float scale, float center, Texture texture, float speed) {
-        this.height = texture.getHeight() * scale;
+    public Map(Texture texture, int speed) {
+        this.height = texture.getHeight();
         this.y1 = 0;
         this.y2 = this.height;
-        this.speed = Math.round(speed * scale);
+        this.speed = speed;
 
-        spawnX = center - texture.getWidth() * scale / 2;
         this.sprite1 = new Sprite(texture);
         this.sprite2 = new Sprite(texture);
 
-        sprite1.setSize(sprite1.getWidth() * scale, sprite1.getHeight() * scale);
-        sprite2.setSize(sprite2.getWidth() * scale, sprite2.getHeight() * scale);
-
-        sprite1.setPosition(spawnX, y1);
-        sprite2.setPosition(spawnX, y2);
+        sprite1.setPosition(0, y1);
+        sprite2.setPosition(0, y2);
     }
 
     public Sprite getSprite1() {
@@ -50,8 +46,8 @@ public class Map {
             y2 = height;
         }
 
-        this.sprite1.setPosition(spawnX, y1);
-        this.sprite2.setPosition(spawnX, y2);
+        this.sprite1.setPosition(0, y1);
+        this.sprite2.setPosition(0, y2);
     }
 
 }
