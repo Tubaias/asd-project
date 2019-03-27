@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
@@ -21,20 +20,12 @@ import com.mygdx.game.level.Map;
 public class AsdGame extends ApplicationAdapter {
 	float width;
 	float height;
-	float windowW;
-	float windowH;
-	float playFieldW;
-	float playFieldH;
-	float resolutionScale;
 
 	EntityStore store;
 	Drawer drawer;
 	InputHandler inputHandler;
 
-    Texture playerTexture;
-	Sprite playerSprite;
 	Player player;
-
 	Map foregroundMap;
 	Map backgroundMap;
 
@@ -62,8 +53,19 @@ public class AsdGame extends ApplicationAdapter {
 
 		inputHandler.handleSystemKeys();
         inputHandler.handlePlayerInputs();
+		moveEntities();
+		cleanup();
 
-        backgroundMap.move();
+		while(deltaAccumulator > 0.25) {
+			addEnemy();
+			deltaAccumulator -= 0.25;
+		}
+
+		drawer.drawFrame();
+	}
+
+	private void moveEntities() {
+		backgroundMap.move();
 		foregroundMap.move();
 		player.move();
 
@@ -78,15 +80,6 @@ public class AsdGame extends ApplicationAdapter {
 		for (Bullet b : store.playerBullets) {
 			b.move();
         }
-
-		cleanup();
-
-		while(deltaAccumulator > 0.25) {
-			addEnemy();
-			deltaAccumulator -= 0.25;
-		}
-
-		drawer.drawFrame();
 	}
 
 	private void addEnemy() {
@@ -94,14 +87,14 @@ public class AsdGame extends ApplicationAdapter {
 		store.enemies.add(new TestEnemy(rng.nextInt((int) width), height - 20));
 	}
 
-	@Override
-	public void dispose () {
-		drawer.dispose();
-    }
-
     private void cleanup() {
         ArrayList<Bullet> pb = store.playerBullets.stream().filter(b -> b.getPosition().y < height).collect(Collectors.toCollection(ArrayList::new));
 
         store.playerBullets = pb;
+	}
+
+	@Override
+	public void dispose () {
+		drawer.dispose();
     }
 }

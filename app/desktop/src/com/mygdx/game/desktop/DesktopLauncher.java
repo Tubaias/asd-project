@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		config.width = 600;
 		config.resizable = true;
 
-		int resolutionmode = 0; // for quick resolution swaps while developing
+		int resolutionmode = 1; // for quick resolution swaps while developing
 		switch (resolutionmode) {
 			case 1:
 				config.height = 480;
