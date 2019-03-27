@@ -53,6 +53,10 @@ public class BulletSystem {
         cleanup();
     }
 
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+
     public void big_oof() {
         System.out.println("B: " + basicBulletPool.size() + " S: " + starBulletPool.size());
     }
