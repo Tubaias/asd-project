@@ -2,7 +2,6 @@ package com.mygdx.game.entity.bullet;
 
 import java.util.ArrayList;
 import java.util.ArrayDeque;
-import java.util.stream.Collectors;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.utility.EntityStore;
@@ -56,7 +55,6 @@ public class BulletSystem {
     public void big_oof() {
         System.out.println("B: " + basicBulletPool.size() + " S: " + starBulletPool.size());
     }
-
 
     public void draw(SpriteBatch batch) {
         for (Bullet b : bullets) {

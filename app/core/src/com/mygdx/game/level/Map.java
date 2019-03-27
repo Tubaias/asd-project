@@ -3,7 +3,6 @@ package com.mygdx.game.level;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
 
 public class Map {
     private float y1;

@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.entity.bullet.Bullet;
-import com.mygdx.game.entity.bullet.BulletSystem;
 import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.utility.EntityStore;
 
@@ -14,7 +12,6 @@ public class Player implements Entity {
     private Vector2 position;
     private Sprite sprite;
     private EntityStore store;
-    private BulletSystem bulletSystem;
 
     public Player() {
         this.sprite = new Sprite(new Texture("ship.png"));
@@ -24,8 +21,6 @@ public class Player implements Entity {
 
         this.sprite.setPosition(x, y);
         this.position = new Vector2(x, y);
-        // this.bullets = bulletList;
-        //this.bulletSystem = bulletSystem;
     }
 
     public void setStore(EntityStore store) {
