@@ -1,11 +1,14 @@
-package com.mygdx.game.entity.bullet;
+package com.mygdx.game.utility;
 
-import java.util.ArrayList;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.utility.EntityStore;
-
+import com.mygdx.game.entity.bullet.BasicBullet;
+import com.mygdx.game.entity.bullet.Bullet;
+import com.mygdx.game.entity.bullet.BulletType;
+import com.mygdx.game.entity.bullet.StarBullet;
 
 public class BulletSystem {
     private ArrayList<Bullet> bullets;
@@ -86,7 +89,6 @@ public class BulletSystem {
             }
         }
     }
-
 
     private boolean inPlayField(Bullet b) {
         Vector2 position = b.getPosition();

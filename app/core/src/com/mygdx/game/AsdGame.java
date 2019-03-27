@@ -1,8 +1,6 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -94,11 +92,12 @@ public class AsdGame extends ApplicationAdapter {
 		store.enemies.add(new TestEnemy(rng.nextInt((int) width), height - 20));
 	}
 
- /*   private void cleanup() {
-        ArrayList<Bullet> pb = store.playerBullets.stream().filter(b -> b.getPosition().y < height).collect(Collectors.toCollection(ArrayList::new));
-
-        store.playerBullets = pb;
-	} */
+/*
+ 	private void cleanup() {
+    ArrayList<Bullet> pb = store.playerBullets.stream().filter(b -> b.getPosition().y < height).collect(Collectors.toCollection(ArrayList::new));
+    store.playerBullets = pb;
+	}
+*/
 
 	@Override
 	public void dispose () {
