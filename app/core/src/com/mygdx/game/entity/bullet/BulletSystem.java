@@ -11,7 +11,6 @@ public class BulletSystem {
     private ArrayList<Bullet> bullets;
     private ArrayDeque<StarBullet> starBulletPool;
     private ArrayDeque<BasicBullet> basicBulletPool;
-    private EntityStore store;
 
     private final float HEIGHT = 800;
     private final float WIDTH = 600;

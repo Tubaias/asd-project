@@ -44,7 +44,7 @@ public class StarBullet implements Bullet {
         this.position.x = x-32;
         this.position.y = y;
         this.angle = Math.toRadians(angle);
-        //this.sprite.setOriginCenter();
+        this.sprite.setOriginCenter();
     }
 
     @Override
