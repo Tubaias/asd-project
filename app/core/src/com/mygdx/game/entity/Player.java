@@ -10,15 +10,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.BasicBullet;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.bullet.StarBullet;
+import com.mygdx.game.entity.bullet.BulletSystem;
+import com.mygdx.game.entity.bullet.BulletType;
 
 public class Player {
     public Vector2 position;
     public Vector2 speed;
     public Sprite sprite;
     private float scale;
-    private ArrayList<Bullet> bullets;
+    //private ArrayList<Bullet> bullets;
+    private BulletSystem bulletSystem;
 
-    public Player(float scale, ArrayList<Bullet> bulletList) {
+    public Player(float scale, BulletSystem bulletSystem) {
         this.sprite = new Sprite(new Texture("ship.png"));
         this.sprite.setSize(sprite.getWidth() * scale, sprite.getHeight() * scale);
 
@@ -28,8 +31,9 @@ public class Player {
         this.sprite.setPosition(x, y);
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, 0);
-        this.bullets = bulletList;
+        // this.bullets = bulletList;
         this.scale = scale;
+        this.bulletSystem = bulletSystem;
     }
 
     public void move() {
@@ -39,9 +43,9 @@ public class Player {
         sprite.setPosition(position.x, position.y);
     }
 
-    public void setBullets(ArrayList<Bullet> bullets) {
+    /* public void setBullets(ArrayList<Bullet> bullets) {
       this.bullets = bullets;
-    }
+    } */
 
     public void shoot(boolean focused) {
         Bullet bullet1;
@@ -49,19 +53,18 @@ public class Player {
         Bullet bullet3;
 
         if (focused) {
-            int bulletAngle = 15;
-            bullet1 = new StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, 0);
-            bullet2 = new StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, -bulletAngle);
-            bullet3 = new StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, bulletAngle);
+            float bulletAngle = 15;
+            /*bullet1 = newBullet StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, 0);
+            bullet2 = newBullet StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, -bulletAngle);
+            bullet3 = newBullet StarBullet(position.x + (32 - 8), position.y + 64 * scale, scale, bulletAngle); */
+            bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64 * scale, 0f);
+            bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64 * scale, -bulletAngle);
+            bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64 * scale, bulletAngle);
         } else {
-            int bulletAngle = 30;
-            bullet1 = new BasicBullet(position.x + (32 - 8), position.y + 64 * scale, scale, 0);
-            bullet2 = new BasicBullet(position.x + (32 - 8), position.y + 64 * scale, scale, -bulletAngle);
-            bullet3 = new BasicBullet(position.x + (32 - 8), position.y + 64 * scale, scale, bulletAngle);
+            float bulletAngle = 30;
+            bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64 * scale, 0f);
+            bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64 * scale, -bulletAngle);
+            bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64 * scale, bulletAngle);
         }
-
-        bullets.add(bullet1);
-        bullets.add(bullet2);
-        bullets.add(bullet3);
     }
 }

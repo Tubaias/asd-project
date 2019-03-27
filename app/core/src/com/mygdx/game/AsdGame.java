@@ -16,6 +16,7 @@ import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.utility.InputHandler;
 import com.mygdx.game.level.Map;
+import com.mygdx.game.entity.bullet.BulletSystem;
 
 public class AsdGame extends ApplicationAdapter {
 	float targetW;
@@ -27,6 +28,7 @@ public class AsdGame extends ApplicationAdapter {
 	float resolutionScale;
 
 	InputHandler inputHandler;
+	BulletSystem bulletSystem;
 
 	SpriteBatch batch;
     Texture playerTexture;
@@ -62,12 +64,16 @@ public class AsdGame extends ApplicationAdapter {
 
 		float centerW = windowW / 2;
 
-        player = new Player(resolutionScale, playerBullets);
+
+		bulletSystem = new BulletSystem(resolutionScale);
+
+        player = new Player(resolutionScale, bulletSystem);
 
         foregroundMap = new Map(resolutionScale, centerW, new Texture("fg.png"), 5);
         backgroundMap = new Map(resolutionScale, centerW, new Texture("bg.png"), 3);
 
 		inputHandler = new InputHandler(player, resolutionScale);
+
 
 		font = new BitmapFont();
 		font.setColor(Color.RED);
@@ -95,7 +101,7 @@ public class AsdGame extends ApplicationAdapter {
         foregroundMap.getSprite1().draw(batch);
         foregroundMap.getSprite2().draw(batch);
 
-        for (Bullet b : bullets) {
+        /*for (Bullet b : bullets) {
 			b.move();
 			b.getSprite().draw(batch);
 		}
@@ -106,11 +112,15 @@ public class AsdGame extends ApplicationAdapter {
 
         }
 
-		cleanup();
+		cleanup(); */
+
+		bulletSystem.step();
+		bulletSystem.draw(batch);
 
 		while (deltaAccumulator > 0.2) {
 			fps = (int) (1 / Gdx.graphics.getDeltaTime());
 			deltaAccumulator -= 0.2;
+			bulletSystem.big_oof();
 		}
 
 		font.draw(batch, "" + fps, 10, 20);
@@ -126,10 +136,10 @@ public class AsdGame extends ApplicationAdapter {
 		playerTexture.dispose();
     }
 
-    private void cleanup() {
+    /*private void cleanup() {
         ArrayList<Bullet> pb = playerBullets.stream().filter(b -> b.getY() < playFieldH).collect(Collectors.toCollection(ArrayList::new));
 
         playerBullets = pb;
         player.setBullets(pb);
-    }
+    } */
 }

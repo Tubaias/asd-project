@@ -41,6 +41,34 @@ public class StarBullet implements Bullet {
     }
 
     @Override
+    public float getX() {
+        return x;
+    }
+
+    @Override
+    public void setX(float value) {
+        this.x = value;
+    }
+
+    @Override
+    public void setY(float value) {
+        this.y = value;
+    }
+
+    @Override
+    public void setAngle(float value) {
+        this.angle = value;
+    }
+
+    @Override
+    public void refresh(float x, float y, float angle) {
+        this.x = x-32;
+        this.y = y;
+        this.angle = Math.toRadians(angle);
+        //this.sprite.setOriginCenter();
+    }
+
+    @Override
     public void move() {
         speed += acceleration;
 
