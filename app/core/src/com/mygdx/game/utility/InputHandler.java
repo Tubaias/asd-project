@@ -8,11 +8,15 @@ import com.mygdx.game.entity.Player;
 
 public class InputHandler {
     private Player player;
-    private float scale;
 
-    public InputHandler(Player player, float scale) {
+    public InputHandler(Player player) {
         this.player = player;
-        this.scale = scale;
+    }
+
+    public void handleSystemKeys() {
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            Gdx.app.exit();
+        }
     }
 
     public void handlePlayerInputs() {
@@ -20,10 +24,6 @@ public class InputHandler {
 
         if (Gdx.input.isKeyPressed(Input.Keys.J)) {
             player.shoot(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT));
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
         }
     }
 
@@ -49,11 +49,11 @@ public class InputHandler {
         movement.nor();
 
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-            movement.scl(3.5f * scale);
+            movement.scl(3.5f);
         } else {
-            movement.scl(7f * scale);
+            movement.scl(7f);
         }
 
-        player.position.add(movement);
+        player.getPosition().add(movement);
     }
 }

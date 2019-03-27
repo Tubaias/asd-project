@@ -4,41 +4,47 @@ import java.util.ArrayList;
 import java.util.ArrayDeque;
 import java.util.stream.Collectors;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.utility.EntityStore;
 
 
 public class BulletSystem {
     private ArrayList<Bullet> bullets;
     private ArrayDeque<StarBullet> starBulletPool;
     private ArrayDeque<BasicBullet> basicBulletPool;
-    private float scale;
+    private EntityStore store;
 
     private final float HEIGHT = 800;
     private final float WIDTH = 600;
 
-    public BulletSystem(float scale) {
+    public BulletSystem(EntityStore store) {
         bullets = new ArrayList<>();
         starBulletPool = new ArrayDeque<>();
         basicBulletPool = new ArrayDeque<>();
-        this.scale = scale;
+        this.store = store;
     }
 
     public void newBullet(BulletType type, float x, float y, float angle) {
         if (type == BulletType.STAR) {
             if (starBulletPool.isEmpty()) {
-                StarBullet b = new StarBullet(x, y, scale, angle);
+                StarBullet b = new StarBullet(x, y, angle);
+                store.bullets.add(b);
                 bullets.add(b);
             } else {
                 StarBullet b = starBulletPool.pollFirst();
                 b.refresh(x, y, angle);
+                store.bullets.add(b);
                 bullets.add(b);
             }
         } else {
             if (basicBulletPool.isEmpty()) {
-                BasicBullet b = new BasicBullet(x, y, scale, angle);
+                BasicBullet b = new BasicBullet(x, y, angle);
+                store.bullets.add(b);
                 bullets.add(b);
             } else {
                 BasicBullet b = basicBulletPool.pollFirst();
                 b.refresh(x, y, angle);
+                store.bullets.add(b);
                 bullets.add(b);
             }
         }
@@ -87,8 +93,7 @@ public class BulletSystem {
 
 
     private boolean inPlayField(Bullet b) {
-        float scaledH = scale * HEIGHT;
-        float scaledW = scale * WIDTH;
-        return b.getX() < scaledW && b.getX() > 0 && b.getY() < scaledH && b.getY() > 0;
+        Vector2 position = b.getPosition();
+        return position.x < WIDTH && position.x > 0 && position.y < HEIGHT && position.y > 0;
     }
 }
