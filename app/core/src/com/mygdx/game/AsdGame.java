@@ -12,6 +12,7 @@ import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.TestEnemy;
+import com.mygdx.game.utility.CollisionSystem;
 import com.mygdx.game.utility.Drawer;
 import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.utility.InputHandler;
@@ -26,6 +27,7 @@ public class AsdGame extends ApplicationAdapter {
 	Drawer drawer;
 	InputHandler inputHandler;
 	BulletSystem bulletSystem;
+	CollisionSystem collisionSystem;
 
 	Player player;
 	Map foregroundMap;
@@ -44,6 +46,7 @@ public class AsdGame extends ApplicationAdapter {
 		player = new Player();
 		bulletSystem = new BulletSystem();
 		store = new EntityStore(player, bulletSystem, foregroundMap, backgroundMap);
+		collisionSystem = new CollisionSystem(store);
 		inputHandler = new InputHandler(player);
 		drawer = new Drawer(store);
 
@@ -62,9 +65,10 @@ public class AsdGame extends ApplicationAdapter {
 		while(deltaAccumulator > 0.25) {
 			addEnemy();
 			deltaAccumulator -= 0.25;
-			bulletSystem.big_oof();
-			System.out.println("B: " + store.bullets.size());
 		}
+
+		collisionSystem.playerCollision();
+		store.bulletSystem.big_oof();
 
 		drawer.drawFrame();
 	}
