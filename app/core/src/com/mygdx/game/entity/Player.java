@@ -28,10 +28,6 @@ public class Player implements Entity {
         //this.bulletSystem = bulletSystem;
     }
 
-    public void setBulletSystem(BulletSystem system) {
-        this.bulletSystem = system;
-    }
-
     public void setStore(EntityStore store) {
         this.store = store;
     }
@@ -43,14 +39,14 @@ public class Player implements Entity {
     public void shoot(boolean focused) {
         if (focused) {
             float bulletAngle = 15;
-            bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64, 0f);
-            bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64, -bulletAngle);
-            bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64, bulletAngle);
+            store.bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64, 0f);
+            store.bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64, -bulletAngle);
+            store.bulletSystem.newBullet(BulletType.STAR, position.x + (32 - 8), position.y + 64, bulletAngle);
         } else {
             float bulletAngle = 30;
-            bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64, 0f);
-            bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64, -bulletAngle);
-            bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64, bulletAngle);
+            store.bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64, 0f);
+            store.bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64, -bulletAngle);
+            store.bulletSystem.newBullet(BulletType.BASIC, position.x + (32 - 8), position.y + 64, bulletAngle);
         }
     }
 
