@@ -16,8 +16,8 @@ public class Player implements Entity {
     public Player() {
         this.sprite = new Sprite(new Texture("ship.png"));
 
-        float x = Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2;
-        float y = Gdx.graphics.getHeight() / 2 - sprite.getHeight() / 2;
+        float x = 600 / 2 - sprite.getWidth() / 2;
+        float y = 100;
 
         this.sprite.setPosition(x, y);
         this.position = new Vector2(x, y);

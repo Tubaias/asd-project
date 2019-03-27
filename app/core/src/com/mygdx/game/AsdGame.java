@@ -49,17 +49,17 @@ public class AsdGame extends ApplicationAdapter {
 		collisionSystem = new CollisionSystem(store);
 		inputHandler = new InputHandler(player);
 		drawer = new Drawer(store);
-
+		System.out.println(Gdx.graphics.getWidth());
 		player.setStore(store);
 	}
 
 	@Override
 	public void render () {
-        float delta = Gdx.graphics.getDeltaTime();
+    float delta = Gdx.graphics.getDeltaTime();
 		deltaAccumulator += delta;
 
 		inputHandler.handleSystemKeys();
-        inputHandler.handlePlayerInputs();
+    inputHandler.handlePlayerInputs();
 		moveEntities();
 
 		while(deltaAccumulator > 0.25) {
@@ -68,7 +68,7 @@ public class AsdGame extends ApplicationAdapter {
 		}
 
 		collisionSystem.playerCollision();
-		store.bulletSystem.big_oof();
+		//store.bulletSystem.big_oof();
 
 		drawer.drawFrame();
 	}
