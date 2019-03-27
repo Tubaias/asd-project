@@ -17,34 +17,29 @@ public class BulletSystem {
     private final float HEIGHT = 800;
     private final float WIDTH = 600;
 
-    public BulletSystem(EntityStore store) {
+    public BulletSystem() {
         bullets = new ArrayList<>();
         starBulletPool = new ArrayDeque<>();
         basicBulletPool = new ArrayDeque<>();
-        this.store = store;
     }
 
     public void newBullet(BulletType type, float x, float y, float angle) {
         if (type == BulletType.STAR) {
             if (starBulletPool.isEmpty()) {
                 StarBullet b = new StarBullet(x, y, angle);
-                store.bullets.add(b);
                 bullets.add(b);
             } else {
                 StarBullet b = starBulletPool.pollFirst();
                 b.refresh(x, y, angle);
-                store.bullets.add(b);
                 bullets.add(b);
             }
         } else {
             if (basicBulletPool.isEmpty()) {
                 BasicBullet b = new BasicBullet(x, y, angle);
-                store.bullets.add(b);
                 bullets.add(b);
             } else {
                 BasicBullet b = basicBulletPool.pollFirst();
                 b.refresh(x, y, angle);
-                store.bullets.add(b);
                 bullets.add(b);
             }
         }

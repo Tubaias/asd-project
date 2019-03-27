@@ -61,9 +61,7 @@ public class Drawer implements Disposable {
             b.getSprite().draw(batch);
         }
 
-        for (Bullet b : store.playerBullets) {
-            b.getSprite().draw(batch);
-        }
+        store.bulletSystem.draw(batch);
 
         store.player.getSprite().draw(batch);
 

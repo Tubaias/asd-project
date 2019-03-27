@@ -42,13 +42,12 @@ public class AsdGame extends ApplicationAdapter {
 		backgroundMap = new Map(new Texture("bg.png"), 3);
 
 		player = new Player();
-		store = new EntityStore(player, foregroundMap, backgroundMap);
-		bulletSystem = new BulletSystem(store);
+		bulletSystem = new BulletSystem();
+		store = new EntityStore(player, bulletSystem, foregroundMap, backgroundMap);
 		inputHandler = new InputHandler(player);
 		drawer = new Drawer(store);
 
 		player.setStore(store);
-		player.setBulletSystem(bulletSystem);
 	}
 
 	@Override
@@ -59,11 +58,12 @@ public class AsdGame extends ApplicationAdapter {
 		inputHandler.handleSystemKeys();
         inputHandler.handlePlayerInputs();
 		moveEntities();
-		cleanup();
 
 		while(deltaAccumulator > 0.25) {
 			addEnemy();
 			deltaAccumulator -= 0.25;
+			bulletSystem.big_oof();
+			System.out.println("B: " + store.bullets.size());
 		}
 
 		drawer.drawFrame();
@@ -82,9 +82,7 @@ public class AsdGame extends ApplicationAdapter {
 			b.move();
 		}
 
-		for (Bullet b : store.playerBullets) {
-			b.move();
-        }
+		store.bulletSystem.step();
 	}
 
 	private void addEnemy() {
@@ -92,11 +90,11 @@ public class AsdGame extends ApplicationAdapter {
 		store.enemies.add(new TestEnemy(rng.nextInt((int) width), height - 20));
 	}
 
-    private void cleanup() {
+ /*   private void cleanup() {
         ArrayList<Bullet> pb = store.playerBullets.stream().filter(b -> b.getPosition().y < height).collect(Collectors.toCollection(ArrayList::new));
 
         store.playerBullets = pb;
-	}
+	} */
 
 	@Override
 	public void dispose () {
