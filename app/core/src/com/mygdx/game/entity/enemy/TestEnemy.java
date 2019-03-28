@@ -9,6 +9,7 @@ public class TestEnemy implements Enemy {
     private Vector2 position;
     private Vector2 speed;
     private Sprite sprite;
+    private int hitpoints = 10000;
 
     private float sinewaveAngle;
 
@@ -25,6 +26,15 @@ public class TestEnemy implements Enemy {
         position.add(speed);
         updateSpeed();
         sprite.setPosition(position.x, position.y);
+    }
+
+    @Override
+    public void hit() {
+        System.out.println("OOF OUCH OWIE");
+        this.hitpoints -= 2500;
+        if (hitpoints <= 0) {
+            this.position = new Vector2(-1000,-1000);
+        }
     }
 
     private void updateSpeed() {
