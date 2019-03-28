@@ -14,6 +14,7 @@ public class BulletSystem {
     private ArrayList<Bullet> bullets;
     private ArrayDeque<StarBullet> starBulletPool;
     private ArrayDeque<BasicBullet> basicBulletPool;
+    private ArrayDeque<BasicBullet> playerBulletPool;
 
     private final float HEIGHT = 800;
     private final float WIDTH = 600;
@@ -22,27 +23,41 @@ public class BulletSystem {
         bullets = new ArrayList<>();
         starBulletPool = new ArrayDeque<>();
         basicBulletPool = new ArrayDeque<>();
+        playerBulletPool = new ArrayDeque<>();
     }
 
     public void newBullet(BulletType type, float x, float y, float angle) {
-        if (type == BulletType.STAR) {
-            if (starBulletPool.isEmpty()) {
-                StarBullet b = new StarBullet(x, y, angle);
-                bullets.add(b);
-            } else {
-                StarBullet b = starBulletPool.pollFirst();
-                b.refresh(x, y, angle);
-                bullets.add(b);
-            }
+        switch(type) {
+            case PLAYER:
+
+            case STAR:
+                newStar(x, y, angle);
+            case BASIC:
+                newBasic(x, y, angle);
+            default:
+                return;
+        }
+    }
+
+    private void newStar(float x, float y, float angle) {
+        if (starBulletPool.isEmpty()) {
+            StarBullet b = new StarBullet(x, y, angle);
+            bullets.add(b);
         } else {
-            if (basicBulletPool.isEmpty()) {
-                BasicBullet b = new BasicBullet(x, y, angle);
-                bullets.add(b);
-            } else {
-                BasicBullet b = basicBulletPool.pollFirst();
-                b.refresh(x, y, angle);
-                bullets.add(b);
-            }
+            StarBullet b = starBulletPool.pollFirst();
+            b.refresh(x, y, angle);
+            bullets.add(b);
+        }
+    }
+
+    private void newBasic(float x, float y, float angle) {
+        if (basicBulletPool.isEmpty()) {
+            BasicBullet b = new BasicBullet(x, y, angle);
+            bullets.add(b);
+        } else {
+            BasicBullet b = basicBulletPool.pollFirst();
+            b.refresh(x, y, angle);
+            bullets.add(b);
         }
     }
 

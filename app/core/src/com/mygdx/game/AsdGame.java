@@ -15,7 +15,7 @@ import com.mygdx.game.utility.Drawer;
 import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.utility.InputHandler;
 import com.mygdx.game.level.Map;
-import com.mygdx.game.entity.bullet.BulletSystem;
+import com.mygdx.game.utility.BulletSystem;;
 
 public class AsdGame extends ApplicationAdapter {
 	float width;
