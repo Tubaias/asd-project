@@ -87,7 +87,7 @@ public class BulletSystem {
         ArrayList<Bullet> alive = new ArrayList<>();
         ArrayList<Bullet> dead = new ArrayList<>();
         for (Bullet b : bullets) {
-            if (inPlayField(b)) {
+            if (inPlayField(b) && !b.isDead()) {
                 alive.add(b);
             } else {
                 dead.add(b);
