@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
-public class TestEnemy implements Enemy {
+public class TestEnemy extends Enemy {
     private Vector2 position;
     private Vector2 speed;
     private Sprite sprite;

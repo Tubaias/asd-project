@@ -32,8 +32,10 @@ public class BulletSystem {
 
             case STAR:
                 newStar(x, y, angle);
+                break;
             case BASIC:
                 newBasic(x, y, angle);
+                break;
             default:
                 return;
         }

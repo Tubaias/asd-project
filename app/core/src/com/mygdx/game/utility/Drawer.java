@@ -69,6 +69,9 @@ public class Drawer implements Disposable {
         store.bulletSystem.draw(batch);
 
         store.player.getSprite().draw(batch);
+        store.player.getPods()[0].getSprite().draw(batch);
+        store.player.getPods()[1].getSprite().draw(batch);
+
 
         updateFPS();
         font.draw(batch, "" + fps, 10, 20);

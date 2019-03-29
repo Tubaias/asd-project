@@ -3,7 +3,7 @@ package com.mygdx.game.entity.enemy;
 
 import com.mygdx.game.entity.Entity;
 
-public interface Enemy extends Entity {
-    void move();
-    void hit();
+public abstract class Enemy extends Entity {
+    public abstract void move();
+    public abstract void hit();
 }

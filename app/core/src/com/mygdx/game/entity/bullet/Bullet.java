@@ -2,25 +2,16 @@
 package com.mygdx.game.entity.bullet;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Entity;
 
-public abstract class Bullet implements Entity {
-    protected Vector2 position;
+public abstract class Bullet extends Entity {
     protected double speed;
     protected double acceleration;
     protected double angle;
     protected Texture texture;
-    protected Sprite sprite;
     protected boolean dead = false;
 
     public abstract void move();
-
-    @Override
-    public Sprite getSprite() {
-        return this.sprite;
-    }
 
     public void setAngle(float value) {
         this.angle = value;
@@ -40,15 +31,5 @@ public abstract class Bullet implements Entity {
 
     public boolean isDead() {
         return dead;
-    }
-
-    @Override
-    public Vector2 getPosition() {
-        return this.position;
-    }
-
-    @Override
-    public void setPosition(Vector2 position) {
-        this.position = position;
     }
 }

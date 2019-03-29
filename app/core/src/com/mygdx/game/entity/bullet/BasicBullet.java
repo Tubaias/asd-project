@@ -11,10 +11,10 @@ public class BasicBullet extends Bullet {
         this.speed = 20;
         this.acceleration = 0;
 
-        this.texture = new Texture("whitebullet.png");
+        this.texture = new Texture("playerbullet.png");
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
-        this.sprite.setColor(1, 0, 0, 1f);
+        this.sprite.setColor(0.7f, 0f, 0f, 0.9f);
         this.position = new Vector2(x - this.sprite.getWidth() / 2, y);
     }
 
