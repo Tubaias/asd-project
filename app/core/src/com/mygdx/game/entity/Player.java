@@ -59,21 +59,25 @@ public class Player extends Entity {
 
     public void shoot() {
         if (focused) {
-            //store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, 0f);
-            //store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, -15);
-            //store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, 15);
-
             store.bulletSystem.newBullet(BulletType.PLAYERLARGE, position.x + 64, position.y + 80 + bulletFlipFlop, 0f);
+
             store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 0f);
+            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 1f);
             store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -1f);
+
             store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 0f);
             store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 1f);
+            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -1f);
         } else {
             store.bulletSystem.newBullet(BulletType.PLAYERLARGE, position.x + 64, position.y + 80 + bulletFlipFlop, 0f);
+
             store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 0f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -5f);
+            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -3f);
+            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -6f);
+
             store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 0f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 5f);
+            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 3f);
+            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 6f);
         }
 
         if (bulletFlipFlop == 0) {
@@ -81,5 +85,11 @@ public class Player extends Entity {
         } else {
             bulletFlipFlop = 0;
         }
+    }
+
+    public void special() {
+        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, 0f);
+        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, -15);
+        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, 15);
     }
 }

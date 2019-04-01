@@ -65,7 +65,7 @@ public class AsdGame extends ApplicationAdapter {
 			deltaAccumulator -= 0.25;
 		}
 
-		collisionSystem.playerCollision();
+		collisionSystem.collision();
 		//store.bulletSystem.big_oof();
 
 		drawer.drawFrame();

@@ -9,13 +9,13 @@ public class LargePlayerBullet extends Bullet {
 
     public LargePlayerBullet(float x, float y, float angle) {
         this.angle = Math.toRadians(angle);
-        this.speed = 45;
+        this.speed = 30;
         this.acceleration = 0;
 
         this.texture = new Texture("largeplayerbullet.png");
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
-        this.sprite.setColor(0.7f, 1f, 0.7f, 0.9f);
+        this.sprite.setColor(0.7f, 1f, 0.7f, 0.7f);
         this.position = new Vector2(x - this.sprite.getWidth() / 2, y);
     }
 

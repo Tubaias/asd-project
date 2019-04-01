@@ -30,8 +30,7 @@ public class TestEnemy extends Enemy {
 
     @Override
     public void hit() {
-        System.out.println("OOF OUCH OWIE");
-        this.hitpoints -= 2500;
+        this.hitpoints -= 100;
         if (hitpoints <= 0) {
             this.position = new Vector2(-1000,-1000);
         }

@@ -13,8 +13,7 @@ public class CollisionSystem {
         this.store = store;
     }
 
-
-    public void playerCollision() {
+    public void collision() {
         Player player = store.player;
 
         for (Enemy e : store.enemies) {
@@ -26,15 +25,13 @@ public class CollisionSystem {
 
             for (Bullet b : store.bulletSystem.getBullets()) {
                 Vector2 bulletC = getCenter(b.getSprite());
-                if (enemyC.dst(bulletC) < 20) {
+                if (enemyC.dst(bulletC) < 16 + e.getSprite().getWidth() / 2) {
                     e.hit();
                     b.setDead(true);
                 }
             }
         }
-
     }
-
 
     private Vector2 getCenter(Sprite s) {
         float x = s.getX() + s.getWidth() / 2;

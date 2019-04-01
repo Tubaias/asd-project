@@ -34,7 +34,7 @@ public class Pod extends Entity {
             velocity.set((destination.x - position.x) / 3, (destination.y - position.y) / 3);
         }
 
-        if (Math.abs(position.x - destination.x) < 1 && Math.abs(position.y - destination.y) < 1) {
+        if (Math.abs(position.x - destination.x) < 5 && Math.abs(position.y - destination.y) < 5) {
             velocity.set(0, 0);
             if (focused) {
                 attached = true;
