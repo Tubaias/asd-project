@@ -1,6 +1,7 @@
 
 package com.mygdx.game.entity.enemy;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -26,10 +27,13 @@ public class TestEnemy extends Enemy {
         position.add(speed);
         updateSpeed();
         sprite.setPosition(position.x, position.y);
+        sprite.setColor(Color.WHITE);
     }
 
     @Override
     public void hit() {
+        sprite.setColor(1f, 0.3f, 0.3f, 1f);
+
         this.hitpoints -= 100;
         if (hitpoints <= 0) {
             this.position = new Vector2(-1000,-1000);
