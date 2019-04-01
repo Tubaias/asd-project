@@ -10,6 +10,7 @@ import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.TestEnemy;
+import com.mygdx.game.entity.enemy.RootterTootter;
 import com.mygdx.game.utility.CollisionSystem;
 import com.mygdx.game.utility.Drawer;
 import com.mygdx.game.utility.EntityStore;
@@ -89,7 +90,7 @@ public class AsdGame extends ApplicationAdapter {
 
 	private void addEnemy() {
 		Random rng = new Random();
-		store.enemies.add(new TestEnemy(rng.nextInt((int) width), height - 20));
+		store.enemies.add(new RootterTootter(rng.nextInt((int) width), height - 20));
 	}
 
 /*
