@@ -20,10 +20,16 @@ public class InputHandler {
     }
 
     public void handlePlayerInputs() {
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
+            player.setFocused(true);
+        } else {
+            player.setFocused(false);
+        }
+
         playerMovement();
 
         if (Gdx.input.isKeyPressed(Input.Keys.J)) {
-            player.shoot(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT));
+            player.shoot();
         }
     }
 

@@ -5,16 +5,17 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.entity.bullet.BasicBullet;
+import com.mygdx.game.entity.bullet.PlayerBullet;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.bullet.BulletType;
+import com.mygdx.game.entity.bullet.LargePlayerBullet;
 import com.mygdx.game.entity.bullet.StarBullet;
 
 public class BulletSystem {
     private ArrayList<Bullet> bullets;
     private ArrayDeque<StarBullet> starBulletPool;
-    private ArrayDeque<BasicBullet> basicBulletPool;
-    private ArrayDeque<BasicBullet> playerBulletPool;
+    private ArrayDeque<PlayerBullet> playerBulletPool;
+    private ArrayDeque<LargePlayerBullet> largePlayerBulletPool;
 
     private final float HEIGHT = 800;
     private final float WIDTH = 600;
@@ -22,19 +23,22 @@ public class BulletSystem {
     public BulletSystem() {
         bullets = new ArrayList<>();
         starBulletPool = new ArrayDeque<>();
-        basicBulletPool = new ArrayDeque<>();
         playerBulletPool = new ArrayDeque<>();
+        largePlayerBulletPool = new ArrayDeque<>();
     }
 
     public void newBullet(BulletType type, float x, float y, float angle) {
         switch(type) {
-            case PLAYER:
+            case BASIC:
 
             case STAR:
                 newStar(x, y, angle);
                 break;
-            case BASIC:
-                newBasic(x, y, angle);
+            case PLAYER:
+                newPlayer(x, y, angle);
+                break;
+            case PLAYERLARGE:
+                newLargePlayer(x, y, angle);
                 break;
             default:
                 return;
@@ -52,12 +56,23 @@ public class BulletSystem {
         }
     }
 
-    private void newBasic(float x, float y, float angle) {
-        if (basicBulletPool.isEmpty()) {
-            BasicBullet b = new BasicBullet(x, y, angle);
+    private void newPlayer(float x, float y, float angle) {
+        if (playerBulletPool.isEmpty()) {
+            PlayerBullet b = new PlayerBullet(x, y, angle);
             bullets.add(b);
         } else {
-            BasicBullet b = basicBulletPool.pollFirst();
+            PlayerBullet b = playerBulletPool.pollFirst();
+            b.refresh(x, y, angle);
+            bullets.add(b);
+        }
+    }
+
+    private void newLargePlayer(float x, float y, float angle) {
+        if (largePlayerBulletPool.isEmpty()) {
+            LargePlayerBullet b = new LargePlayerBullet(x, y, angle);
+            bullets.add(b);
+        } else {
+            LargePlayerBullet b = largePlayerBulletPool.pollFirst();
             b.refresh(x, y, angle);
             bullets.add(b);
         }
@@ -76,7 +91,7 @@ public class BulletSystem {
     }
 
     public void big_oof() {
-        System.out.println("B: " + basicBulletPool.size() + " S: " + starBulletPool.size());
+        System.out.println("B: " + playerBulletPool.size() + " S: " + starBulletPool.size());
     }
 
     public void draw(SpriteBatch batch) {
@@ -101,8 +116,10 @@ public class BulletSystem {
         for (Bullet d : dead) {
             if (d instanceof StarBullet) {
                 starBulletPool.addFirst((StarBullet) d);
-            } else {
-                basicBulletPool.addFirst((BasicBullet) d);
+            } else if (d instanceof PlayerBullet) {
+                playerBulletPool.addFirst((PlayerBullet) d);
+            } else if (d instanceof LargePlayerBullet) {
+                largePlayerBulletPool.addFirst((LargePlayerBullet) d);
             }
         }
     }

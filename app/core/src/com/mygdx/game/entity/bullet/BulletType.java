@@ -1,5 +1,5 @@
 package com.mygdx.game.entity.bullet;
 
 public enum BulletType {
-    STAR, BASIC, PLAYER
+    STAR, BASIC, PLAYER, PLAYERLARGE
 }

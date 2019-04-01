@@ -5,16 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
-public class BasicBullet extends Bullet {
-    public BasicBullet(float x, float y, float angle) {
+public class PlayerBullet extends Bullet {
+
+    public PlayerBullet(float x, float y, float angle) {
         this.angle = Math.toRadians(angle);
-        this.speed = 20;
+        this.speed = 30;
         this.acceleration = 0;
 
         this.texture = new Texture("playerbullet.png");
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
-        this.sprite.setColor(0.7f, 0f, 0f, 0.9f);
+        this.sprite.setColor(0.7f, 1f, 0.7f, 0.9f);
         this.position = new Vector2(x - this.sprite.getWidth() / 2, y);
     }
 
