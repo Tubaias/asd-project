@@ -12,12 +12,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
+import com.mygdx.game.entity.enemy.RootterTootter;
 
 public class Drawer implements Disposable {
     private EntityStore store;
     private SpriteBatch batch;
     private BitmapFont font;
     private float deltaAccumulator;
+    private float animationAccumulator;
     private int fps;
 
     OrthographicCamera camera;
@@ -32,6 +34,7 @@ public class Drawer implements Disposable {
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);
         viewport.apply();
+        animationAccumulator = 0f;
 
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
     }
@@ -39,6 +42,7 @@ public class Drawer implements Disposable {
     public void drawFrame() {
         float delta = Gdx.graphics.getDeltaTime();
         deltaAccumulator += delta;
+        animationAccumulator += delta;
 
         camera.update();
 
@@ -59,7 +63,8 @@ public class Drawer implements Disposable {
         store.foregroundMap.getSprite2().draw(batch);
 
         for (Enemy e : store.enemies) {
-            e.getSprite().draw(batch);
+            RootterTootter r = (RootterTootter) e;
+            batch.draw(r.getFrame(animationAccumulator), r.getPosition().x, r.getPosition().y);
         }
 
         for (Bullet b : store.bullets) {

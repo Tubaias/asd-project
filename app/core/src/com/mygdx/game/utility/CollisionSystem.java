@@ -25,7 +25,7 @@ public class CollisionSystem {
 
             for (Bullet b : store.bulletSystem.getBullets()) {
                 Vector2 bulletC = getCenter(b.getSprite());
-                if (enemyC.dst(bulletC) < 16 + e.getSprite().getWidth() / 2) {
+                if (enemyC.dst(bulletC) < 16 + 38) {
                     e.hit();
                     b.setDead(true);
                 }
