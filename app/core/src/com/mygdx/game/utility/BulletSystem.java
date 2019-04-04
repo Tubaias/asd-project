@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.PlayerBullet;
+import com.mygdx.game.entity.bullet.BasicBullet;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.entity.bullet.LargePlayerBullet;
@@ -14,6 +15,7 @@ import com.mygdx.game.entity.bullet.StarBullet;
 public class BulletSystem {
     private ArrayList<Bullet> bullets;
     private ArrayDeque<StarBullet> starBulletPool;
+    private ArrayDeque<BasicBullet> basicBulletPool;
     private ArrayDeque<PlayerBullet> playerBulletPool;
     private ArrayDeque<LargePlayerBullet> largePlayerBulletPool;
 
@@ -25,12 +27,14 @@ public class BulletSystem {
         starBulletPool = new ArrayDeque<>();
         playerBulletPool = new ArrayDeque<>();
         largePlayerBulletPool = new ArrayDeque<>();
+        basicBulletPool = new ArrayDeque<>();
     }
 
     public void newBullet(BulletType type, float x, float y, float angle) {
         switch(type) {
             case BASIC:
-
+                newBasic(x, y, angle);
+                break;
             case STAR:
                 newStar(x, y, angle);
                 break;
@@ -42,6 +46,17 @@ public class BulletSystem {
                 break;
             default:
                 return;
+        }
+    }
+
+    private void newBasic(float x, float y, float angle) {
+        if (basicBulletPool.isEmpty()) {
+            BasicBullet b = new BasicBullet(x, y, angle);
+            bullets.add(b);
+        } else {
+            BasicBullet b = basicBulletPool.pollFirst();
+            b.refresh(x, y, angle);
+            bullets.add(b);
         }
     }
 
@@ -91,7 +106,7 @@ public class BulletSystem {
     }
 
     public void big_oof() {
-        System.out.println("B: " + playerBulletPool.size() + " S: " + starBulletPool.size());
+        System.out.println("bullets list size: " + bullets.size());
     }
 
     public void draw(SpriteBatch batch) {
@@ -120,6 +135,8 @@ public class BulletSystem {
                 playerBulletPool.addFirst((PlayerBullet) d);
             } else if (d instanceof LargePlayerBullet) {
                 largePlayerBulletPool.addFirst((LargePlayerBullet) d);
+            } else if (d instanceof BasicBullet) {
+                basicBulletPool.addFirst((BasicBullet) d);
             }
         }
     }

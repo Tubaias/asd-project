@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.entity.bullet.Bullet;
@@ -21,6 +23,8 @@ public class Drawer implements Disposable {
     private float deltaAccumulator;
     private float animationAccumulator;
     private int fps;
+
+    private ShaderProgram whiteShader;
 
     OrthographicCamera camera;
     Viewport viewport;
@@ -37,6 +41,9 @@ public class Drawer implements Disposable {
         animationAccumulator = 0f;
 
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+
+        whiteShader = new ShaderProgram(Gdx.files.internal("shaders/whiteshader.vs"), Gdx.files.internal("shaders/whiteshader.fs"));
+        batch.setShader(whiteShader);
     }
 
     public void drawFrame() {
@@ -45,10 +52,8 @@ public class Drawer implements Disposable {
         animationAccumulator += delta;
 
         camera.update();
-
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
-
         viewport.update(w, h);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -64,7 +69,22 @@ public class Drawer implements Disposable {
 
         for (Enemy e : store.enemies) {
             RootterTootter r = (RootterTootter) e;
-            batch.draw(r.getFrame(animationAccumulator), r.getPosition().x, r.getPosition().y);
+
+            if (r.isHit()) {
+                batch.end();
+                whiteShader.begin();
+                whiteShader.setUniformi("white", 1);
+                whiteShader.end();
+                batch.begin();
+                batch.draw(r.getFrame(animationAccumulator), r.getPosition().x, r.getPosition().y);
+                batch.end();
+                whiteShader.begin();
+                whiteShader.setUniformi("white", 0);
+                whiteShader.end();
+                batch.begin();
+            } else {
+                batch.draw(r.getFrame(animationAccumulator), r.getPosition().x, r.getPosition().y);
+            }
         }
 
         for (Bullet b : store.bullets) {
@@ -77,10 +97,8 @@ public class Drawer implements Disposable {
         store.player.getPods()[0].getSprite().draw(batch);
         store.player.getPods()[1].getSprite().draw(batch);
 
-
         updateFPS();
         font.draw(batch, "" + fps, 10, 20);
-
         batch.end();
     }
 

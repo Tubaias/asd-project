@@ -11,9 +11,11 @@ public abstract class Entity {
     public Sprite getSprite() {
         return sprite;
     }
+
     public Vector2 getPosition() {
         return position;
     }
+
     public void setPosition(Vector2 position) {
         this.position = position;
     }

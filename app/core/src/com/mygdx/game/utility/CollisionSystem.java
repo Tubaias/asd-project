@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
+import com.mygdx.game.entity.bullet.LargePlayerBullet;
+import com.mygdx.game.entity.bullet.PlayerBullet;
 import com.mygdx.game.entity.enemy.Enemy;
 
 public class CollisionSystem {
@@ -25,7 +27,7 @@ public class CollisionSystem {
 
             for (Bullet b : store.bulletSystem.getBullets()) {
                 Vector2 bulletC = getCenter(b.getSprite());
-                if (enemyC.dst(bulletC) < 16 + 38) {
+                if (enemyC.dst(bulletC) < 16 + 38 && (b instanceof PlayerBullet || b instanceof LargePlayerBullet)) {
                     e.hit();
                     b.setDead(true);
                 }
