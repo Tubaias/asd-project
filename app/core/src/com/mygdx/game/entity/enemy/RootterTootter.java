@@ -3,7 +3,6 @@ package com.mygdx.game.entity.enemy;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -16,8 +15,6 @@ public class RootterTootter extends Enemy {
     private Vector2 speed;
     private Sprite sprite;
     private Animator animation;
-    //private Animation<TextureRegion> animation;
-    //private Texture rootorSheet;
     private int hitpoints = 10000;
     private boolean isHit;
     private float sinewaveAngle;
@@ -31,7 +28,6 @@ public class RootterTootter extends Enemy {
 
         this.sprite = new Sprite(new Texture("helikipotel.png"));
         this.sprite.setPosition(x, y);
-
 
         animation = new Animator(new Texture("helikipotel.png"), 3);
         this.sprite = new Sprite(animation.getFrame());
