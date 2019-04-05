@@ -9,13 +9,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.utility.EntityStore;
+import com.mygdx.game.utility.Animator;
 
 public class RootterTootter extends Enemy {
     private Vector2 position;
     private Vector2 speed;
     private Sprite sprite;
-    private Animation<TextureRegion> animation;
-    private Texture rootorSheet;
+    private Animator animation;
+    //private Animation<TextureRegion> animation;
+    //private Texture rootorSheet;
     private int hitpoints = 10000;
     private boolean isHit;
     private float sinewaveAngle;
@@ -30,11 +32,10 @@ public class RootterTootter extends Enemy {
         this.sprite = new Sprite(new Texture("helikipotel.png"));
         this.sprite.setPosition(x, y);
 
-        rootorSheet = new Texture("helikipotel.png");
-        TextureRegion[] texture = TextureRegion.split(rootorSheet, rootorSheet.getWidth()/3, rootorSheet.getHeight())[0];
-        animation = new Animation<TextureRegion>(0.0167f, texture);
 
-        this.sprite = new Sprite(texture[0]);
+        animation = new Animator(new Texture("helikipotel.png"), 3);
+        this.sprite = new Sprite(animation.getFrame());
+
         this.sprite.setPosition(x, y);
         this.isHit = false;
     }
@@ -85,7 +86,7 @@ public class RootterTootter extends Enemy {
     }
 
     public TextureRegion getFrame(float accumulator) {
-        return animation.getKeyFrame(accumulator, true);
+        return animation.getFrame();
     }
 
     @Override

@@ -71,6 +71,7 @@ public class Drawer implements Disposable {
             RootterTootter r = (RootterTootter) e;
 
             if (r.isHit()) {
+                System.out.println("Bang");
                 batch.end();
                 whiteShader.begin();
                 whiteShader.setUniformi("white", 1);
