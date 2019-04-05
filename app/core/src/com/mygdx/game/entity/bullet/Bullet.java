@@ -25,6 +25,21 @@ public abstract class Bullet extends Entity {
         this.dead = false;
     }
 
+    public static Bullet createBullet(BulletType type, float x, float y, float angle) {
+        switch (type) {
+            case BASIC:
+                return new BasicBullet(x, y, angle);
+            case PLAYER:
+                return new PlayerBullet(x, y, angle);
+            case PLAYERLARGE:
+                return new LargePlayerBullet(x, y, angle);
+            case STAR:
+                return new StarBullet(x, y, angle);
+            default:
+                return null;
+        }
+    }
+
     public void setDead(boolean dead) {
         this.dead = dead;
     }

@@ -14,20 +14,24 @@ import com.mygdx.game.entity.bullet.StarBullet;
 
 public class BulletSystem {
     private ArrayList<Bullet> bullets;
-    private ArrayDeque<StarBullet> starBulletPool;
+    /* private ArrayDeque<StarBullet> starBulletPool;
     private ArrayDeque<BasicBullet> basicBulletPool;
     private ArrayDeque<PlayerBullet> playerBulletPool;
-    private ArrayDeque<LargePlayerBullet> largePlayerBulletPool;
+    private ArrayDeque<LargePlayerBullet> largePlayerBulletPool; */
+    private BulletPool starBulletPool;
+    private BulletPool basicBulletPool;
+    private BulletPool playerBulletPool;
+    private BulletPool largePlayerBulletPool;
 
     private final float HEIGHT = 800;
     private final float WIDTH = 600;
 
     public BulletSystem() {
         bullets = new ArrayList<>();
-        starBulletPool = new ArrayDeque<>();
-        playerBulletPool = new ArrayDeque<>();
-        largePlayerBulletPool = new ArrayDeque<>();
-        basicBulletPool = new ArrayDeque<>();
+        starBulletPool = new BulletPool(BulletType.STAR);
+        playerBulletPool = new BulletPool(BulletType.PLAYER);
+        largePlayerBulletPool = new BulletPool(BulletType.PLAYERLARGE);
+        basicBulletPool = new BulletPool(BulletType.BASIC);
     }
 
     public void newBullet(BulletType type, float x, float y, float angle) {
@@ -50,47 +54,19 @@ public class BulletSystem {
     }
 
     private void newBasic(float x, float y, float angle) {
-        if (basicBulletPool.isEmpty()) {
-            BasicBullet b = new BasicBullet(x, y, angle);
-            bullets.add(b);
-        } else {
-            BasicBullet b = basicBulletPool.pollFirst();
-            b.refresh(x, y, angle);
-            bullets.add(b);
-        }
+        bullets.add(basicBulletPool.newObj(x, y, angle));
     }
 
     private void newStar(float x, float y, float angle) {
-        if (starBulletPool.isEmpty()) {
-            StarBullet b = new StarBullet(x, y, angle);
-            bullets.add(b);
-        } else {
-            StarBullet b = starBulletPool.pollFirst();
-            b.refresh(x, y, angle);
-            bullets.add(b);
-        }
+        bullets.add(starBulletPool.newObj(x, y, angle));
     }
 
     private void newPlayer(float x, float y, float angle) {
-        if (playerBulletPool.isEmpty()) {
-            PlayerBullet b = new PlayerBullet(x, y, angle);
-            bullets.add(b);
-        } else {
-            PlayerBullet b = playerBulletPool.pollFirst();
-            b.refresh(x, y, angle);
-            bullets.add(b);
-        }
+        bullets.add(playerBulletPool.newObj(x, y, angle));
     }
 
     private void newLargePlayer(float x, float y, float angle) {
-        if (largePlayerBulletPool.isEmpty()) {
-            LargePlayerBullet b = new LargePlayerBullet(x, y, angle);
-            bullets.add(b);
-        } else {
-            LargePlayerBullet b = largePlayerBulletPool.pollFirst();
-            b.refresh(x, y, angle);
-            bullets.add(b);
-        }
+        bullets.add(largePlayerBulletPool.newObj(x, y, angle));
     }
 
     public void step() {
@@ -107,6 +83,8 @@ public class BulletSystem {
 
     public void big_oof() {
         System.out.println("bullets list size: " + bullets.size());
+        System.out.println("Pool zise: " + playerBulletPool.size());
+
     }
 
     public void draw(SpriteBatch batch) {
@@ -130,13 +108,13 @@ public class BulletSystem {
 
         for (Bullet d : dead) {
             if (d instanceof StarBullet) {
-                starBulletPool.addFirst((StarBullet) d);
+                starBulletPool.put((StarBullet) d);
             } else if (d instanceof PlayerBullet) {
-                playerBulletPool.addFirst((PlayerBullet) d);
+                playerBulletPool.put((PlayerBullet) d);
             } else if (d instanceof LargePlayerBullet) {
-                largePlayerBulletPool.addFirst((LargePlayerBullet) d);
+                largePlayerBulletPool.put((LargePlayerBullet) d);
             } else if (d instanceof BasicBullet) {
-                basicBulletPool.addFirst((BasicBullet) d);
+                basicBulletPool.put((BasicBullet) d);
             }
         }
     }
