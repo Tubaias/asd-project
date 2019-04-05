@@ -26,8 +26,8 @@ public class BulletPool {
         return Bullet.createBullet(type, x, y, angle);
     }
 
-    public Class<?> getType() {
-        return this.getClass();
+    public BulletType getType() {
+        return this.type;
     }
 
     public int size() {

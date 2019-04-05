@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.entity.bullet.Bullet;
@@ -71,7 +70,7 @@ public class Drawer implements Disposable {
             RootterTootter r = (RootterTootter) e;
 
             if (r.isHit()) {
-                System.out.println("Bang");
+                //System.out.println("Bang");
                 batch.end();
                 whiteShader.begin();
                 whiteShader.setUniformi("white", 1);

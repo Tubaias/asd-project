@@ -25,4 +25,9 @@ public class BasicBullet extends Bullet {
 
         sprite.setPosition(position.x, position.y);
     }
+
+    @Override
+    public BulletType getType() {
+        return BulletType.BASIC;
+    }
 }

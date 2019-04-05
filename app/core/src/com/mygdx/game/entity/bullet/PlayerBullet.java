@@ -28,4 +28,9 @@ public class PlayerBullet extends Bullet {
 
         sprite.setPosition(position.x, position.y);
     }
+
+    @Override
+    public BulletType getType() {
+        return BulletType.PLAYER;
+    }
 }

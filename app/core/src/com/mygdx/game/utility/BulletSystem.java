@@ -1,7 +1,7 @@
 package com.mygdx.game.utility;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -14,14 +14,12 @@ import com.mygdx.game.entity.bullet.StarBullet;
 
 public class BulletSystem {
     private ArrayList<Bullet> bullets;
-    /* private ArrayDeque<StarBullet> starBulletPool;
-    private ArrayDeque<BasicBullet> basicBulletPool;
-    private ArrayDeque<PlayerBullet> playerBulletPool;
-    private ArrayDeque<LargePlayerBullet> largePlayerBulletPool; */
     private BulletPool starBulletPool;
     private BulletPool basicBulletPool;
     private BulletPool playerBulletPool;
     private BulletPool largePlayerBulletPool;
+
+    private HashMap<BulletType, BulletPool> pools;
 
     private final float HEIGHT = 800;
     private final float WIDTH = 600;
@@ -32,6 +30,12 @@ public class BulletSystem {
         playerBulletPool = new BulletPool(BulletType.PLAYER);
         largePlayerBulletPool = new BulletPool(BulletType.PLAYERLARGE);
         basicBulletPool = new BulletPool(BulletType.BASIC);
+
+        pools = new HashMap<>();
+        pools.put(BulletType.PLAYER, playerBulletPool);
+        pools.put(BulletType.PLAYERLARGE, largePlayerBulletPool);
+        pools.put(BulletType.BASIC, basicBulletPool);
+        pools.put(BulletType.STAR, starBulletPool);
     }
 
     public void newBullet(BulletType type, float x, float y, float angle) {
@@ -107,15 +111,7 @@ public class BulletSystem {
         bullets = alive;
 
         for (Bullet d : dead) {
-            if (d instanceof StarBullet) {
-                starBulletPool.put((StarBullet) d);
-            } else if (d instanceof PlayerBullet) {
-                playerBulletPool.put((PlayerBullet) d);
-            } else if (d instanceof LargePlayerBullet) {
-                largePlayerBulletPool.put((LargePlayerBullet) d);
-            } else if (d instanceof BasicBullet) {
-                basicBulletPool.put((BasicBullet) d);
-            }
+            pools.get(d.getType()).put(d);
         }
     }
 

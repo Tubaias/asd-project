@@ -13,6 +13,8 @@ public abstract class Bullet extends Entity {
 
     public abstract void move();
 
+    public abstract BulletType getType();
+
     public void setAngle(float value) {
         this.angle = value;
     }

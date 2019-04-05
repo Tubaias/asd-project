@@ -31,4 +31,9 @@ public class StarBullet extends Bullet {
         sprite.setPosition(position.x, position.y);
         sprite.setRotation(sprite.getRotation() + 5);
     }
+
+    @Override
+    public BulletType getType() {
+        return BulletType.STAR;
+    }
 }
