@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -40,13 +41,13 @@ public class Drawer implements Disposable {
         animationAccumulator = 0f;
 
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+        System.out.println(camera.position);
 
         whiteShader = new ShaderProgram(Gdx.files.internal("shaders/whiteshader.vs"), Gdx.files.internal("shaders/whiteshader.fs"));
         batch.setShader(whiteShader);
     }
 
-    public void drawFrame() {
-        float delta = Gdx.graphics.getDeltaTime();
+    public void drawFrame(float delta) {
         deltaAccumulator += delta;
         animationAccumulator += delta;
 
@@ -55,10 +56,12 @@ public class Drawer implements Disposable {
         int h = Gdx.graphics.getHeight();
         viewport.update(w, h);
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+
+        batch.draw(new Texture("ship.png"), 100, 100);
 
         store.backgroundMap.getSprite1().draw(batch);
         store.backgroundMap.getSprite2().draw(batch);

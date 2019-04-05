@@ -16,7 +16,7 @@ public class CollisionSystem {
         this.store = store;
     }
 
-    public void collision() {
+    public boolean collision() {
         Player player = store.player;
         Vector2 playerC = getCenter(player.getSprite());
 
@@ -41,10 +41,12 @@ public class CollisionSystem {
                 Vector2 bulletC = getCenter(b.getSprite());
 
                 if (playerC.dst(bulletC) < 10) {
-                    System.exit(0);
+                    return false;
                 }
             }
         }
+        
+        return true;
     }
 
     private Vector2 getCenter(Sprite s) {
