@@ -5,12 +5,8 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.entity.bullet.BasicBullet;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.bullet.BulletType;
-import com.mygdx.game.entity.bullet.LargePlayerBullet;
-import com.mygdx.game.entity.bullet.PlayerBullet;
-import com.mygdx.game.entity.bullet.StarBullet;
 
 public class BulletSystem {
     private ArrayList<Bullet> bullets;

@@ -47,7 +47,6 @@ public class AsdGame extends ApplicationAdapter {
         collisionSystem = new CollisionSystem(store);
         inputHandler = new InputHandler(player);
         drawer = new Drawer(store);
-        System.out.println(Gdx.graphics.getWidth());
         player.setStore(store);
     }
 
