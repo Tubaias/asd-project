@@ -25,13 +25,12 @@ public class FontDisplayer {
         font.draw(batch, layout, x - layout.width / 2, y + layout.height / 2);
     }
 
-    public void drawMultiline(float x, float y, SpriteBatch batch, String... lines) {
-        String s = "";
+    public void drawMultiline(String[] lines, float x, float y, SpriteBatch batch) {
         for (String l : lines) {
-            s += l + "\n";
+            layout.setText(font, l);
+            font.draw(batch, layout, x-layout.width / 2, y + layout.height / 2);
+            y -= font.getLineHeight();
         }
-        layout.setText(font, s);
-        font.draw(batch, layout, x - layout.width / 2, y + layout.height / 2);
     }
 
     

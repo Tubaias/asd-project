@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.io.FileIO;
 import com.mygdx.game.io.FontDisplayer;
 
 public class MenuScreen implements Screen {
@@ -41,8 +40,8 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         bigFont.drawFont("Press J\nto Start", 300, 400, batch);
-        String highscore = new FileIO().fileToArray("highscores.txt")[0];
-        smallFont.drawMultiline(300, 100, batch, "Highscores:", highscore);
+        String highscore = Highscores.getScores()[0];
+        smallFont.drawMultiline(new String[]{"Highscores:", highscore}, 300, 100, batch);
         batch.end();
     }
 
