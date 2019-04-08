@@ -62,6 +62,7 @@ public class RootterTootter extends Enemy {
         this.hitpoints -= 100;
 
         if (hitpoints <= 0) {
+            store.scoring.increase(1000);
             this.position = new Vector2(-1000,-1000);
         }
     }

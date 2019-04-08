@@ -41,7 +41,6 @@ public class Drawer implements Disposable {
         animationAccumulator = 0f;
 
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
-        System.out.println(camera.position);
 
         whiteShader = new ShaderProgram(Gdx.files.internal("shaders/whiteshader.vs"), Gdx.files.internal("shaders/whiteshader.fs"));
         batch.setShader(whiteShader);

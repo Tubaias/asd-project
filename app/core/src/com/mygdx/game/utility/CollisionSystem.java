@@ -12,6 +12,7 @@ import com.mygdx.game.entity.enemy.Enemy;
 public class CollisionSystem {
     EntityStore store;
 
+
     public CollisionSystem(EntityStore store) {
         this.store = store;
     }
@@ -41,11 +42,12 @@ public class CollisionSystem {
                 Vector2 bulletC = getCenter(b.getSprite());
 
                 if (playerC.dst(bulletC) < 10) {
+                    store.scoring.save();
                     return false;
                 }
             }
         }
-        
+
         return true;
     }
 

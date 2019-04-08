@@ -16,8 +16,9 @@ import com.mygdx.game.utility.CollisionSystem;
 import com.mygdx.game.utility.Drawer;
 import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.utility.InputHandler;
+import com.mygdx.game.utility.ScoringSystem;
 
-public class GameScreen implements Screen { 
+public class GameScreen implements Screen {
     float width;
     float height;
 
@@ -26,6 +27,7 @@ public class GameScreen implements Screen {
     InputHandler inputHandler;
     BulletSystem bulletSystem;
     CollisionSystem collisionSystem;
+    ScoringSystem scoring;
 
     Player player;
     Map foregroundMap;
@@ -49,12 +51,13 @@ public class GameScreen implements Screen {
 
         player = new Player();
         bulletSystem = new BulletSystem();
-        store = new EntityStore(player, bulletSystem, foregroundMap, backgroundMap);
+        scoring = new ScoringSystem();
+
+        store = new EntityStore(player, bulletSystem, foregroundMap, backgroundMap, scoring);
         collisionSystem = new CollisionSystem(store);
         inputHandler = new InputHandler(player);
         drawer = new Drawer(store);
         player.setStore(store);
-        System.out.println("JAAS");
     }
 
     @Override
@@ -115,12 +118,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
-        
+
     }
 
     @Override
     public void dispose() {
         drawer.dispose();
     }
-    
+
 }

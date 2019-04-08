@@ -22,7 +22,7 @@ public class FileIO {
             r += s.nextLine() + "\n";
         }
         s.close();
-        return r.split("\n"); 
+        return r.split("\n");
     }
 
     public static void createFile(String path, String[] lines) throws IOException {
@@ -32,6 +32,4 @@ public class FileIO {
         }
         pw.close();
     }
-    
-
 }

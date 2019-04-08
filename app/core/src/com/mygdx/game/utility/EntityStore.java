@@ -16,13 +16,15 @@ public class EntityStore {
     public Player player;
     public Map foregroundMap;
     public Map backgroundMap;
+    public ScoringSystem scoring;
 
-    public EntityStore(Player player, BulletSystem bulletSystem, Map fgMap, Map bgMap) {
+    public EntityStore(Player player, BulletSystem bulletSystem, Map fgMap, Map bgMap, ScoringSystem scoring) {
         this.player = player;
         this.bullets = new ArrayList<>();
         this.bulletSystem = bulletSystem;
         this.enemies = new ArrayList<>();
         foregroundMap = fgMap;
         backgroundMap = bgMap;
+        this.scoring = scoring;
     }
 }
