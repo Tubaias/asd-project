@@ -11,10 +11,10 @@ public class BasicBullet extends Bullet {
         this.angle = Math.toRadians(angle);
         this.speed = 7;
 
-        this.texture = new Texture("whitebullet.png");
+        this.texture = new Texture("enemybullet.png");
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
-        this.sprite.setColor(1f, 0.3f, 0.3f, 1f);
+        //this.sprite.setColor(1f, 0.3f, 0.3f, 1f);
         this.position = new Vector2(x - this.sprite.getWidth() / 2, y);
     }
 

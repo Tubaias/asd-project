@@ -58,38 +58,47 @@ public class Player extends Entity {
     }
 
     public void shoot() {
+        float podLX = podL.getPosition().x + 16;
+        float podRX = podR.getPosition().x + 16;
+        float podY = position.y + 48 + bulletFlipFlop;
+
+        float playerX = position.x + 64;
+        float playerY = position.y + 80 + bulletFlipFlop;
+
+        float angle1 = 3;
+        float angle2 = 6;
+
         if (focused) {
-            store.bulletSystem.newBullet(BulletType.PLAYERLARGE, position.x + 64, position.y + 80 + bulletFlipFlop, 0f);
-
-            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 0f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 1f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -1f);
-
-            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 0f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 1f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -1f);
-        } else {
-            store.bulletSystem.newBullet(BulletType.PLAYERLARGE, position.x + 64, position.y + 80 + bulletFlipFlop, 0f);
-
-            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 0f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -3f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podL.getPosition().x + 16, position.y + 48 + bulletFlipFlop, -6f);
-
-            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 0f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 3f);
-            store.bulletSystem.newBullet(BulletType.PLAYER, podR.getPosition().x + 16, position.y + 48 + bulletFlipFlop, 6f);
+            angle1 = 1;
+            angle2 = 2;
         }
 
+        store.bulletSystem.newBullet(BulletType.PLAYERLARGE, playerX, playerY, -angle1);
+        store.bulletSystem.newBullet(BulletType.PLAYERLARGE, playerX, playerY, 0f);
+        store.bulletSystem.newBullet(BulletType.PLAYERLARGE, playerX, playerY, angle1);
+
+        store.bulletSystem.newBullet(BulletType.PLAYERLARGE, podLX, podY, 0f);
+        store.bulletSystem.newBullet(BulletType.PLAYERLARGE, podLX, podY, -angle1);
+        store.bulletSystem.newBullet(BulletType.PLAYER, podLX, podY, angle1);
+        store.bulletSystem.newBullet(BulletType.PLAYER, podLX, podY, -angle2);
+
+        store.bulletSystem.newBullet(BulletType.PLAYERLARGE, podRX, podY, 0f);
+        store.bulletSystem.newBullet(BulletType.PLAYERLARGE, podRX, podY, angle1);
+        store.bulletSystem.newBullet(BulletType.PLAYER, podRX, podY, -angle1);
+        store.bulletSystem.newBullet(BulletType.PLAYER, podRX, podY, angle2);
+
         if (bulletFlipFlop == 0) {
-            bulletFlipFlop = -8;
+            bulletFlipFlop = -16;
         } else {
             bulletFlipFlop = 0;
         }
     }
 
     public void special() {
-        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, 0f);
-        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, -15);
-        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), position.y + 80, 15);
+        float playerY = position.y + 80;
+
+        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), playerY, 0f);
+        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), playerY, -15);
+        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), playerY, 15);
     }
 }

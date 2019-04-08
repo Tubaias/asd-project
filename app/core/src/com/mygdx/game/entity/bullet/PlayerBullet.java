@@ -9,7 +9,7 @@ public class PlayerBullet extends Bullet {
 
     public PlayerBullet(float x, float y, float angle) {
         this.angle = Math.toRadians(angle);
-        this.speed = 30;
+        this.speed = 50;
         this.acceleration = 0;
 
         this.texture = new Texture("playerbullet.png");
