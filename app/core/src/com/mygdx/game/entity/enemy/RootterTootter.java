@@ -20,6 +20,7 @@ public class RootterTootter extends Enemy {
     private float sinewaveAngle;
     private float deltaAccumulator;
     private EntityStore store;
+    private boolean dead = false;
 
     public RootterTootter(float x, float y, EntityStore store) {
         this.store = store;
@@ -62,7 +63,11 @@ public class RootterTootter extends Enemy {
         this.hitpoints -= 100;
 
         if (hitpoints <= 0) {
-            store.scoring.increase(1000);
+            if (!dead) {
+                store.scoring.increase(1000);
+            }
+
+            this.dead = true;
             this.position = new Vector2(-1000,-1000);
         }
     }

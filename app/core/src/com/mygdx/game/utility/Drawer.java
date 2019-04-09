@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.RootterTootter;
+import com.mygdx.game.io.FontDisplayer;
 
 public class Drawer implements Disposable {
     private EntityStore store;
@@ -23,6 +24,7 @@ public class Drawer implements Disposable {
     private float deltaAccumulator;
     private float animationAccumulator;
     private int fps;
+    private FontDisplayer fontDisplayer;
 
     private ShaderProgram whiteShader;
 
@@ -34,6 +36,8 @@ public class Drawer implements Disposable {
         this.batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
+
+        this.fontDisplayer = new FontDisplayer("fonts/vcr_mono.ttf", 21);
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);
@@ -98,6 +102,8 @@ public class Drawer implements Disposable {
         store.player.getSprite().draw(batch);
         store.player.getPods()[0].getSprite().draw(batch);
         store.player.getPods()[1].getSprite().draw(batch);
+
+        fontDisplayer.drawFont(Integer.toString(store.scoring.getScore()), 100, 600, batch);
 
         updateFPS();
         font.draw(batch, "" + fps, 10, 20);

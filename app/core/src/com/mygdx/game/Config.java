@@ -1,35 +1,59 @@
 package com.mygdx.game;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.badlogic.gdx.Gdx;
 import com.mygdx.game.io.FileIO;
 
 public class Config {
     private Map<String, Object> confs;
 
     public Config() {
+        createConfig();
         confs = new HashMap<>();
-        
+        Pattern numer = Pattern.compile("([a-z]+):\\s*([0-9]+)");
+        Pattern alpha = Pattern.compile("([a-z]+):\\s*([\\-a-zA-Z0-9]+)");
+
         try {
-            String[] configs = new FileIO().fileToArray("config.txt");
+            String[] configs = FileIO.fileToArray("config.txt");
             for (String l : configs) {
-                String[] split = l.split(":");
-                System.out.println("Toinen " + split[1]);
-                try {
-                    confs.put(split[0].trim(), Integer.valueOf(split[1].trim()));
-                } catch (Exception e) {
-                    confs.put(split[0].trim(), split[1].trim());
+                Matcher m1 = numer.matcher(l);
+                Matcher m2 = alpha.matcher(l);
+                if (m1.matches()) {
+                    confs.put(m1.group(1), Integer.valueOf(m1.group(2)));
+                } else if (m2.matches()) {
+                    confs.put(m2.group(1), m2.group(2));
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     public Object getOption(String name, Object def) {
         return confs.getOrDefault(name, def);
+    }
+
+    private void createConfig() {
+        if (!new File("config.txt").exists()) {
+            try {
+                FileIO.createFile("config.txt", new String[]{
+                    "width: 600",
+                    "height: 800",
+                    "up: W",
+                    "down: S",
+                    "left: A",
+                    "right: D",
+                    "shoot: J",
+                    "special: K",
+                    "focus: L-Ctrl",
+                });
+            } catch (Exception e) {
+                System.out.println("Config creation failed: " + e.getMessage());
+            }
+        }
     }
 }
