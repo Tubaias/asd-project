@@ -1,4 +1,4 @@
-package com.mygdx.game.utility;
+package com.mygdx.game.utility.logic;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;

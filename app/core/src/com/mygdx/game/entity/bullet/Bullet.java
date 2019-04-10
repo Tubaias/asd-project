@@ -24,6 +24,7 @@ public abstract class Bullet extends Entity {
         this.position.y = y;
         this.angle = Math.toRadians(angle);
         this.sprite.setOriginCenter();
+        this.sprite.setRotation(-angle);
         this.dead = false;
     }
 

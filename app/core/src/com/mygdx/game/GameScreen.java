@@ -2,21 +2,19 @@ package com.mygdx.game;
 
 import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.RootterTootter;
 import com.mygdx.game.level.Map;
-import com.mygdx.game.utility.BulletSystem;
-import com.mygdx.game.utility.CollisionSystem;
-import com.mygdx.game.utility.Drawer;
-import com.mygdx.game.utility.EntityStore;
+import com.mygdx.game.utility.logic.BulletSystem;
+import com.mygdx.game.utility.logic.CollisionSystem;
+import com.mygdx.game.utility.graphic.Drawer;
+import com.mygdx.game.utility.logic.EntityStore;
 import com.mygdx.game.utility.InputHandler;
-import com.mygdx.game.utility.ScoringSystem;
+import com.mygdx.game.utility.logic.ScoringSystem;
 
 public class GameScreen implements Screen {
     float width;
@@ -46,8 +44,8 @@ public class GameScreen implements Screen {
         width = 600;
         height = 800;
 
-        foregroundMap = new Map(new Texture("fg.png"), 5);
-        backgroundMap = new Map(new Texture("bg.png"), 3);
+        foregroundMap = new Map(new Texture("images/fg.png"), 5);
+        backgroundMap = new Map(new Texture("images/bg.png"), 3);
 
         player = new Player();
         bulletSystem = new BulletSystem();
@@ -58,11 +56,12 @@ public class GameScreen implements Screen {
         inputHandler = new InputHandler(player);
         drawer = new Drawer(store);
         player.setStore(store);
+
+        store.enemies.add(new RootterTootter(width / 2, height / 2, store));
     }
 
     @Override
     public void render(float delta) {
-        //delta = Gdx.graphics.getDeltaTime();
         deltaAccumulator += delta;
 
         inputHandler.handleSystemKeys();

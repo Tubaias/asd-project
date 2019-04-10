@@ -1,4 +1,4 @@
-package com.mygdx.game.utility;
+package com.mygdx.game.utility.logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;

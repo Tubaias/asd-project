@@ -15,7 +15,7 @@ public class StarBullet extends Bullet {
         this.speed = 10;
         this.acceleration = 0;
 
-        this.texture = new Texture("star.png");
+        this.texture = new Texture("images/bullets/star.png");
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
         sprite.setColor(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);

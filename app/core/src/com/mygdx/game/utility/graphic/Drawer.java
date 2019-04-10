@@ -1,5 +1,5 @@
 
-package com.mygdx.game.utility;
+package com.mygdx.game.utility.graphic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -16,6 +16,7 @@ import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.RootterTootter;
 import com.mygdx.game.io.FontDisplayer;
+import com.mygdx.game.utility.logic.EntityStore;
 
 public class Drawer implements Disposable {
     private EntityStore store;
@@ -59,12 +60,12 @@ public class Drawer implements Disposable {
         int h = Gdx.graphics.getHeight();
         viewport.update(w, h);
 
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        batch.draw(new Texture("ship.png"), 100, 100);
+        batch.draw(new Texture("images/ship.png"), 100, 100);
 
         store.backgroundMap.getSprite1().draw(batch);
         store.backgroundMap.getSprite2().draw(batch);
@@ -76,7 +77,6 @@ public class Drawer implements Disposable {
             RootterTootter r = (RootterTootter) e;
 
             if (r.isHit()) {
-                //System.out.println("Bang");
                 batch.end();
                 whiteShader.begin();
                 whiteShader.setUniformi("white", 1);

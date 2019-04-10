@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.BulletType;
-import com.mygdx.game.utility.EntityStore;
+import com.mygdx.game.utility.logic.EntityStore;
 
 public class Player extends Entity {
     private EntityStore store;
@@ -16,7 +16,7 @@ public class Player extends Entity {
     private int bulletFlipFlop;
 
     public Player() {
-        this.sprite = new Sprite(new Texture("ship.png"));
+        this.sprite = new Sprite(new Texture("images/ship.png"));
 
         float x = 600 / 2 - sprite.getWidth() / 2;
         float y = 100;

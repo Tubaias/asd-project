@@ -1,7 +1,6 @@
-package com.mygdx.game.utility;
+package com.mygdx.game.utility.logic;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import com.mygdx.game.io.FileIO;
 

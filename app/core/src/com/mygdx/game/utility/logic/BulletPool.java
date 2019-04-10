@@ -1,4 +1,4 @@
-package com.mygdx.game.utility;
+package com.mygdx.game.utility.logic;
 
 import java.util.ArrayList;
 import com.mygdx.game.entity.bullet.Bullet;

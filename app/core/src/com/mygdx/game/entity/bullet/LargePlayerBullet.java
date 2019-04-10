@@ -12,7 +12,7 @@ public class LargePlayerBullet extends Bullet {
         this.speed = 50;
         this.acceleration = 0;
 
-        this.texture = new Texture("largeplayerbullet.png");
+        this.texture = new Texture("images/bullets/largeplayerbullet.png");
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
         this.sprite.setColor(0.7f, 1f, 0.7f, 0.7f);

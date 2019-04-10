@@ -1,11 +1,11 @@
 
-package com.mygdx.game.utility;
+package com.mygdx.game.utility.logic;
 
 import java.util.ArrayList;
 
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
-import com.mygdx.game.utility.BulletSystem;
+import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.level.Map;
 

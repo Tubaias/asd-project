@@ -8,7 +8,7 @@ public class Highscores {
 
     public static String[] getScores() {
         try {
-            return new FileIO().fileToArray("highscores.txt");
+            return FileIO.fileToArray("highscores.txt");
         } catch (IOException e) {
             return new String[]{"-"};
         }

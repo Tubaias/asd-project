@@ -17,7 +17,7 @@ public class TestEnemy extends Enemy {
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, -2);
 
-        this.sprite = new Sprite(new Texture("skull.png"));
+        this.sprite = new Sprite(new Texture("images/enemies/skull.png"));
         this.sprite.setPosition(x, y);
     }
 

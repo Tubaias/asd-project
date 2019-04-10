@@ -13,7 +13,7 @@ public class Pod extends Entity {
         this.position = new Vector2(x, y);
         this.destination = new Vector2(x, y);
         this.velocity = new Vector2(0, 0);
-        this.sprite = new Sprite(new Texture("pod" + side + ".png"));
+        this.sprite = new Sprite(new Texture("images/pod" + side + ".png"));
         this.sprite.setPosition(x, y);
         this.attached = false;
     }

@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.BulletType;
-import com.mygdx.game.utility.EntityStore;
-import com.mygdx.game.utility.Animator;
+import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.graphic.Animator;
 
 public class RootterTootter extends Enemy {
     private Vector2 position;
@@ -27,10 +27,10 @@ public class RootterTootter extends Enemy {
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, -2);
 
-        this.sprite = new Sprite(new Texture("helikipotel.png"));
+        this.sprite = new Sprite(new Texture("images/enemies/helikipotel.png"));
         this.sprite.setPosition(x, y);
 
-        animation = new Animator(new Texture("helikipotel.png"), 3);
+        animation = new Animator(new Texture("images/enemies/helikipotel.png"), 3);
         this.sprite = new Sprite(animation.getFrame());
 
         this.sprite.setPosition(x, y);
