@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.io.FontDisplayer;
+import com.mygdx.game.utility.Inputs;
 import com.mygdx.game.utility.logic.ScoringSystem;
 
 public class GameOver implements Screen {
@@ -20,14 +21,16 @@ public class GameOver implements Screen {
     private int pointer = 0;
     private ScoringSystem score;
     private long timer;
+    private Inputs inputs;
 
 
-    public GameOver(AsdGame game, ScoringSystem score) {
+    public GameOver(AsdGame game, ScoringSystem score, Inputs inputs) {
         parent = game;
         batch = new SpriteBatch();
         fontDisplay = new FontDisplayer("fonts/vcr_mono.ttf", 63);
         this.score = score;
         timer = System.currentTimeMillis();
+        this.inputs = inputs;
     }
 
     @Override
@@ -65,34 +68,33 @@ public class GameOver implements Screen {
         }
 
         if (System.currentTimeMillis() - timer > 500) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
-                System.out.println("LUL: " +score.getScore());
+            if (Gdx.input.isKeyJustPressed(inputs.getKey("shoot"))) {
                 score.save("" + name[0] + name[1] + name[2]);
                 parent.changeScreen("main");
             }
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+            if (Gdx.input.isKeyJustPressed(inputs.getKey("up"))) {
                 name[pointer]++;
                 if (name[pointer] > 'Z') {
                     name[pointer] = 'A';
                 }
             }
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+            if (Gdx.input.isKeyJustPressed(inputs.getKey("down"))) {
                 name[pointer]--;
                 if (name[pointer] < 'A') {
                     name[pointer] = 'Z';
                 }
             }
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+            if (Gdx.input.isKeyJustPressed(inputs.getKey("right"))) {
                 pointer++;
                 if (pointer > 2) {
                     pointer = 0;
                 }
             }
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+            if (Gdx.input.isKeyJustPressed(inputs.getKey("left"))) {
                 pointer--;
                 if (pointer < 0) {
                     pointer = 2;

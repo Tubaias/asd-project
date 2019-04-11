@@ -6,6 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.io.FontDisplayer;
+import com.mygdx.game.utility.Inputs;
+
 
 public class MenuScreen implements Screen {
 
@@ -13,12 +15,14 @@ public class MenuScreen implements Screen {
     private SpriteBatch batch;
     private FontDisplayer bigFont;
     private FontDisplayer smallFont;
+    private Inputs inputs;
 
-    public MenuScreen(AsdGame game) {
+    public MenuScreen(AsdGame game, Inputs inputs) {
         parent = game;
         this.batch = new SpriteBatch();
         bigFont = new FontDisplayer("fonts/vcr_mono.ttf", 63);
         smallFont = new FontDisplayer("fonts/vcr_mono.ttf", 42);
+        this.inputs = inputs;
     }
 
     @Override
@@ -28,7 +32,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
+        if (Gdx.input.isKeyJustPressed(inputs.getKey("shoot"))) {
             parent.changeScreen("game");
         }
 

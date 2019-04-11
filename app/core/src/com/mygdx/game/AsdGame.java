@@ -1,12 +1,14 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
+import com.mygdx.game.utility.Inputs;
 import com.mygdx.game.utility.logic.ScoringSystem;
 
 public class AsdGame extends Game {
     private GameScreen game;
     private MenuScreen menu;
     private GameOver gameOver;
+    private Inputs inputs;
 
     public void changeScreen(String screen, ScoringSystem scoring) {
         switch (screen) {
@@ -20,7 +22,7 @@ public class AsdGame extends Game {
                 this.setScreen(menu);
                 break;
             case "over":
-                this.setScreen(new GameOver(this, scoring));
+                this.setScreen(new GameOver(this, scoring, inputs));
                 break;
         }
     }
@@ -36,7 +38,9 @@ public class AsdGame extends Game {
 
     @Override
     public void create() {
-        menu = new MenuScreen(this);
+        Config config = new Config();
+        inputs = new Inputs(config);
+        menu = new MenuScreen(this, inputs);
         this.setScreen(menu);
     }
 }
