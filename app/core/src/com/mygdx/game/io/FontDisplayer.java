@@ -1,6 +1,7 @@
 package com.mygdx.game.io;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,6 +26,10 @@ public class FontDisplayer {
         font.draw(batch, layout, x - layout.width / 2, y + layout.height / 2);
     }
 
+    public void setColor(Color color) {
+        font.setColor(color);
+    }
+
     public void drawMultiline(String[] lines, float x, float y, SpriteBatch batch) {
         for (String l : lines) {
             layout.setText(font, l);
@@ -33,5 +38,5 @@ public class FontDisplayer {
         }
     }
 
-    
+
 }

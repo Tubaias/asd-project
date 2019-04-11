@@ -1,13 +1,14 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
+import com.mygdx.game.utility.logic.ScoringSystem;
 
 public class AsdGame extends Game {
     private GameScreen game;
     private MenuScreen menu;
     private GameOver gameOver;
 
-    public void changeScreen(String screen) {
+    public void changeScreen(String screen, ScoringSystem scoring) {
         switch (screen) {
             case "game":
                 if (game == null) {
@@ -19,12 +20,13 @@ public class AsdGame extends Game {
                 this.setScreen(menu);
                 break;
             case "over":
-                if (gameOver == null) {
-                    gameOver = new GameOver(this);
-                }
-                this.setScreen(gameOver);
+                this.setScreen(new GameOver(this, scoring));
                 break;
         }
+    }
+
+    public void changeScreen(String screen) {
+        changeScreen(screen, null);
     }
 
     @Override

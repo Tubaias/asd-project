@@ -1,22 +1,33 @@
 package com.mygdx.game;
 
+import java.util.Arrays;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.io.FontDisplayer;
+import com.mygdx.game.utility.logic.ScoringSystem;
 
 public class GameOver implements Screen {
 
     private AsdGame parent;
     private SpriteBatch batch;
     private FontDisplayer fontDisplay;
+    private char[] name = new char[]{'A', 'A', 'A'};
+    private int pointer = 0;
+    private ScoringSystem score;
+    private long timer;
 
-    public GameOver(AsdGame game) {
+
+    public GameOver(AsdGame game, ScoringSystem score) {
         parent = game;
         batch = new SpriteBatch();
         fontDisplay = new FontDisplayer("fonts/vcr_mono.ttf", 63);
+        this.score = score;
+        timer = System.currentTimeMillis();
     }
 
     @Override
@@ -26,10 +37,6 @@ public class GameOver implements Screen {
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
-            parent.changeScreen("main");
-        }
-
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
@@ -37,7 +44,61 @@ public class GameOver implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        fontDisplay.drawFont("Game Over\nPress J", 300, 400, batch);
+
+        fontDisplay.drawFont("Game Over", 300, 700, batch);
+        fontDisplay.drawFont("Score: " + score.getScore(), 300, 500, batch);
+        fontDisplay.drawFont("Press J\nto continue", 300, 100, batch);
+
+
+        float x = 265;
+        float y = 400;
+        for (int i = 0; i < 3; i++) {
+            if (pointer == i) {
+                fontDisplay.setColor(Color.RED);
+                fontDisplay.drawFont("" + name[i], x, y, batch);
+                fontDisplay.setColor(Color.WHITE);
+            } else {
+                fontDisplay.drawFont("" + name[i], x, y, batch);
+            }
+
+            x += 35;
+        }
+
+        if (System.currentTimeMillis() - timer > 500) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
+                System.out.println("LUL: " +score.getScore());
+                score.save("" + name[0] + name[1] + name[2]);
+                parent.changeScreen("main");
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                name[pointer]++;
+                if (name[pointer] > 'Z') {
+                    name[pointer] = 'A';
+                }
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                name[pointer]--;
+                if (name[pointer] < 'A') {
+                    name[pointer] = 'Z';
+                }
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                pointer++;
+                if (pointer > 2) {
+                    pointer = 0;
+                }
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+                pointer--;
+                if (pointer < 0) {
+                    pointer = 2;
+                }
+            }
+        }
 
         batch.end();
     }

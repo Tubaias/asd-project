@@ -15,7 +15,7 @@ public class ScoringSystem {
         return score;
     }
 
-    public void save() {
+    public void save(String player) {
         String[] scores;
         try {
             scores = FileIO.fileToArray("highscores.txt");
@@ -30,7 +30,7 @@ public class ScoringSystem {
             if (scr.length > 1) newScores.add(new Score(scr[0].trim(), Integer.valueOf(scr[1].trim())));
         }
 
-        newScores.add(new Score("player", score));
+        newScores.add(new Score(player, score));
 
         String[] newScoreStrings = newScores.stream().sorted().map(s -> s.toString()).toArray(String[]::new);
 
@@ -44,7 +44,7 @@ public class ScoringSystem {
         }
     }
 
-    private class Score implements Comparable {
+    private class Score implements Comparable<Score> {
         String name;
         int score;
 
@@ -54,8 +54,8 @@ public class ScoringSystem {
         }
 
         @Override
-        public int compareTo(Object o) {
-            return Integer.compare(((Score) o).score, this.score);
+        public int compareTo(Score o) {
+            return Integer.compare(o.score, this.score);
         }
 
         @Override

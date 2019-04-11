@@ -38,7 +38,7 @@ public class Drawer implements Disposable {
         font = new BitmapFont();
         font.setColor(Color.RED);
 
-        this.fontDisplayer = new FontDisplayer("fonts/vcr_mono.ttf", 21);
+        this.fontDisplayer = new FontDisplayer("fonts/vcr_mono.ttf", 42);
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);
@@ -103,7 +103,7 @@ public class Drawer implements Disposable {
         store.player.getPods()[0].getSprite().draw(batch);
         store.player.getPods()[1].getSprite().draw(batch);
 
-        fontDisplayer.drawFont(Integer.toString(store.scoring.getScore()), 100, 600, batch);
+        fontDisplayer.drawFont(Integer.toString(store.scoring.getScore()), 75, 750, batch);
 
         updateFPS();
         font.draw(batch, "" + fps, 10, 20);

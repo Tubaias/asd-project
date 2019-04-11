@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.bullet.BulletType;
+import com.mygdx.game.entity.bullet.LargePlayerBullet;
+import com.mygdx.game.entity.bullet.PlayerBullet;
 
 public class BulletSystem {
     private ArrayList<Bullet> bullets;
@@ -32,6 +34,13 @@ public class BulletSystem {
         pools.put(BulletType.PLAYERLARGE, largePlayerBulletPool);
         pools.put(BulletType.BASIC, basicBulletPool);
         pools.put(BulletType.STAR, starBulletPool);
+    }
+
+    public void initPool() {
+        for (int i = 0; i < 100; i++) {
+            playerBulletPool.put(new PlayerBullet(0, 0, 0));
+            largePlayerBulletPool.put(new LargePlayerBullet(0, 0, 0));
+        }
     }
 
     public void newBullet(BulletType type, float x, float y, float angle) {
@@ -83,7 +92,9 @@ public class BulletSystem {
 
     public void big_oof() {
         System.out.println("bullets list size: " + bullets.size());
-        System.out.println("Pool zise: " + playerBulletPool.size());
+        System.out.println("plaýer pool zise: " + playerBulletPool.size());
+        System.out.println("L pool zise: " + largePlayerBulletPool.size());
+
 
     }
 
@@ -113,6 +124,6 @@ public class BulletSystem {
 
     private boolean inPlayField(Bullet b) {
         Vector2 position = b.getPosition();
-        return position.x < WIDTH && position.x > 0 && position.y < HEIGHT && position.y > 0;
+        return position.x < WIDTH+64 && position.x > -64 && position.y < HEIGHT+64 && position.y > -64;
     }
 }

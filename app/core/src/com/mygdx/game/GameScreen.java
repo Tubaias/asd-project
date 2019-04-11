@@ -4,10 +4,12 @@ import java.util.Random;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.RootterTootter;
+import com.mygdx.game.io.FontDisplayer;
 import com.mygdx.game.level.Map;
 import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.utility.logic.CollisionSystem;
@@ -56,6 +58,7 @@ public class GameScreen implements Screen {
         inputHandler = new InputHandler(player);
         drawer = new Drawer(store);
         player.setStore(store);
+        store.bulletSystem.initPool();
 
         store.enemies.add(new RootterTootter(width / 2, height / 2, store));
     }
@@ -74,7 +77,7 @@ public class GameScreen implements Screen {
         }
 
         if (!collisionSystem.collision()) {
-            parent.changeScreen("over");
+            parent.changeScreen("over", store.scoring);
         }
 
         drawer.drawFrame(delta);
@@ -98,7 +101,7 @@ public class GameScreen implements Screen {
 
     private void addEnemy() {
         Random rng = new Random();
-        store.enemies.add(new RootterTootter(rng.nextInt((int) width), height - 20, store));
+        store.enemies.add(new RootterTootter(rng.nextInt((int) width)-64, height - 20, store));
     }
 
     @Override

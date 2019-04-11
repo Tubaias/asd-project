@@ -40,20 +40,24 @@ public class InputHandler {
 
     private void playerMovement() {
         Vector2 movement = new Vector2(0, 0);
+        Vector2 playerPos = player.getPosition();
+        if (playerPos.x > 60) {
 
-        if (Gdx.input.isKeyPressed(inputs.getKey("left"))) {
+        }
+
+        if (Gdx.input.isKeyPressed(inputs.getKey("left")) && playerPos.x > -60) {
             movement.add(-1, 0);
         }
 
-        if (Gdx.input.isKeyPressed(inputs.getKey("right"))) {
+        if (Gdx.input.isKeyPressed(inputs.getKey("right")) && playerPos.x < 600-68) {
             movement.add(1, 0);
         }
 
-        if (Gdx.input.isKeyPressed(inputs.getKey("up"))) {
+        if (Gdx.input.isKeyPressed(inputs.getKey("up")) && playerPos.y < 800-68) {
             movement.add(0, 1);
         }
 
-        if (Gdx.input.isKeyPressed(inputs.getKey("down"))) {
+        if (Gdx.input.isKeyPressed(inputs.getKey("down")) && playerPos.y > -60) {
             movement.add(0, -1);
         }
 
