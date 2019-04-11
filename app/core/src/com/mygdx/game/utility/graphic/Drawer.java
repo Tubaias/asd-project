@@ -39,6 +39,7 @@ public class Drawer implements Disposable {
         font.setColor(Color.RED);
 
         this.fontDisplayer = new FontDisplayer("fonts/vcr_mono.ttf", 42);
+        fontDisplayer.setColor(Color.valueOf("f4b342"));
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);

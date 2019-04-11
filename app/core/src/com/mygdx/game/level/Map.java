@@ -21,6 +21,9 @@ public class Map {
         this.sprite1 = new Sprite(texture);
         this.sprite2 = new Sprite(texture);
 
+        this.sprite1.setColor(0.7f, 0.7f, 0.7f, 1f);
+        this.sprite2.setColor(0.7f, 0.7f, 0.7f, 1f);
+
         sprite1.setPosition(0, y1);
         sprite2.setPosition(0, y2);
     }
