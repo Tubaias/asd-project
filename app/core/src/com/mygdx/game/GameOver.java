@@ -50,7 +50,7 @@ public class GameOver implements Screen {
 
         fontDisplay.drawFont("Game Over", 300, 700, batch);
         fontDisplay.drawFont("Score: " + score.getScore(), 300, 500, batch);
-        fontDisplay.drawFont("Press J\nto continue", 300, 100, batch);
+        fontDisplay.drawFont("Press Shoot\nto continue", 300, 100, batch);
 
 
         float x = 265;

@@ -43,7 +43,7 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        bigFont.drawFont("Press J\nto Start", 300, 400, batch);
+        bigFont.drawFont("Press Shoot\nto Start", 300, 400, batch);
         String highscore = Highscores.getScores()[0];
         smallFont.drawMultiline(new String[]{"Highscores:", highscore}, 300, 100, batch);
         batch.end();
