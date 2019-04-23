@@ -11,8 +11,9 @@ import com.mygdx.game.level.Map;
 
 public class EntityStore {
     public ArrayList<Bullet> bullets;
-    public BulletSystem bulletSystem;
     public ArrayList<Enemy> enemies;
+
+    public BulletSystem bulletSystem;
     public Player player;
     public Map foregroundMap;
     public Map backgroundMap;

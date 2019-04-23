@@ -78,10 +78,11 @@ public class KopterPlane extends Enemy {
         if (hitpoints <= 0) {
             if (!dead) {
                 store.scoring.increase(10000);
+                this.animation = new Animator(new Texture("images/effects/explosion256.png"), 11);
             }
 
             this.dead = true;
-            this.position = new Vector2(-1000,-1000);
+            //this.position = new Vector2(-1000,-1000);
         }
     }
 
