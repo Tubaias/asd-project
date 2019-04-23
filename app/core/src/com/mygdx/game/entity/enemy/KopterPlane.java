@@ -16,7 +16,6 @@ public class KopterPlane extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private int hitpoints = 100000;
-    private boolean isHit;
     private float deltaAccumulator;
     private EntityStore store;
     private boolean dead = false;
@@ -29,14 +28,9 @@ public class KopterPlane extends Enemy {
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, -2);
 
-        this.sprite = new Sprite(new Texture("images/enemies/bigplane.png"));
-        this.sprite.setPosition(x, y);
-
         animation = new Animator(new Texture("images/enemies/bigplane.png"), 4);
         this.sprite = new Sprite(animation.getFrame());
-
         this.sprite.setPosition(x, y);
-        this.isHit = false;
     }
 
     @Override

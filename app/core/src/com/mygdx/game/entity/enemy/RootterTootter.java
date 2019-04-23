@@ -16,7 +16,6 @@ public class RootterTootter extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private int hitpoints = 10000;
-    private boolean isHit;
     private float sinewaveAngle;
     private float deltaAccumulator;
     private EntityStore store;
@@ -27,14 +26,9 @@ public class RootterTootter extends Enemy {
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, -2);
 
-        this.sprite = new Sprite(new Texture("images/enemies/helikipotel.png"));
-        this.sprite.setPosition(x, y);
-
         animation = new Animator(new Texture("images/enemies/helikipotel.png"), 3);
         this.sprite = new Sprite(animation.getFrame());
-
         this.sprite.setPosition(x, y);
-        this.isHit = false;
     }
 
     @Override
