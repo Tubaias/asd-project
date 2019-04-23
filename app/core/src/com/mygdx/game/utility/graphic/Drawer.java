@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
-import com.mygdx.game.entity.enemy.RootterTootter;
 import com.mygdx.game.io.FontDisplayer;
 import com.mygdx.game.utility.logic.EntityStore;
 
@@ -66,33 +64,17 @@ public class Drawer implements Disposable {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        batch.draw(new Texture("images/ship.png"), 100, 100);
-
         store.backgroundMap.getSprite1().draw(batch);
         store.backgroundMap.getSprite2().draw(batch);
 
         store.foregroundMap.getSprite1().draw(batch);
         store.foregroundMap.getSprite2().draw(batch);
 
-        for (Enemy e : store.enemies) {
-            RootterTootter r = (RootterTootter) e;
+        drawEnemies();
 
-            if (r.isHit()) {
-                batch.end();
-                whiteShader.begin();
-                whiteShader.setUniformi("white", 1);
-                whiteShader.end();
-                batch.begin();
-                batch.draw(r.getFrame(animationAccumulator), r.getPosition().x, r.getPosition().y);
-                batch.end();
-                whiteShader.begin();
-                whiteShader.setUniformi("white", 0);
-                whiteShader.end();
-                batch.begin();
-            } else {
-                batch.draw(r.getFrame(animationAccumulator), r.getPosition().x, r.getPosition().y);
-            }
-        }
+        store.player.getSprite().draw(batch);
+        store.player.getPods()[0].getSprite().draw(batch);
+        store.player.getPods()[1].getSprite().draw(batch);
 
         for (Bullet b : store.bullets) {
             b.getSprite().draw(batch);
@@ -100,15 +82,32 @@ public class Drawer implements Disposable {
 
         store.bulletSystem.draw(batch);
 
-        store.player.getSprite().draw(batch);
-        store.player.getPods()[0].getSprite().draw(batch);
-        store.player.getPods()[1].getSprite().draw(batch);
-
         fontDisplayer.drawFont(Integer.toString(store.scoring.getScore()), 75, 750, batch);
 
         updateFPS();
         font.draw(batch, "" + fps, 10, 20);
         batch.end();
+    }
+
+    private void drawEnemies() {
+        for (Enemy e : store.enemies) {
+
+            if (e.isHit()) {
+                batch.end();
+                whiteShader.begin();
+                whiteShader.setUniformi("white", 1);
+                whiteShader.end();
+                batch.begin();
+                batch.draw(e.getFrame(animationAccumulator), e.getPosition().x, e.getPosition().y);
+                batch.end();
+                whiteShader.begin();
+                whiteShader.setUniformi("white", 0);
+                whiteShader.end();
+                batch.begin();
+            } else {
+                batch.draw(e.getFrame(animationAccumulator), e.getPosition().x, e.getPosition().y);
+            }
+        }
     }
 
     private void updateFPS() {

@@ -20,12 +20,12 @@ public class BulletSystem {
 
     private BulletPool starBulletPool;
     private BulletPool basicBulletPool;
+    private BulletPool angledBulletPool;
     private BulletPool playerBulletPool;
     private BulletPool largePlayerBulletPool;
 
     private Texture playerBulletTexture;
     private Texture largePlayerBulletTexture;
-    private Texture basicBulletTexture;
 
     public BulletSystem() {
         bullets = new ArrayList<>();
@@ -33,16 +33,17 @@ public class BulletSystem {
         playerBulletPool = new BulletPool(BulletType.PLAYER);
         largePlayerBulletPool = new BulletPool(BulletType.PLAYERLARGE);
         basicBulletPool = new BulletPool(BulletType.BASIC);
+        angledBulletPool = new BulletPool(BulletType.ANGLED);
 
         pools = new HashMap<>();
         pools.put(BulletType.PLAYER, playerBulletPool);
         pools.put(BulletType.PLAYERLARGE, largePlayerBulletPool);
         pools.put(BulletType.BASIC, basicBulletPool);
+        pools.put(BulletType.ANGLED, angledBulletPool);
         pools.put(BulletType.STAR, starBulletPool);
 
         playerBulletTexture = new Texture("images/bullets/playerbullet.png");
         largePlayerBulletTexture = new Texture("images/bullets/largeplayerbullet.png");
-        basicBulletTexture = new Texture("images/bullets/enemyarrow.png");
     }
 
     public void initPool() {
@@ -54,37 +55,23 @@ public class BulletSystem {
 
     public void newBullet(BulletType type, float x, float y, float angle) {
         switch(type) {
-            case BASIC:
-                newBasic(x, y, angle);
-                break;
-            case STAR:
-                newStar(x, y, angle);
-                break;
             case PLAYER:
-                newPlayer(x, y, angle);
+                bullets.add(playerBulletPool.newObj(x, y, angle));
                 break;
             case PLAYERLARGE:
-                newLargePlayer(x, y, angle);
+                bullets.add(largePlayerBulletPool.newObj(x, y, angle));
                 break;
+            case BASIC:
+                bullets.add(basicBulletPool.newObj(x, y, angle));
+                break;
+            case STAR:
+                bullets.add(starBulletPool.newObj(x, y, angle));
+                break;
+            case ANGLED:
+                bullets.add(angledBulletPool.newObj(x, y, angle));
             default:
                 return;
         }
-    }
-
-    private void newBasic(float x, float y, float angle) {
-        bullets.add(basicBulletPool.newObj(x, y, angle));
-    }
-
-    private void newStar(float x, float y, float angle) {
-        bullets.add(starBulletPool.newObj(x, y, angle));
-    }
-
-    private void newPlayer(float x, float y, float angle) {
-        bullets.add(playerBulletPool.newObj(x, y, angle));
-    }
-
-    private void newLargePlayer(float x, float y, float angle) {
-        bullets.add(largePlayerBulletPool.newObj(x, y, angle));
     }
 
     public void step() {

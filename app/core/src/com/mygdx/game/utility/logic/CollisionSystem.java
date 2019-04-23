@@ -42,7 +42,7 @@ public class CollisionSystem {
                 Vector2 bulletC = getCenter(b.getSprite());
 
                 if (playerC.dst(bulletC) < 10) {
-                    return false;
+                    //return false;
                 }
             }
         }

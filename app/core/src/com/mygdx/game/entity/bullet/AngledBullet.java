@@ -5,15 +5,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
-public class BasicBullet extends Bullet {
+public class AngledBullet extends Bullet {
 
-    public BasicBullet(float x, float y, float angle, Texture texture) {
+    public AngledBullet(float x, float y, float angle, Texture texture) {
         this.angle = Math.toRadians(angle);
         this.speed = 7;
 
         this.texture = texture;
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
+        this.sprite.setRotation(-angle);
         this.position = new Vector2(x - this.sprite.getWidth() / 2, y);
     }
 
@@ -27,6 +28,6 @@ public class BasicBullet extends Bullet {
 
     @Override
     public BulletType getType() {
-        return BulletType.BASIC;
+        return BulletType.ANGLED;
     }
 }

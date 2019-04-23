@@ -4,12 +4,11 @@ import java.util.Random;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
+import com.mygdx.game.entity.enemy.KopterPlane;
 import com.mygdx.game.entity.enemy.RootterTootter;
-import com.mygdx.game.io.FontDisplayer;
 import com.mygdx.game.level.Map;
 import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.utility.logic.CollisionSystem;
@@ -33,7 +32,8 @@ public class GameScreen implements Screen {
     Map foregroundMap;
     Map backgroundMap;
 
-    float deltaAccumulator = 0;
+    float tootterDeltaAccumulator = 0;
+    float planeDeltaAccumulator = 0;
 
     private AsdGame parent;
 
@@ -59,21 +59,25 @@ public class GameScreen implements Screen {
         drawer = new Drawer(store);
         player.setStore(store);
         store.bulletSystem.initPool();
-
-        store.enemies.add(new RootterTootter(width / 2, height / 2, store));
     }
 
     @Override
     public void render(float delta) {
-        deltaAccumulator += delta;
+        tootterDeltaAccumulator += delta;
+        planeDeltaAccumulator += delta;
 
         inputHandler.handleSystemKeys();
         inputHandler.handlePlayerInputs();
         moveEntities();
 
-        while (deltaAccumulator > 0.25) {
-            addEnemy();
-            deltaAccumulator -= 0.25;
+        while (tootterDeltaAccumulator > 0.25) {
+            addTootter();
+            tootterDeltaAccumulator -= 0.25;
+        }
+
+        while (planeDeltaAccumulator > 3) {
+            addPlane();
+            planeDeltaAccumulator -= 3;
         }
 
         if (!collisionSystem.collision()) {
@@ -99,9 +103,14 @@ public class GameScreen implements Screen {
         store.bulletSystem.step();
     }
 
-    private void addEnemy() {
+    private void addTootter() {
         Random rng = new Random();
-        store.enemies.add(new RootterTootter(rng.nextInt((int) width)-64, height - 20, store));
+        store.enemies.add(new RootterTootter(rng.nextInt((int) width) - 64, height - 20, store));
+    }
+
+    private void addPlane() {
+        Random rng = new Random();
+        store.enemies.add(new KopterPlane(rng.nextInt((int) width) - 128, height - 20, store));
     }
 
     @Override
@@ -110,17 +119,14 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override
