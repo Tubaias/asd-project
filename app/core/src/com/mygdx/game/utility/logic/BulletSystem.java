@@ -3,6 +3,7 @@ package com.mygdx.game.utility.logic;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.Bullet;
@@ -11,16 +12,20 @@ import com.mygdx.game.entity.bullet.LargePlayerBullet;
 import com.mygdx.game.entity.bullet.PlayerBullet;
 
 public class BulletSystem {
+    private final float HEIGHT = 800;
+    private final float WIDTH = 600;
+
     private ArrayList<Bullet> bullets;
+    private HashMap<BulletType, BulletPool> pools;
+
     private BulletPool starBulletPool;
     private BulletPool basicBulletPool;
     private BulletPool playerBulletPool;
     private BulletPool largePlayerBulletPool;
 
-    private HashMap<BulletType, BulletPool> pools;
-
-    private final float HEIGHT = 800;
-    private final float WIDTH = 600;
+    private Texture playerBulletTexture;
+    private Texture largePlayerBulletTexture;
+    private Texture basicBulletTexture;
 
     public BulletSystem() {
         bullets = new ArrayList<>();
@@ -34,12 +39,16 @@ public class BulletSystem {
         pools.put(BulletType.PLAYERLARGE, largePlayerBulletPool);
         pools.put(BulletType.BASIC, basicBulletPool);
         pools.put(BulletType.STAR, starBulletPool);
+
+        playerBulletTexture = new Texture("images/bullets/playerbullet.png");
+        largePlayerBulletTexture = new Texture("images/bullets/largeplayerbullet.png");
+        basicBulletTexture = new Texture("images/bullets/enemyarrow.png");
     }
 
     public void initPool() {
         for (int i = 0; i < 100; i++) {
-            playerBulletPool.put(new PlayerBullet(0, 0, 0));
-            largePlayerBulletPool.put(new LargePlayerBullet(0, 0, 0));
+            playerBulletPool.put(new PlayerBullet(0, 0, 0, playerBulletTexture));
+            largePlayerBulletPool.put(new LargePlayerBullet(0, 0, 0, largePlayerBulletTexture));
         }
     }
 

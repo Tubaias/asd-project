@@ -31,11 +31,11 @@ public abstract class Bullet extends Entity {
     public static Bullet createBullet(BulletType type, float x, float y, float angle) {
         switch (type) {
             case BASIC:
-                return new BasicBullet(x, y, angle);
+                return new BasicBullet(x, y, angle, new Texture("images/bullets/enemyarrow.png"));
             case PLAYER:
-                return new PlayerBullet(x, y, angle);
+                return new PlayerBullet(x, y, angle, new Texture("images/bullets/playerbullet.png"));
             case PLAYERLARGE:
-                return new LargePlayerBullet(x, y, angle);
+                return new LargePlayerBullet(x, y, angle, new Texture("images/bullets/largeplayerbullet.png"));
             case STAR:
                 return new StarBullet(x, y, angle);
             default:

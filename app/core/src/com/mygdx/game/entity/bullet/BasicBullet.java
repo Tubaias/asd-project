@@ -7,15 +7,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class BasicBullet extends Bullet {
 
-    public BasicBullet(float x, float y, float angle) {
+    public BasicBullet(float x, float y, float angle, Texture texture) {
         this.angle = Math.toRadians(angle);
         this.speed = 7;
 
-        this.texture = new Texture("images/bullets/enemyarrow.png");
+        this.texture = texture;
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
         this.sprite.setRotation(-angle);
-        //this.sprite.setColor(1f, 0.3f, 0.3f, 1f);
         this.position = new Vector2(x - this.sprite.getWidth() / 2, y);
     }
 

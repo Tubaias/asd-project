@@ -23,6 +23,7 @@ public class BulletPool {
             b.refresh(x, y, angle);
             return b;
         }
+
         return Bullet.createBullet(type, x, y, angle);
     }
 

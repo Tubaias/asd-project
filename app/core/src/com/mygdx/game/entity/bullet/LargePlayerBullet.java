@@ -7,12 +7,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class LargePlayerBullet extends Bullet {
 
-    public LargePlayerBullet(float x, float y, float angle) {
+    public LargePlayerBullet(float x, float y, float angle, Texture texture) {
         this.angle = Math.toRadians(angle);
         this.speed = 50;
         this.acceleration = 0;
-
-        this.texture = new Texture("images/bullets/largeplayerbullet.png");
+        this.texture = texture;
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
         this.sprite.setColor(0.7f, 1f, 0.7f, 0.7f);
