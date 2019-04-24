@@ -97,7 +97,7 @@ public class KopterPlane extends Enemy {
         dead = true;
         animation = new Animator(new Texture("images/effects/explosion256.png"), 11);
         store.scoring.increase(10000);
-        store.screenShake.startShake(8, 3.3f);
+        store.screenShake.startShake(8, 0.3f);
     }
 
     @Override
