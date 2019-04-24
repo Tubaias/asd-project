@@ -13,6 +13,7 @@ import com.mygdx.game.level.Map;
 import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.utility.logic.CollisionSystem;
 import com.mygdx.game.utility.graphic.Drawer;
+import com.mygdx.game.utility.graphic.ScreenShake;
 import com.mygdx.game.utility.logic.EntityStore;
 import com.mygdx.game.utility.InputHandler;
 import com.mygdx.game.utility.logic.ScoringSystem;
@@ -46,17 +47,18 @@ public class GameScreen implements Screen {
         width = 600;
         height = 800;
 
-        foregroundMap = new Map(new Texture("images/fg.png"), 5);
-        backgroundMap = new Map(new Texture("images/bg.png"), 3);
+        foregroundMap = new Map(new Texture("images/desert-bg.png"), 3);
+        backgroundMap = new Map(new Texture("images/desert-bg.png"), 3);
 
         player = new Player();
         bulletSystem = new BulletSystem();
         scoring = new ScoringSystem();
+        ScreenShake screenShake = new ScreenShake();
 
-        store = new EntityStore(player, bulletSystem, foregroundMap, backgroundMap, scoring);
+        store = new EntityStore(player, bulletSystem, foregroundMap, backgroundMap, scoring, screenShake);
         collisionSystem = new CollisionSystem(store);
         inputHandler = new InputHandler(player);
-        drawer = new Drawer(store);
+        drawer = new Drawer(store, screenShake);
         player.setStore(store);
         store.bulletSystem.initPool();
     }

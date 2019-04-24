@@ -15,13 +15,14 @@ public class KopterPlane extends Enemy {
     private Vector2 speed;
     private Sprite sprite;
     private Animator animation;
-    private int hitpoints = 100000;
+    private int hitpoints = 1000;
     private float deltaAccumulator;
     private EntityStore store;
     private boolean dead = false;
 
     private int burst;
     private int interval;
+    private int deadFrames;
 
     public KopterPlane(float x, float y, EntityStore store) {
         this.store = store;
@@ -35,6 +36,14 @@ public class KopterPlane extends Enemy {
 
     @Override
     public void move() {
+        if (dead) {
+            if (deadFrames < 11) {
+                deadFrames++;
+            } else {
+                this.position = new Vector2(-1000,-1000);
+            }
+        }
+
         deltaAccumulator += Gdx.graphics.getDeltaTime();
 
         position.add(speed);
@@ -57,6 +66,10 @@ public class KopterPlane extends Enemy {
     }
 
     private void shoot() {
+        if (dead) {
+            return;
+        }
+
         if (burst == 0) {
             burst = 4;
         }
@@ -73,17 +86,18 @@ public class KopterPlane extends Enemy {
     @Override
     public void hit() {
         this.isHit = true;
-        this.hitpoints -= 100;
+        this.hitpoints -= 1;
 
-        if (hitpoints <= 0) {
-            if (!dead) {
-                store.scoring.increase(10000);
-                this.animation = new Animator(new Texture("images/effects/explosion256.png"), 11);
-            }
-
-            this.dead = true;
-            //this.position = new Vector2(-1000,-1000);
+        if (!dead && hitpoints <= 0) {
+            die();
         }
+    }
+
+    private void die() {
+        dead = true;
+        animation = new Animator(new Texture("images/effects/explosion256.png"), 11);
+        store.scoring.increase(10000);
+        store.screenShake.startShake(8, 0.3f);
     }
 
     @Override

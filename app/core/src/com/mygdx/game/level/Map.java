@@ -24,8 +24,8 @@ public class Map {
         this.sprite1.setColor(0.7f, 0.7f, 0.7f, 1f);
         this.sprite2.setColor(0.7f, 0.7f, 0.7f, 1f);
 
-        sprite1.setPosition(0, y1);
-        sprite2.setPosition(0, y2);
+        sprite1.setPosition(-100, y1);
+        sprite2.setPosition(-100, y2);
     }
 
     public Sprite getSprite1() {
@@ -48,8 +48,8 @@ public class Map {
             y2 = height;
         }
 
-        this.sprite1.setPosition(0, y1);
-        this.sprite2.setPosition(0, y2);
+        this.sprite1.setPosition(-100, y1);
+        this.sprite2.setPosition(-100, y2);
     }
 
 }

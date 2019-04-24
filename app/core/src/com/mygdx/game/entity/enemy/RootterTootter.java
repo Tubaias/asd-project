@@ -15,7 +15,7 @@ public class RootterTootter extends Enemy {
     private Vector2 speed;
     private Sprite sprite;
     private Animator animation;
-    private int hitpoints = 10000;
+    private int hitpoints = 100;
     private float sinewaveAngle;
     private float deltaAccumulator;
     private EntityStore store;
@@ -54,7 +54,7 @@ public class RootterTootter extends Enemy {
     @Override
     public void hit() {
         this.isHit = true;
-        this.hitpoints -= 100;
+        this.hitpoints -= 1;
 
         if (hitpoints <= 0) {
             if (!dead) {

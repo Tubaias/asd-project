@@ -18,20 +18,22 @@ import com.mygdx.game.utility.logic.EntityStore;
 
 public class Drawer implements Disposable {
     private EntityStore store;
+    private ScreenShake screenShake;
     private SpriteBatch batch;
     private BitmapFont font;
+    private FontDisplayer fontDisplayer;
+    private ShaderProgram whiteShader;
     private float deltaAccumulator;
     private float animationAccumulator;
     private int fps;
-    private FontDisplayer fontDisplayer;
 
-    private ShaderProgram whiteShader;
+    private OrthographicCamera camera;
+    private Viewport viewport;
 
-    OrthographicCamera camera;
-    Viewport viewport;
-
-    public Drawer(EntityStore store) {
+    public Drawer(EntityStore store, ScreenShake screenShake) {
         this.store = store;
+        this.screenShake = screenShake;
+
         this.batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
@@ -48,11 +50,18 @@ public class Drawer implements Disposable {
 
         whiteShader = new ShaderProgram(Gdx.files.internal("shaders/whiteshader.vs"), Gdx.files.internal("shaders/whiteshader.fs"));
         batch.setShader(whiteShader);
+
+
     }
 
     public void drawFrame(float delta) {
         deltaAccumulator += delta;
         animationAccumulator += delta;
+
+        if (screenShake.isActive()) {
+            camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+            camera.translate(screenShake.shake());
+        }
 
         camera.update();
         int w = Gdx.graphics.getWidth();
