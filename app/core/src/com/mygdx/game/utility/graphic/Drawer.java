@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.io.FontDisplayer;
 import com.mygdx.game.utility.logic.EntityStore;
@@ -84,10 +83,6 @@ public class Drawer implements Disposable {
         store.player.getSprite().draw(batch);
         store.player.getPods()[0].getSprite().draw(batch);
         store.player.getPods()[1].getSprite().draw(batch);
-
-        for (Bullet b : store.bullets) {
-            b.getSprite().draw(batch);
-        }
 
         store.bulletSystem.draw(batch);
 

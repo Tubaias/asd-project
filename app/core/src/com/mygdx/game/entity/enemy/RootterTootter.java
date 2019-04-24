@@ -29,26 +29,28 @@ public class RootterTootter extends Enemy {
         animation = new Animator(new Texture("images/enemies/helikipotel.png"), 3);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
+
+        shoot();
     }
 
     @Override
     public void move() {
         deltaAccumulator += Gdx.graphics.getDeltaTime();
 
-        position.add(speed);
+        //position.add(speed);
         updateSpeed();
         sprite.setPosition(position.x, position.y);
         this.isHit = false;
 
-        if (deltaAccumulator > 0.7) {
-            shoot();
-            deltaAccumulator -= 0.7;
-        }
+        // if (deltaAccumulator > 0.7) {
+        //     shoot();
+        //     deltaAccumulator -= 0.7;
+        // }
     }
 
     private void shoot() {
         int angle = (int) store.player.getPosition().cpy().sub(position).angle(new Vector2(0, 1));
-        store.bulletSystem.newBullet(BulletType.BASIC, position.x + 64, position.y + 64 - 16, angle);
+        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, angle);
     }
 
     @Override

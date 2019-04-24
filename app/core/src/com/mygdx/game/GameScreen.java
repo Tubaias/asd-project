@@ -5,7 +5,6 @@ import java.util.Random;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.entity.Player;
-import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.KopterPlane;
 import com.mygdx.game.entity.enemy.RootterTootter;
@@ -59,8 +58,13 @@ public class GameScreen implements Screen {
         collisionSystem = new CollisionSystem(store);
         inputHandler = new InputHandler(player);
         drawer = new Drawer(store, screenShake);
+
         player.setStore(store);
-        store.bulletSystem.initPool();
+        bulletSystem.setStore(store);
+        bulletSystem.createPools();
+        bulletSystem.initPool();
+
+        store.enemies.add(new RootterTootter(300, 400, store));
     }
 
     @Override
@@ -72,15 +76,15 @@ public class GameScreen implements Screen {
         inputHandler.handlePlayerInputs();
         moveEntities();
 
-        while (tootterDeltaAccumulator > 0.25) {
-            addTootter();
-            tootterDeltaAccumulator -= 0.25;
-        }
+        // while (tootterDeltaAccumulator > 0.25) {
+        //     addTootter();
+        //     tootterDeltaAccumulator -= 0.25;
+        // }
 
-        while (planeDeltaAccumulator > 3) {
-            addPlane();
-            planeDeltaAccumulator -= 3;
-        }
+        // while (planeDeltaAccumulator > 3) {
+        //     addPlane();
+        //     planeDeltaAccumulator -= 3;
+        // }
 
         if (!collisionSystem.collision()) {
             parent.changeScreen("over", store.scoring);
@@ -96,10 +100,6 @@ public class GameScreen implements Screen {
 
         for (Enemy e : store.enemies) {
             e.move();
-        }
-
-        for (Bullet b : store.bullets) {
-            b.move();
         }
 
         store.bulletSystem.step();

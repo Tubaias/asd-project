@@ -7,10 +7,12 @@ import com.mygdx.game.entity.bullet.BulletType;
 public class BulletPool {
     private ArrayList<Bullet> pool;
     private BulletType type;
+    private BulletFactory factory;
 
-    public BulletPool(BulletType type) {
+    public BulletPool(BulletType type, BulletFactory factory) {
         this.pool = new ArrayList<>();
         this.type = type;
+        this.factory = factory;
     }
 
     public void put(Bullet obj) {
@@ -24,7 +26,7 @@ public class BulletPool {
             return b;
         }
 
-        return Bullet.createBullet(type, x, y, angle);
+        return factory.createBullet(type, x, y, angle);
     }
 
     public BulletType getType() {

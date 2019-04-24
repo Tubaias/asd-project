@@ -17,10 +17,13 @@ public class BulletSystem {
 
     private ArrayList<Bullet> bullets;
     private HashMap<BulletType, BulletPool> pools;
+    private BulletFactory factory;
+    private EntityStore store;
 
     private BulletPool starBulletPool;
     private BulletPool basicBulletPool;
     private BulletPool angledBulletPool;
+    private BulletPool missilePool;
     private BulletPool playerBulletPool;
     private BulletPool largePlayerBulletPool;
 
@@ -29,21 +32,31 @@ public class BulletSystem {
 
     public BulletSystem() {
         bullets = new ArrayList<>();
-        starBulletPool = new BulletPool(BulletType.STAR);
-        playerBulletPool = new BulletPool(BulletType.PLAYER);
-        largePlayerBulletPool = new BulletPool(BulletType.PLAYERLARGE);
-        basicBulletPool = new BulletPool(BulletType.BASIC);
-        angledBulletPool = new BulletPool(BulletType.ANGLED);
+        playerBulletTexture = new Texture("images/bullets/playerbullet.png");
+        largePlayerBulletTexture = new Texture("images/bullets/largeplayerbullet.png");
+    }
+
+    public void setStore(EntityStore store) {
+        this.store = store;
+    }
+
+    public void createPools() {
+        factory = new BulletFactory(store);
+
+        starBulletPool = new BulletPool(BulletType.STAR, factory);
+        playerBulletPool = new BulletPool(BulletType.PLAYER, factory);
+        largePlayerBulletPool = new BulletPool(BulletType.PLAYERLARGE, factory);
+        basicBulletPool = new BulletPool(BulletType.BASIC, factory);
+        angledBulletPool = new BulletPool(BulletType.ANGLED, factory);
+        missilePool = new BulletPool(BulletType.MISSILE, factory);
 
         pools = new HashMap<>();
         pools.put(BulletType.PLAYER, playerBulletPool);
         pools.put(BulletType.PLAYERLARGE, largePlayerBulletPool);
         pools.put(BulletType.BASIC, basicBulletPool);
         pools.put(BulletType.ANGLED, angledBulletPool);
+        pools.put(BulletType.MISSILE, missilePool);
         pools.put(BulletType.STAR, starBulletPool);
-
-        playerBulletTexture = new Texture("images/bullets/playerbullet.png");
-        largePlayerBulletTexture = new Texture("images/bullets/largeplayerbullet.png");
     }
 
     public void initPool() {
@@ -69,6 +82,8 @@ public class BulletSystem {
                 break;
             case ANGLED:
                 bullets.add(angledBulletPool.newObj(x, y, angle));
+            case MISSILE:
+                bullets.add(missilePool.newObj(x, y, angle));
             default:
                 return;
         }

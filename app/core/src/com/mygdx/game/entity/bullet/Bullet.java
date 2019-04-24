@@ -28,23 +28,6 @@ public abstract class Bullet extends Entity {
         this.dead = false;
     }
 
-    public static Bullet createBullet(BulletType type, float x, float y, float angle) {
-        switch (type) {
-            case BASIC:
-                return new BasicBullet(x, y, angle, new Texture("images/bullets/enemyroundbullet.png"));
-            case PLAYER:
-                return new PlayerBullet(x, y, angle, new Texture("images/bullets/playerbullet.png"));
-            case PLAYERLARGE:
-                return new LargePlayerBullet(x, y, angle, new Texture("images/bullets/largeplayerbullet.png"));
-            case STAR:
-                return new StarBullet(x, y, angle);
-            case ANGLED:
-                return new AngledBullet(x, y, angle, new Texture("images/bullets/enemybullet.png"));
-            default:
-                return null;
-        }
-    }
-
     public void setDead(boolean dead) {
         this.dead = dead;
     }
