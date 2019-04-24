@@ -47,7 +47,7 @@ public class GameScreen implements Screen {
         width = 600;
         height = 800;
 
-        foregroundMap = new Map(new Texture("images/desert-bg.png"), 3);
+        foregroundMap = new Map(new Texture("images/desert-fg.png"), 4);
         backgroundMap = new Map(new Texture("images/desert-bg.png"), 3);
 
         player = new Player();
