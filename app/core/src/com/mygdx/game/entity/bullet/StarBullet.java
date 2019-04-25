@@ -11,7 +11,8 @@ public class StarBullet extends Bullet {
     public StarBullet(float x, float y, float angle) {
         Random rand = new Random();
         this.position = new Vector2(x - 32, y);
-        this.angle = Math.toRadians(angle);
+        this.angle = angle;
+        this.initialSpeed = 10;
         this.speed = 10;
         this.acceleration = 0;
 
@@ -25,8 +26,8 @@ public class StarBullet extends Bullet {
     public void move() {
         speed += acceleration;
 
-        position.x += speed * Math.sin(angle);
-        position.y += speed * Math.cos(angle);
+        position.x += speed * Math.sin(Math.toRadians(angle));
+        position.y += speed * Math.cos(Math.toRadians(angle));
 
         sprite.setPosition(position.x, position.y);
         sprite.setRotation(sprite.getRotation() + 5);

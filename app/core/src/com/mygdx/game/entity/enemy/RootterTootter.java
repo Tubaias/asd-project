@@ -42,10 +42,10 @@ public class RootterTootter extends Enemy {
         sprite.setPosition(position.x, position.y);
         this.isHit = false;
 
-        // if (deltaAccumulator > 0.7) {
-        //     shoot();
-        //     deltaAccumulator -= 0.7;
-        // }
+        if (deltaAccumulator > 0.7) {
+            shoot();
+            deltaAccumulator -= 0.7;
+        }
     }
 
     private void shoot() {

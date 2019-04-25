@@ -8,7 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 public class PlayerBullet extends Bullet {
 
     public PlayerBullet(float x, float y, float angle, Texture texture) {
-        this.angle = Math.toRadians(angle);
+        this.angle = angle;
+        this.initialSpeed = 50;
         this.speed = 50;
         this.acceleration = 0;
         this.texture = texture;
@@ -22,8 +23,8 @@ public class PlayerBullet extends Bullet {
     public void move() {
         speed += acceleration;
 
-        position.x += speed * Math.sin(angle);
-        position.y += speed * Math.cos(angle);
+        position.x += speed * Math.sin(Math.toRadians(angle));
+        position.y += speed * Math.cos(Math.toRadians(angle));
 
         sprite.setPosition(position.x, position.y);
     }

@@ -8,7 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 public class AngledBullet extends Bullet {
 
     public AngledBullet(float x, float y, float angle, Texture texture) {
-        this.angle = Math.toRadians(angle);
+        this.angle = angle;
+        this.initialSpeed = 7;
         this.speed = 7;
 
         this.texture = texture;
@@ -20,8 +21,8 @@ public class AngledBullet extends Bullet {
 
     @Override
     public void move() {
-        position.x += speed * Math.sin(angle);
-        position.y += speed * Math.cos(angle);
+        position.x += speed * Math.sin(Math.toRadians(angle));
+        position.y += speed * Math.cos(Math.toRadians(angle));
 
         sprite.setPosition(position.x, position.y);
     }
