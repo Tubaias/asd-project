@@ -14,6 +14,7 @@ public class Map {
 
     public Map(Texture texture, int speed) {
         this.height = texture.getHeight();
+        System.out.println("h: " + this.height);
         this.y1 = 0;
         this.y2 = this.height;
         this.speed = speed;
@@ -41,11 +42,11 @@ public class Map {
         y2 -= speed;
 
         if (y1 <= -height) {
-            y1 = height;
+            y1 += 2 * height;
         }
 
         if (y2 <= -height) {
-            y2 = height;
+            y2 +=  2 * height;
         }
 
         this.sprite1.setPosition(-100, y1);

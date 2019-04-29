@@ -82,8 +82,10 @@ public class BulletSystem {
                 break;
             case ANGLED:
                 bullets.add(angledBulletPool.newObj(x, y, angle));
+                break;
             case MISSILE:
                 bullets.add(missilePool.newObj(x, y, angle));
+                break;
             default:
                 return;
         }

@@ -17,12 +17,15 @@ public class KopterPlane extends Enemy {
     private Animator animation;
     private int hitpoints = 1000;
     private float deltaAccumulator;
+    private float missileAccumulator;
+
     private EntityStore store;
     private boolean dead = false;
 
     private int burst;
     private int interval;
     private int deadFrames;
+
 
     public KopterPlane(float x, float y, EntityStore store) {
         this.store = store;
@@ -45,10 +48,16 @@ public class KopterPlane extends Enemy {
         }
 
         deltaAccumulator += Gdx.graphics.getDeltaTime();
+        missileAccumulator += Gdx.graphics.getDeltaTime();
 
         position.add(speed);
         sprite.setPosition(position.x, position.y);
         this.isHit = false;
+
+        if (missileAccumulator > 1.5) {
+            shootMissiles();
+            missileAccumulator -= 1.5;
+        }
 
         if (burst > 0 && interval == 2) {
             shoot();
@@ -81,6 +90,16 @@ public class KopterPlane extends Enemy {
         store.bulletSystem.newBullet(BulletType.ANGLED, bulletX, bulletY, 180);
         store.bulletSystem.newBullet(BulletType.ANGLED, bulletX + 8, bulletY, 150);
         store.bulletSystem.newBullet(BulletType.ANGLED, bulletX - 8, bulletY, 210);
+    }
+
+    private void shootMissiles() {
+        float missileX = position.x + 128;
+        float missileY = position.y + 110;
+
+        store.bulletSystem.newBullet(BulletType.MISSILE, missileX - 16, missileY, 170);
+        store.bulletSystem.newBullet(BulletType.MISSILE, missileX + 16, missileY, -170);
+        store.bulletSystem.newBullet(BulletType.MISSILE, missileX + 50, missileY, -160);
+        store.bulletSystem.newBullet(BulletType.MISSILE, missileX - 50, missileY, 160);
     }
 
     @Override

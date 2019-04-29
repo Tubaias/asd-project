@@ -1,22 +1,29 @@
 
 package com.mygdx.game.entity.bullet;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.entity.Smoke;
 import com.mygdx.game.utility.logic.EntityStore;
 
 public class Missile extends Bullet {
     private EntityStore store;
+    private Texture smoke;
+    private float smokeAccumulator;
 
     public Missile(float x, float y, float angle, Texture texture, EntityStore store) {
         this.store = store;
         this.angle = angle;
-        this.initialSpeed = 1;
-        this.speed = 1;
+        this.initialSpeed = -10;
+        this.speed = initialSpeed;
 
         this.texture = texture;
         this.sprite = new Sprite(texture);
+
+        this.smoke = new Texture("images/enemies/skull.png");
+
         this.sprite.setOriginCenter();
         this.sprite.setRotation(-angle);
         this.position = new Vector2(x - this.sprite.getWidth() / 2, y);
@@ -24,17 +31,20 @@ public class Missile extends Bullet {
 
     @Override
     public void move() {
-        if (speed < 8) {
+        if (speed < 16) {
             speed++;
         }
 
         float angleToPlayer = store.player.getPosition().cpy().sub(position).angle(new Vector2(0, 1));
+
         angle += turnAmount(angleToPlayer);
 
         normalizeAngle();
 
-        System.out.println("angle: " + angle);
-        System.out.println("to player: " + angleToPlayer);
+        emitSmoke();
+
+        //System.out.println("angle: " + angle);
+        //System.out.println("to player: " + angleToPlayer);
 
         position.x += speed * Math.sin(Math.toRadians(angle));
         position.y += speed * Math.cos(Math.toRadians(angle));
@@ -43,19 +53,29 @@ public class Missile extends Bullet {
         sprite.setRotation((float) -angle);
     }
 
+    private void emitSmoke() {
+        smokeAccumulator += Gdx.graphics.getDeltaTime();
+        if (smokeAccumulator > 0.3) {
+            Smoke smk = new Smoke(smoke, position);
+            store.misc.add(smk);
+        }
+    }
+
     private double turnAmount(float angleToPlayer) {
-        double opposite = angle - (180 * Math.signum(angle));
-        System.out.println("opposite: " + opposite);
+        double turnAmount = 1;
+        //System.out.println("opposite: " + opposite);
+        double a = Math.signum(angleToPlayer);
+        double b = Math.signum(angle);
 
-        return 4 * Math.signum(angleToPlayer - angle);
 
-        // if (angleToPlayer > angle || angleToPlayer < opposite) {
-        //     System.out.println("turning right");
-        //     return 5;
-        // } else {
-        //     System.out.println("turning left");
-        //     return -5;
-        // }
+        if (a > 0 && b < 0) {
+            return -1* turnAmount;
+        } else if (a < 0 && b > 0){
+            return turnAmount;
+        }
+
+        return turnAmount * Math.signum(angleToPlayer - angle);
+
     }
 
     private void normalizeAngle() {

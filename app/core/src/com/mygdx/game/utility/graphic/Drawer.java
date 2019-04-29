@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.entity.Smoke;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.io.FontDisplayer;
 import com.mygdx.game.utility.logic.EntityStore;
@@ -85,6 +87,11 @@ public class Drawer implements Disposable {
         store.player.getPods()[1].getSprite().draw(batch);
 
         store.bulletSystem.draw(batch);
+
+        for (Smoke s : store.misc) {
+            s.getSprite().draw(batch);
+            s.Fade();
+        }
 
         fontDisplayer.drawFont(Integer.toString(store.scoring.getScore()), 75, 750, batch);
 

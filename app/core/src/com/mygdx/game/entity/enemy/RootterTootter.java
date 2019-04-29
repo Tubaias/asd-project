@@ -50,7 +50,11 @@ public class RootterTootter extends Enemy {
 
     private void shoot() {
         int angle = (int) store.player.getPosition().cpy().sub(position).angle(new Vector2(0, 1));
-        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, angle);
+        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, 160);
+        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, -160);
+        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, 140);
+        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, -140);
+
     }
 
     @Override

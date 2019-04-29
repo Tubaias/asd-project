@@ -64,7 +64,7 @@ public class GameScreen implements Screen {
         bulletSystem.createPools();
         bulletSystem.initPool();
 
-        store.enemies.add(new RootterTootter(300, 400, store));
+       // store.enemies.add(new KopterPlane(300, 400, store));
     }
 
     @Override
@@ -81,10 +81,10 @@ public class GameScreen implements Screen {
         //     tootterDeltaAccumulator -= 0.25;
         // }
 
-        // while (planeDeltaAccumulator > 3) {
-        //     addPlane();
-        //     planeDeltaAccumulator -= 3;
-        // }
+        while (planeDeltaAccumulator > 3) {
+            addPlane();
+            planeDeltaAccumulator -= 3;
+        }
 
         if (!collisionSystem.collision()) {
             parent.changeScreen("over", store.scoring);
