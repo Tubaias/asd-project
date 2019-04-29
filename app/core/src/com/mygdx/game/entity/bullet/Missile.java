@@ -36,15 +36,10 @@ public class Missile extends Bullet {
         }
 
         float angleToPlayer = store.player.getPosition().cpy().sub(position).angle(new Vector2(0, 1));
-
         angle += turnAmount(angleToPlayer);
-
         normalizeAngle();
 
         emitSmoke();
-
-        //System.out.println("angle: " + angle);
-        //System.out.println("to player: " + angleToPlayer);
 
         position.x += speed * Math.sin(Math.toRadians(angle));
         position.y += speed * Math.cos(Math.toRadians(angle));
@@ -63,10 +58,8 @@ public class Missile extends Bullet {
 
     private double turnAmount(float angleToPlayer) {
         double turnAmount = 1;
-        //System.out.println("opposite: " + opposite);
         double a = Math.signum(angleToPlayer);
         double b = Math.signum(angle);
-
 
         if (a > 0 && b < 0) {
             return -1* turnAmount;
@@ -75,7 +68,6 @@ public class Missile extends Bullet {
         }
 
         return turnAmount * Math.signum(angleToPlayer - angle);
-
     }
 
     private void normalizeAngle() {

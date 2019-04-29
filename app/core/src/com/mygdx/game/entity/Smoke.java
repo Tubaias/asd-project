@@ -12,7 +12,7 @@ public class Smoke extends Entity {
     public Smoke(Texture texture, Vector2 position) {
         this.sprite = new Sprite(texture);
         Random r = new Random();
-        float scale = r.nextFloat() / 2 + 0.3;
+        float scale = r.nextFloat() / 2 + 0.3f;
         float xOffset = r.nextFloat() * 10 - 5;
         float yOffset = r.nextFloat() * 10 - 5;
 
