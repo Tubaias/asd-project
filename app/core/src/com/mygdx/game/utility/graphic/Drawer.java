@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -21,6 +21,7 @@ public class Drawer implements Disposable {
     private EntityStore store;
     private ScreenShake screenShake;
     private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
     private BitmapFont font;
     private FontDisplayer fontDisplayer;
     private ShaderProgram whiteShader;
@@ -34,6 +35,8 @@ public class Drawer implements Disposable {
     public Drawer(EntityStore store, ScreenShake screenShake) {
         this.store = store;
         this.screenShake = screenShake;
+
+        this.shapeRenderer = new ShapeRenderer();
 
         this.batch = new SpriteBatch();
         font = new BitmapFont();
@@ -96,7 +99,6 @@ public class Drawer implements Disposable {
 
     private void drawEnemies() {
         for (Enemy e : store.enemies) {
-
             if (e.isHit()) {
                 batch.end();
                 whiteShader.begin();
@@ -112,6 +114,10 @@ public class Drawer implements Disposable {
             } else {
                 batch.draw(e.getFrame(animationAccumulator), e.getPosition().x, e.getPosition().y);
             }
+
+            batch.end();
+            e.hitbox.drawHitbox(shapeRenderer);
+            batch.begin();
         }
     }
 

@@ -29,8 +29,8 @@ public class CollisionSystem {
             }
 
             for (Bullet b : store.bulletSystem.getBullets()) {
-                Vector2 bulletC = getCenter(b.getSprite());
-                if (enemyC.dst(bulletC) < 16 + 38 && (b instanceof PlayerBullet || b instanceof LargePlayerBullet)) {
+                //Vector2 bulletC = getCenter(b.getSprite());
+                if (e.collide(b) && (b instanceof PlayerBullet || b instanceof LargePlayerBullet)) {
                     e.hit();
                     b.setDead(true);
                 }

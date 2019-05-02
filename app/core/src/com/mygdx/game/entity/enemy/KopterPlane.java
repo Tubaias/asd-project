@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.entity.Entity;
+import com.mygdx.game.entity.Hitbox;
 import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.utility.logic.EntityStore;
 import com.mygdx.game.utility.graphic.Animator;
@@ -35,6 +37,8 @@ public class KopterPlane extends Enemy {
         animation = new Animator(texture, 4);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
+
+        this.hitbox = new Hitbox(x + sprite.getWidth() / 2, y + sprite.getHeight() / 2, 170, 70);
     }
 
     @Override
@@ -57,6 +61,7 @@ public class KopterPlane extends Enemy {
         }
 
         sprite.setPosition(position.x, position.y);
+        hitbox.move(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2);
         this.isHit = false;
 
         while (missileAccumulator > 1.5) {

@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.entity.Entity;
+import com.mygdx.game.entity.Hitbox;
 import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.utility.logic.EntityStore;
 import com.mygdx.game.utility.graphic.Animator;
@@ -30,12 +32,17 @@ public class RootterTootter extends Enemy {
         animation = new Animator(texture, 3);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
+
+        this.hitbox = new Hitbox(x + sprite.getWidth() / 2, y + sprite.getHeight() / 2, 45, 100);
     }
 
     @Override
     public void move() {
         moveAccumulator += Gdx.graphics.getDeltaTime();
         shootAccumulator += Gdx.graphics.getDeltaTime();
+
+        hitbox.move(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2 + 25);
+
 
         while (moveAccumulator > 0.0167) {
             position.add(speed);

@@ -1,5 +1,8 @@
 package com.mygdx.game.entity;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 
 public class Hitbox {
@@ -30,5 +33,17 @@ public class Hitbox {
 
     public Vector2 getSize() {
         return size;
+    }
+
+    public void move(float x, float y) {
+        this.position.x = x - size.x / 2;
+        this.position.y = y - size.y / 2;
+    }
+
+    public void drawHitbox(ShapeRenderer shape) {
+        shape.begin(ShapeType.Line);
+		shape.setColor(Color.RED);
+		shape.rect(position.x, position.y, size.x, size.y);
+		shape.end();
     }
 }
