@@ -8,7 +8,8 @@ import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.KopterPlane;
 import com.mygdx.game.entity.enemy.RootterTootter;
-import com.mygdx.game.level.Map;
+import com.mygdx.game.level.Level;
+import com.mygdx.game.level.Level1;
 import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.utility.logic.CollisionSystem;
 import com.mygdx.game.utility.graphic.Drawer;
@@ -29,8 +30,6 @@ public class GameScreen implements Screen {
     ScoringSystem scoring;
 
     Player player;
-    Map foregroundMap;
-    Map backgroundMap;
 
     float tootterDeltaAccumulator = 0;
     float planeDeltaAccumulator = 0;
@@ -46,15 +45,14 @@ public class GameScreen implements Screen {
         width = 600;
         height = 800;
 
-        foregroundMap = new Map(new Texture("images/desert-fg.png"), 4);
-        backgroundMap = new Map(new Texture("images/desert-bg.png"), 3);
+        Level level = new Level1(store);
 
         player = new Player();
         bulletSystem = new BulletSystem();
         scoring = new ScoringSystem();
         ScreenShake screenShake = new ScreenShake();
 
-        store = new EntityStore(player, bulletSystem, foregroundMap, backgroundMap, scoring, screenShake);
+        store = new EntityStore(player, bulletSystem, level, scoring, screenShake);
         collisionSystem = new CollisionSystem(store);
         inputHandler = new InputHandler(player);
         drawer = new Drawer(store, screenShake);
@@ -63,8 +61,6 @@ public class GameScreen implements Screen {
         bulletSystem.setStore(store);
         bulletSystem.createPools();
         bulletSystem.initPool();
-
-       // store.enemies.add(new KopterPlane(300, 400, store));
     }
 
     @Override
@@ -81,10 +77,10 @@ public class GameScreen implements Screen {
         //     tootterDeltaAccumulator -= 0.25;
         // }
 
-        while (planeDeltaAccumulator > 3) {
-            addPlane();
-            planeDeltaAccumulator -= 3;
-        }
+        // while (planeDeltaAccumulator > 3) {
+        //     addPlane();
+        //     planeDeltaAccumulator -= 3;
+        // }
 
         if (!collisionSystem.collision()) {
             parent.changeScreen("over", store.scoring);
@@ -94,8 +90,7 @@ public class GameScreen implements Screen {
     }
 
     private void moveEntities() {
-        backgroundMap.move();
-        foregroundMap.move();
+        store.level.step();
         player.move();
 
         for (Enemy e : store.enemies) {
@@ -107,12 +102,12 @@ public class GameScreen implements Screen {
 
     private void addTootter() {
         Random rng = new Random();
-        store.enemies.add(new RootterTootter(rng.nextInt((int) width) - 64, height - 20, store));
+        store.enemies.add(new RootterTootter(rng.nextInt((int) width) - 64, height - 20, new Texture("images/enemies/helikipotel.png"), store));
     }
 
     private void addPlane() {
         Random rng = new Random();
-        store.enemies.add(new KopterPlane(rng.nextInt((int) width) - 128, height - 20, store));
+        store.enemies.add(new KopterPlane(rng.nextInt((int) width) - 128, height - 20, new Texture("images/enemies/bigplane.png"), store));
     }
 
     @Override

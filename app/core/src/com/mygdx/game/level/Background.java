@@ -3,8 +3,9 @@ package com.mygdx.game.level;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Map {
+public class Background {
     private float y1;
     private float y2;
     private int speed;
@@ -12,9 +13,8 @@ public class Map {
     private Sprite sprite1;
     private Sprite sprite2;
 
-    public Map(Texture texture, int speed) {
+    public Background(Texture texture, int speed) {
         this.height = texture.getHeight();
-        System.out.println("h: " + this.height);
         this.y1 = 0;
         this.y2 = this.height;
         this.speed = speed;
@@ -53,4 +53,8 @@ public class Map {
         this.sprite2.setPosition(-100, y2);
     }
 
+    public void draw(SpriteBatch batch) {
+        sprite1.draw(batch);
+        sprite2.draw(batch);
+    }
 }

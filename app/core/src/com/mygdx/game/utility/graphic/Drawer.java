@@ -51,8 +51,6 @@ public class Drawer implements Disposable {
 
         whiteShader = new ShaderProgram(Gdx.files.internal("shaders/whiteshader.vs"), Gdx.files.internal("shaders/whiteshader.fs"));
         batch.setShader(whiteShader);
-
-
     }
 
     public void drawFrame(float delta) {
@@ -74,11 +72,7 @@ public class Drawer implements Disposable {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        store.backgroundMap.getSprite1().draw(batch);
-        store.backgroundMap.getSprite2().draw(batch);
-
-        store.foregroundMap.getSprite1().draw(batch);
-        store.foregroundMap.getSprite2().draw(batch);
+        store.level.draw(batch);
 
         drawEnemies();
 

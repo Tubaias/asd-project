@@ -21,12 +21,12 @@ public class RootterTootter extends Enemy {
     private EntityStore store;
     private boolean dead = false;
 
-    public RootterTootter(float x, float y, EntityStore store) {
+    public RootterTootter(float x, float y, Texture texture, EntityStore store) {
         this.store = store;
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, -2);
 
-        animation = new Animator(new Texture("images/enemies/helikipotel.png"), 3);
+        animation = new Animator(texture, 3);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
 

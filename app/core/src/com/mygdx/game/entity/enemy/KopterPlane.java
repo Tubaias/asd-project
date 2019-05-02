@@ -27,12 +27,12 @@ public class KopterPlane extends Enemy {
     private int deadFrames;
 
 
-    public KopterPlane(float x, float y, EntityStore store) {
+    public KopterPlane(float x, float y, Texture texture, EntityStore store) {
         this.store = store;
         this.position = new Vector2(x, y);
         this.speed = new Vector2(0, -2);
 
-        animation = new Animator(new Texture("images/enemies/bigplane.png"), 4);
+        animation = new Animator(texture, 4);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
     }
@@ -86,7 +86,6 @@ public class KopterPlane extends Enemy {
         float bulletX = position.x + 128;
         float bulletY = position.y + 96;
 
-        //int angle = (int) store.player.getPosition().cpy().sub(position).angle(new Vector2(0, 1));
         store.bulletSystem.newBullet(BulletType.ANGLED, bulletX, bulletY, 180);
         store.bulletSystem.newBullet(BulletType.ANGLED, bulletX + 8, bulletY, 150);
         store.bulletSystem.newBullet(BulletType.ANGLED, bulletX - 8, bulletY, 210);
