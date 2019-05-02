@@ -11,6 +11,19 @@ public class Smoke extends Entity {
 
     public Smoke(Texture texture, Vector2 position) {
         this.sprite = new Sprite(texture);
+        this.set(position.x, position.y);
+    }
+
+    public void Fade() {
+        accumulator += Gdx.graphics.getDeltaTime();
+        if (accumulator > 0.07) {
+            fade -= 0.1;
+            this.sprite.setColor(1, 1, 1, fade);
+            accumulator -= 0.07;
+        }
+    }
+
+    public void set(float x, float y) {
         Random r = new Random();
         float scale = r.nextFloat() / 2 + 0.3f;
         float xOffset = r.nextFloat() * 10 - 5;
@@ -18,19 +31,10 @@ public class Smoke extends Entity {
 
 
         this.sprite.setScale(scale, scale);
-        this.position = position;
         this.sprite.setPosition(position.x + xOffset, position.y + yOffset);
     }
-    public void Fade() {
-        accumulator += Gdx.graphics.getDeltaTime();
-        if (accumulator > 0.07) {
-            fade -= 0.1;
-            this.sprite.setColor(1, 1, 1, fade);
-            if (fade <= 0) {
-                this.position = new Vector2(-1000, -1000);
-                this.sprite.setPosition(-1000, -1000);
-            }
-            accumulator -= 0.07;
-        }
+
+    public float getFade() {
+        return fade;
     }
 }

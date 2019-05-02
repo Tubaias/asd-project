@@ -18,7 +18,7 @@ public class EntityStore {
     public Level level;
     public ScoringSystem scoring;
     public ScreenShake screenShake;
-    public ArrayList<Smoke> misc;
+    public SmokeMachine smokes;
 
     public EntityStore(Player player, BulletSystem bulletSystem, Level level, ScoringSystem scoring, ScreenShake screenShake) {
         this.player = player;
@@ -27,6 +27,6 @@ public class EntityStore {
         this.level = level;
         this.scoring = scoring;
         this.screenShake = screenShake;
-        misc = new ArrayList<>();
+        this.smokes = new SmokeMachine();
     }
 }

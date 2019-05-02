@@ -82,7 +82,7 @@ public class Drawer implements Disposable {
 
         store.bulletSystem.draw(batch);
 
-        for (Smoke s : store.misc) {
+        for (Smoke s : store.smokes.getSmokes()) {
             s.getSprite().draw(batch);
             s.Fade();
         }

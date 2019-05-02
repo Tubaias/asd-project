@@ -5,12 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.entity.Smoke;
 import com.mygdx.game.utility.logic.EntityStore;
 
 public class Missile extends Bullet {
     private EntityStore store;
-    private Texture smoke;
     private float smokeAccumulator;
 
     public Missile(float x, float y, float angle, Texture texture, EntityStore store) {
@@ -21,8 +19,6 @@ public class Missile extends Bullet {
 
         this.texture = texture;
         this.sprite = new Sprite(texture);
-
-        this.smoke = new Texture("images/enemies/skull.png");
 
         this.sprite.setOriginCenter();
         this.sprite.setRotation(-angle);
@@ -51,8 +47,7 @@ public class Missile extends Bullet {
     private void emitSmoke() {
         smokeAccumulator += Gdx.graphics.getDeltaTime();
         if (smokeAccumulator > 0.3) {
-            Smoke smk = new Smoke(smoke, position);
-            store.misc.add(smk);
+            store.smokes.createSmoke(position.x, position.y);
         }
     }
 
