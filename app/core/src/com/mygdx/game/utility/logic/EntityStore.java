@@ -8,7 +8,6 @@ import com.mygdx.game.entity.Smoke;
 import com.mygdx.game.utility.graphic.ScreenShake;
 import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.entity.enemy.Enemy;
-import com.mygdx.game.level.Background;
 import com.mygdx.game.level.Level;
 
 public class EntityStore {
