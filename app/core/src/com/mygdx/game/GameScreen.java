@@ -45,7 +45,7 @@ public class GameScreen implements Screen {
         width = 600;
         height = 800;
 
-        Level level = new Level1(store);
+        Level level = new Level1();
 
         player = new Player();
         bulletSystem = new BulletSystem();
@@ -58,6 +58,10 @@ public class GameScreen implements Screen {
         drawer = new Drawer(store, screenShake);
 
         player.setStore(store);
+
+        level.setStore(store);
+        level.initEvents();
+
         bulletSystem.setStore(store);
         bulletSystem.createPools();
         bulletSystem.initPool();

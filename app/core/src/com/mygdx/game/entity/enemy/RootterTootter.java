@@ -17,7 +17,8 @@ public class RootterTootter extends Enemy {
     private Animator animation;
     private int hitpoints = 100;
     private float sinewaveAngle;
-    private float deltaAccumulator;
+    private float moveAccumulator;
+    private float shootAccumulator;
     private EntityStore store;
     private boolean dead = false;
 
@@ -29,31 +30,31 @@ public class RootterTootter extends Enemy {
         animation = new Animator(texture, 3);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
-
-        shoot();
     }
 
     @Override
     public void move() {
-        deltaAccumulator += Gdx.graphics.getDeltaTime();
+        moveAccumulator += Gdx.graphics.getDeltaTime();
+        shootAccumulator += Gdx.graphics.getDeltaTime();
 
-        //position.add(speed);
-        updateSpeed();
+        while (moveAccumulator > 0.0167) {
+            position.add(speed);
+            updateSpeed();
+            moveAccumulator -= 0.0167;
+        }
+
         sprite.setPosition(position.x, position.y);
         this.isHit = false;
 
-        if (deltaAccumulator > 0.7) {
+        while (shootAccumulator > 0.7) {
             shoot();
-            deltaAccumulator -= 0.7;
+            shootAccumulator -= 0.7;
         }
     }
 
     private void shoot() {
         int angle = (int) store.player.getPosition().cpy().sub(position).angle(new Vector2(0, 1));
-        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, 160);
-        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, -160);
-        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, 140);
-        store.bulletSystem.newBullet(BulletType.MISSILE, position.x + 64, position.y + 64 - 16, -140);
+        store.bulletSystem.newBullet(BulletType.BASIC, position.x + 64, position.y + 64 - 16, angle);
 
     }
 

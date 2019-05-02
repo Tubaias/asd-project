@@ -16,7 +16,8 @@ public class KopterPlane extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private int hitpoints = 1000;
-    private float deltaAccumulator;
+    private float moveAccumulator;
+    private float shootAccumulator;
     private float missileAccumulator;
 
     private EntityStore store;
@@ -25,7 +26,6 @@ public class KopterPlane extends Enemy {
     private int burst;
     private int interval;
     private int deadFrames;
-
 
     public KopterPlane(float x, float y, Texture texture, EntityStore store) {
         this.store = store;
@@ -47,14 +47,19 @@ public class KopterPlane extends Enemy {
             }
         }
 
-        deltaAccumulator += Gdx.graphics.getDeltaTime();
+        moveAccumulator += Gdx.graphics.getDeltaTime();
+        shootAccumulator += Gdx.graphics.getDeltaTime();
         missileAccumulator += Gdx.graphics.getDeltaTime();
 
-        position.add(speed);
+        while (moveAccumulator > 0.0167) {
+            position.add(speed);
+            moveAccumulator -= 0.0167;
+        }
+
         sprite.setPosition(position.x, position.y);
         this.isHit = false;
 
-        if (missileAccumulator > 1.5) {
+        while (missileAccumulator > 1.5) {
             shootMissiles();
             missileAccumulator -= 1.5;
         }
@@ -62,9 +67,11 @@ public class KopterPlane extends Enemy {
         if (burst > 0 && interval == 2) {
             shoot();
             burst--;
-        } else if (deltaAccumulator > 1) {
-            shoot();
-            deltaAccumulator -= 1;
+        } else {
+            while (shootAccumulator > 1) {
+                shoot();
+                shootAccumulator -= 1;
+            }
         }
 
         if (interval > 2) {
