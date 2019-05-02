@@ -42,7 +42,7 @@ public class KopterPlane extends Enemy {
     }
 
     @Override
-    public void move() {
+    public void step() {
         if (dead) {
             if (deadFrames < 11) {
                 deadFrames++;

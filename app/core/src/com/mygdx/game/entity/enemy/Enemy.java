@@ -10,7 +10,7 @@ public abstract class Enemy extends Entity {
     protected boolean isHit;
     public Hitbox hitbox;
 
-    public abstract void move();
+    public abstract void step();
     public abstract void hit();
     public abstract TextureRegion getFrame(float accumulator);
 
