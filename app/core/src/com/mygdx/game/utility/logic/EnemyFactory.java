@@ -6,24 +6,30 @@ import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.EnemyType;
 import com.mygdx.game.entity.enemy.KopterPlane;
 import com.mygdx.game.entity.enemy.RootterTootter;
+import com.mygdx.game.entity.enemy.ShootterTootter;
+import com.mygdx.game.entity.enemy.script.ActionScript;
 
 public class EnemyFactory {
     private EntityStore store;
 
     private Texture tootterTexture;
+    private Texture shootterTexture;
     private Texture kopterTexture;
 
     public EnemyFactory(EntityStore store) {
         this.store = store;
 
-        tootterTexture = new Texture("images/enemies/helikipotel.png");
+        tootterTexture = new Texture("images/enemies/nocannontootter.png");
+        shootterTexture = new Texture("images/enemies/helikipotel.png");
         kopterTexture = new Texture("images/enemies/bigplane.png");
     }
 
-    public Enemy createEnemy(EnemyType type, float x, float y) {
+    public Enemy createEnemy(EnemyType type, float x, float y, ActionScript script) {
         switch (type) {
             case TOOTTER:
-                return new RootterTootter(x, y, tootterTexture, store);
+                return new RootterTootter(x, y, tootterTexture, store, script);
+            case SHOOTTER:
+                return new ShootterTootter(x, y, shootterTexture, store);
             case KOPTER:
                 return new KopterPlane(x, y, kopterTexture, store);
             default:

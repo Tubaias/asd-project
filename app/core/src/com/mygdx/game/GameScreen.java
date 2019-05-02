@@ -1,13 +1,8 @@
 package com.mygdx.game;
 
-import java.util.Random;
-
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.enemy.Enemy;
-import com.mygdx.game.entity.enemy.KopterPlane;
-import com.mygdx.game.entity.enemy.RootterTootter;
 import com.mygdx.game.level.Level;
 import com.mygdx.game.level.Level1;
 import com.mygdx.game.utility.logic.BulletSystem;
@@ -88,7 +83,7 @@ public class GameScreen implements Screen {
         player.move();
 
         for (Enemy e : store.enemies) {
-            e.move();
+            e.step();
         }
 
         store.bulletSystem.step();

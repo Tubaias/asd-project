@@ -7,7 +7,7 @@ import com.mygdx.game.entity.Entity;
 public abstract class Enemy extends Entity {
     protected boolean isHit;
 
-    public abstract void move();
+    public abstract void step();
     public abstract void hit();
     public abstract TextureRegion getFrame(float accumulator);
 
