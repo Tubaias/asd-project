@@ -25,13 +25,14 @@ public class Smoke extends Entity {
 
     public void set(float x, float y) {
         Random r = new Random();
+        this.fade = 0.7f;
         float scale = r.nextFloat() / 2 + 0.3f;
         float xOffset = r.nextFloat() * 10 - 5;
         float yOffset = r.nextFloat() * 10 - 5;
 
 
         this.sprite.setScale(scale, scale);
-        this.sprite.setPosition(position.x + xOffset, position.y + yOffset);
+        this.sprite.setPosition(x + xOffset, y + yOffset);
     }
 
     public float getFade() {

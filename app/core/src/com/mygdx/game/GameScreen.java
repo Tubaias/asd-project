@@ -76,16 +76,6 @@ public class GameScreen implements Screen {
         inputHandler.handlePlayerInputs();
         moveEntities();
 
-        // while (tootterDeltaAccumulator > 0.25) {
-        //     addTootter();
-        //     tootterDeltaAccumulator -= 0.25;
-        // }
-
-        // while (planeDeltaAccumulator > 3) {
-        //     addPlane();
-        //     planeDeltaAccumulator -= 3;
-        // }
-
         if (!collisionSystem.collision()) {
             parent.changeScreen("over", store.scoring);
         }
@@ -102,16 +92,7 @@ public class GameScreen implements Screen {
         }
 
         store.bulletSystem.step();
-    }
-
-    private void addTootter() {
-        Random rng = new Random();
-        store.enemies.add(new RootterTootter(rng.nextInt((int) width) - 64, height - 20, new Texture("images/enemies/helikipotel.png"), store));
-    }
-
-    private void addPlane() {
-        Random rng = new Random();
-        store.enemies.add(new KopterPlane(rng.nextInt((int) width) - 128, height - 20, new Texture("images/enemies/bigplane.png"), store));
+        store.smokes.cull();
     }
 
     @Override
