@@ -1,2 +1,2 @@
-# asd-project
+# shmup project
 name pending
