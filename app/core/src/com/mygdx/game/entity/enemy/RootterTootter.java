@@ -41,15 +41,13 @@ public class RootterTootter extends Enemy {
 
         moveAccumulator += Gdx.graphics.getDeltaTime();
 
-        hitbox.move(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2 + 25);
-
+        hitbox.setPosition(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2 + 25);
 
         while (moveAccumulator > 0.0167) {
             script.step(this);
             moveAccumulator -= 0.0167;
         }
 
-        sprite.setPosition(position.x, position.y);
         this.isHit = false;
     }
 
@@ -68,8 +66,16 @@ public class RootterTootter extends Enemy {
             store.scoring.increase(1000);
         }
 
-        this.dead = true;
-        this.position = new Vector2(-1000,-1000);
+        dead = true;
+        position = new Vector2(-1000,-1000);
+        hitbox.setPosition(-1000, -1000);
+    }
+
+    @Override
+    public void disappear() {
+        dead = true;
+        position = new Vector2(-1000,-1000);
+        hitbox.setPosition(-1000, -1000);
     }
 
     @Override

@@ -15,11 +15,17 @@ public class MoveCommand implements ActionCommand {
         this.speed = speed;
     }
 
+    public MoveCommand(float destX, float destY, float speed) {
+        this.finished = false;
+        this.destination = new Vector2(destX, destY);
+        this.speed = speed;
+    }
+
 	@Override
 	public void step(Enemy enemy) {
         float squareDistance = destination.cpy().sub(enemy.getPosition()).len2();
 
-        if (squareDistance < speed) {
+        if (squareDistance < Math.pow(speed, 2)) {
             enemy.setPosition(destination);
             finished = true;
         } else {

@@ -6,44 +6,51 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.entity.Hitbox;
 import com.mygdx.game.entity.bullet.BulletType;
+import com.mygdx.game.entity.enemy.script.ActionScript;
 import com.mygdx.game.utility.logic.EntityStore;
 import com.mygdx.game.utility.graphic.Animator;
 
 public class ShootterTootter extends Enemy {
     private Vector2 position;
-    private Vector2 speed;
     private Sprite sprite;
     private Animator animation;
+    private ActionScript script;
     private int hitpoints = 100;
-    private float sinewaveAngle;
     private float moveAccumulator;
     private float shootAccumulator;
     private EntityStore store;
     private boolean dead = false;
 
-    public ShootterTootter(float x, float y, Texture texture, EntityStore store) {
+    public ShootterTootter(float x, float y, Texture texture, EntityStore store, ActionScript script) {
         this.store = store;
         this.position = new Vector2(x, y);
-        this.speed = new Vector2(0, -2);
 
         animation = new Animator(texture, 3);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
+
+        this.hitbox = new Hitbox(x + sprite.getWidth() / 2, y + sprite.getHeight() / 2, 45, 100);
+        this.script = script;
     }
 
     @Override
     public void step() {
+        if (dead) {
+            return;
+        }
+
         moveAccumulator += Gdx.graphics.getDeltaTime();
         shootAccumulator += Gdx.graphics.getDeltaTime();
 
+        hitbox.setPosition(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2 + 25);
+
         while (moveAccumulator > 0.0167) {
-            position.add(speed);
-            updateSpeed();
+            script.step(this);
             moveAccumulator -= 0.0167;
         }
 
-        sprite.setPosition(position.x, position.y);
         this.isHit = false;
 
         while (shootAccumulator > 0.7) {
@@ -64,23 +71,25 @@ public class ShootterTootter extends Enemy {
         this.hitpoints -= 1;
 
         if (hitpoints <= 0) {
-            if (!dead) {
-                store.scoring.increase(1000);
-            }
-
-            this.dead = true;
-            this.position = new Vector2(-1000,-1000);
+            die();
         }
     }
 
-    private void updateSpeed() {
-        speed.set((float) Math.sin(sinewaveAngle) * 3, speed.y - 0.05f);
-
-        sinewaveAngle += 0.1;
-
-        if (sinewaveAngle > 360) {
-            sinewaveAngle = 0;
+    private void die() {
+        if (!dead) {
+            store.scoring.increase(2000);
         }
+
+        dead = true;
+        position = new Vector2(-1000,-1000);
+        hitbox.setPosition(-1000, -1000);
+    }
+
+    @Override
+    public void disappear() {
+        dead = true;
+        position = new Vector2(-1000,-1000);
+        hitbox.setPosition(-1000, -1000);
     }
 
     @Override
