@@ -10,6 +10,7 @@ import com.mygdx.game.entity.bullet.LargePlayerBullet;
 import com.mygdx.game.entity.bullet.Missile;
 import com.mygdx.game.entity.bullet.PlayerBullet;
 import com.mygdx.game.entity.bullet.StarBullet;
+import com.mygdx.game.utility.EntityStore;
 
 public class BulletFactory {
     private EntityStore store;

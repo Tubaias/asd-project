@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.entity.Smoke;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.io.FontDisplayer;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 
 public class Drawer implements Disposable {
     private EntityStore store;

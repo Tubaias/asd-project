@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Hitbox;
 import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.entity.enemy.script.ActionScript;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.utility.graphic.Animator;
 
 public class KopterPlane extends Enemy {
@@ -17,7 +17,7 @@ public class KopterPlane extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private ActionScript script;
-    private int hitpoints = 1000;
+    private int hitpoints = 1500;
     private float moveAccumulator;
     private float shootAccumulator;
     private float missileAccumulator;

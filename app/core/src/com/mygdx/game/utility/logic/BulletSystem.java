@@ -10,6 +10,7 @@ import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.entity.bullet.LargePlayerBullet;
 import com.mygdx.game.entity.bullet.PlayerBullet;
+import com.mygdx.game.utility.EntityStore;
 
 public class BulletSystem {
     private final float HEIGHT = 800;

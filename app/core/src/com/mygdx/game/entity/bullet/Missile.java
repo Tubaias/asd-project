@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 
 public class Missile extends Bullet {
     private EntityStore store;

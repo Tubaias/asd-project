@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.bullet.BulletType;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 
 public class Player extends Entity {
     private EntityStore store;

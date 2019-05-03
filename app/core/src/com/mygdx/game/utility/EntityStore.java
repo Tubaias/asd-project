@@ -1,13 +1,15 @@
 
-package com.mygdx.game.utility.logic;
+package com.mygdx.game.utility;
 
 import java.util.ArrayList;
 
 import com.mygdx.game.entity.Player;
-import com.mygdx.game.utility.graphic.ScreenShake;
-import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.level.Level;
+import com.mygdx.game.utility.graphic.ScreenShake;
+import com.mygdx.game.utility.logic.BulletSystem;
+import com.mygdx.game.utility.logic.ScoringSystem;
+import com.mygdx.game.utility.logic.SmokeMachine;
 
 public class EntityStore {
     public ArrayList<Enemy> enemies;

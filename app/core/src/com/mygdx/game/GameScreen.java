@@ -9,7 +9,7 @@ import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.utility.logic.CollisionSystem;
 import com.mygdx.game.utility.graphic.Drawer;
 import com.mygdx.game.utility.graphic.ScreenShake;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.utility.InputHandler;
 import com.mygdx.game.utility.logic.ScoringSystem;
 

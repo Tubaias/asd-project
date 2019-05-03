@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Hitbox;
 import com.mygdx.game.entity.bullet.BulletType;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.entity.enemy.script.ActionScript;
 import com.mygdx.game.utility.graphic.Animator;
 

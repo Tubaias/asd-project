@@ -4,7 +4,7 @@ package com.mygdx.game.level.event;
 import com.mygdx.game.entity.enemy.EnemyType;
 import com.mygdx.game.entity.enemy.script.ActionScript;
 import com.mygdx.game.utility.logic.EnemyFactory;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 
 public class EnemySpawnEvent implements LevelEvent {
     private EnemyFactory factory;

@@ -8,6 +8,7 @@ import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.entity.bullet.LargePlayerBullet;
 import com.mygdx.game.entity.bullet.PlayerBullet;
 import com.mygdx.game.entity.enemy.Enemy;
+import com.mygdx.game.utility.EntityStore;
 
 public class CollisionSystem {
     EntityStore store;

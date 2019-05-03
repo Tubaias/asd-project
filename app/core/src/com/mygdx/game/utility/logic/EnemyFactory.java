@@ -9,6 +9,7 @@ import com.mygdx.game.entity.enemy.Mine;
 import com.mygdx.game.entity.enemy.RootterTootter;
 import com.mygdx.game.entity.enemy.ShootterTootter;
 import com.mygdx.game.entity.enemy.script.ActionScript;
+import com.mygdx.game.utility.EntityStore;
 
 public class EnemyFactory {
     private EntityStore store;

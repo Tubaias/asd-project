@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Hitbox;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.entity.enemy.script.ActionScript;
 import com.mygdx.game.utility.graphic.Animator;
 
@@ -16,7 +16,7 @@ public class RootterTootter extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private ActionScript script;
-    private int hitpoints = 50;
+    private int hitpoints = 30;
     private float moveAccumulator;
     private EntityStore store;
     private boolean dead = false;

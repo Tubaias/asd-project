@@ -2,7 +2,7 @@
 package com.mygdx.game.level;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.utility.logic.EntityStore;
+import com.mygdx.game.utility.EntityStore;
 
 public interface Level {
     void step();
