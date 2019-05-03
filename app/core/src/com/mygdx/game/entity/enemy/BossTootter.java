@@ -12,12 +12,12 @@ import com.mygdx.game.entity.enemy.script.ActionScript;
 import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.utility.graphic.Animator;
 
-public class ShootterTootter extends Enemy {
+public class BossTootter extends Enemy {
     private Vector2 position;
     private Sprite sprite;
     private Animator animation;
     private ActionScript script;
-    private int hitpoints = 50;
+    private int hitpoints = 5000;
     private float moveAccumulator;
     private float shootAccumulator;
     private EntityStore store;
@@ -25,15 +25,15 @@ public class ShootterTootter extends Enemy {
 
     private int deadFrames;
 
-    public ShootterTootter(float x, float y, Texture texture, EntityStore store, ActionScript script) {
+    public BossTootter(float x, float y, EntityStore store, ActionScript script) {
         this.store = store;
         this.position = new Vector2(x, y);
 
-        animation = new Animator(texture, 3);
+        animation = new Animator(new Texture("images/enemies/bossTootter.png"), 3);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
 
-        this.hitbox = new Hitbox(x + sprite.getWidth() / 2, y + sprite.getHeight() / 2, 45, 100);
+        this.hitbox = new Hitbox(x + sprite.getWidth() / 2, y + sprite.getHeight() / 2, 150, 150);
         this.script = script;
     }
 
@@ -52,7 +52,7 @@ public class ShootterTootter extends Enemy {
         moveAccumulator += Gdx.graphics.getDeltaTime();
         shootAccumulator += Gdx.graphics.getDeltaTime();
 
-        hitbox.setPosition(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2 + 25);
+        hitbox.setPosition(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2);
 
         while (moveAccumulator > 0.0167) {
             script.step(this);
@@ -62,7 +62,7 @@ public class ShootterTootter extends Enemy {
         this.isHit = false;
 
         while (shootAccumulator > 0.5) {
-            shoot();
+            //shoot();
             shootAccumulator -= 0.5;
         }
     }

@@ -2,6 +2,7 @@
 package com.mygdx.game.utility.logic;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.entity.enemy.BossTootter;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.entity.enemy.EnemyType;
 import com.mygdx.game.entity.enemy.KopterPlane;
@@ -38,6 +39,8 @@ public class EnemyFactory {
                 return new KopterPlane(x, y, kopterTexture, store, script);
             case MINE:
                 return new Mine(x, y, mineTexture, store, script);
+            case BOSSTOOTTER:
+                return new BossTootter(x, y, store, script);
             default:
                 return null;
         }

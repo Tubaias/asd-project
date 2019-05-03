@@ -43,10 +43,10 @@ public class Level1 implements Level {
         background.move();
         foreground.move();
 
-        if (eventIndex >= events.size()) {
-            eventIndex = 0;
-            deltaTimer = 0;
-        }
+        // if (eventIndex >= events.size()) {
+        //     eventIndex = 0;
+        //     deltaTimer = 0;
+        // }
 
         while (eventIndex < events.size() && events.get(eventIndex).isTime(deltaTimer)) {
             events.get(eventIndex).execute();
@@ -63,42 +63,46 @@ public class Level1 implements Level {
     public void initEvents() {
         this.events = new ArrayList<>();
 
-        ActionScript script1 = new ActionScript();
-        script1.addCommand(new MoveCommand(300 - 64, -300, 8));
-        script1.addCommand(new DisappearCommand());
+        ActionScript tootterScript = new ActionScript();
+        tootterScript.addCommand(new MoveCommand(300 - 64, -300, 8));
+        tootterScript.addCommand(new DisappearCommand());
 
-        ActionScript script2 = new ActionScript();
-        script2.addCommand(new MoveCommand(-100, 600, 5));
-        script2.addCommand(new DisappearCommand());
+        ActionScript kopterScript = new ActionScript();
+        kopterScript.addCommand(new MoveCommand(200, 500, 3));
+        kopterScript.addCommand(new WaitCommand(5));
+        kopterScript.addCommand(new MoveCommand(-300, 500, 7));
+        kopterScript.addCommand(new DisappearCommand());
 
-        ActionScript script3 = new ActionScript();
-        script3.addCommand(new MoveCommand(200, 500, 3));
-        script3.addCommand(new WaitCommand(5f));
-        script3.addCommand(new MoveCommand(-300, 500, 15));
-        script3.addCommand(new DisappearCommand());
+        ActionScript bossScript = new ActionScript();
+        bossScript.addCommand(new MoveCommand(300 - 256, 300, 2));
+        bossScript.addCommand(new WaitCommand(60));
+        kopterScript.addCommand(new DisappearCommand());
 
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.2f, 0, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.4f, 100, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.6f, 200, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.8f, 300, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.0f, 400, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.2f, 500, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.4f, 400, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.6f, 300, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.8f, 200, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 2.0f, 100, 800, store, factory, script1.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 2.2f, 0, 800, store, factory, script1.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.2f, 0, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.4f, 100, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.6f, 200, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.8f, 300, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.0f, 400, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.2f, 500, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.4f, 400, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.6f, 300, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 1.8f, 200, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 2.0f, 100, 800, store, factory, tootterScript.cpy()));
+        // events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 2.2f, 0, 800, store, factory, tootterScript.cpy()));
 
-        spawnShootterWave(3f, 10, 600, "left");
+        // spawnShootterWave(3f, 10, 600, "left");
+        // spawnShootterWave(7f, 10, 600, "right");
 
-        spawnShootterWave(7f, 10, 600, "right");
+        // events.add(new EnemySpawnEvent(EnemyType.KOPTER, 9f, 200, 900, store, factory, kopterScript.cpy()));
 
-        events.add(new EnemySpawnEvent(EnemyType.KOPTER, 9f, 200, 900, store, factory, script3.cpy()));
+        // spawnBasicMine(13f, 75);
+        // spawnBasicMine(13f, 215);
+        // spawnBasicMine(13f, 385);
+        // spawnBasicMine(13f, 525);
 
-        spawnBasicMine(12f, 75);
-        spawnBasicMine(12f, 215);
-        spawnBasicMine(12f, 385);
-        spawnBasicMine(12f, 525);
+        events.add(new EnemySpawnEvent(EnemyType.BOSSTOOTTER, 1f, 300 - 256, 800, store, factory, bossScript));
+
+        // level goes here
     }
 
     private void spawnBasicMine(float time, float x) {
