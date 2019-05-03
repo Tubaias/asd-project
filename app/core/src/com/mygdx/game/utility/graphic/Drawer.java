@@ -91,6 +91,7 @@ public class Drawer implements Disposable {
         }
 
         fontDisplayer.drawFont(Integer.toString(store.scoring.getScore()), 75, 750, batch);
+        fontDisplayer.drawFont(Integer.toString(store.player.getLives()), 75, 50, batch);
 
         updateFPS();
         font.draw(batch, "" + fps, 10, 20);

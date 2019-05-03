@@ -31,7 +31,12 @@ public class Missile extends Bullet {
             speed++;
         }
 
-        float angleToPlayer = store.player.getPosition().cpy().sub(position).angle(new Vector2(0, 1));
+        Vector2 playerPosCopy = store.player.getPosition().cpy();
+
+        playerPosCopy.x = playerPosCopy.x + store.player.getSprite().getWidth() / 2 - 16;
+        playerPosCopy.y = playerPosCopy.y + store.player.getSprite().getHeight() / 2;
+
+        float angleToPlayer = playerPosCopy.sub(position).angle(new Vector2(0, 1));
         angle += turnAmount(angleToPlayer);
         normalizeAngle();
 
