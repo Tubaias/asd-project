@@ -6,17 +6,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.entity.Entity;
 import com.mygdx.game.entity.Hitbox;
 import com.mygdx.game.entity.bullet.BulletType;
+import com.mygdx.game.entity.enemy.script.ActionScript;
 import com.mygdx.game.utility.logic.EntityStore;
 import com.mygdx.game.utility.graphic.Animator;
 
 public class KopterPlane extends Enemy {
     private Vector2 position;
-    private Vector2 speed;
     private Sprite sprite;
     private Animator animation;
+    private ActionScript script;
     private int hitpoints = 1000;
     private float moveAccumulator;
     private float shootAccumulator;
@@ -29,16 +29,16 @@ public class KopterPlane extends Enemy {
     private int interval;
     private int deadFrames;
 
-    public KopterPlane(float x, float y, Texture texture, EntityStore store) {
+    public KopterPlane(float x, float y, Texture texture, EntityStore store, ActionScript script) {
         this.store = store;
         this.position = new Vector2(x, y);
-        this.speed = new Vector2(0, -2);
 
         animation = new Animator(texture, 4);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
 
         this.hitbox = new Hitbox(x + sprite.getWidth() / 2, y + sprite.getHeight() / 2, 170, 70);
+        this.script = script;
     }
 
     @Override
@@ -49,6 +49,8 @@ public class KopterPlane extends Enemy {
             } else {
                 this.position = new Vector2(-1000,-1000);
             }
+
+            return;
         }
 
         moveAccumulator += Gdx.graphics.getDeltaTime();
@@ -56,17 +58,20 @@ public class KopterPlane extends Enemy {
         missileAccumulator += Gdx.graphics.getDeltaTime();
 
         while (moveAccumulator > 0.0167) {
-            position.add(speed);
+            script.step(this);
             moveAccumulator -= 0.0167;
         }
 
-        sprite.setPosition(position.x, position.y);
-        hitbox.move(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2);
+        hitbox.setPosition(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2);
         this.isHit = false;
 
-        while (missileAccumulator > 1.5) {
+        handleShooting();
+    }
+
+    private void handleShooting() {
+        while (missileAccumulator > 2.5) {
             shootMissiles();
-            missileAccumulator -= 1.5;
+            missileAccumulator -= 2.5;
         }
 
         if (burst > 0 && interval == 2) {
@@ -87,10 +92,6 @@ public class KopterPlane extends Enemy {
     }
 
     private void shoot() {
-        if (dead) {
-            return;
-        }
-
         if (burst == 0) {
             burst = 4;
         }
@@ -128,6 +129,13 @@ public class KopterPlane extends Enemy {
         animation = new Animator(new Texture("images/effects/explosion256.png"), 11);
         store.scoring.increase(10000);
         store.screenShake.startShake(8, 0.3f);
+    }
+
+    @Override
+    public void disappear() {
+        dead = true;
+        deadFrames = 11;
+        this.position = new Vector2(-1000,-1000);
     }
 
     @Override

@@ -4,7 +4,6 @@ package com.mygdx.game.utility.logic;
 import java.util.ArrayList;
 
 import com.mygdx.game.entity.Player;
-import com.mygdx.game.entity.Smoke;
 import com.mygdx.game.utility.graphic.ScreenShake;
 import com.mygdx.game.utility.logic.BulletSystem;
 import com.mygdx.game.entity.enemy.Enemy;

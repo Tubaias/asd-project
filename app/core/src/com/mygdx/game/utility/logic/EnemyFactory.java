@@ -29,9 +29,9 @@ public class EnemyFactory {
             case TOOTTER:
                 return new RootterTootter(x, y, tootterTexture, store, script);
             case SHOOTTER:
-                return new ShootterTootter(x, y, shootterTexture, store);
+                return new ShootterTootter(x, y, shootterTexture, store, script);
             case KOPTER:
-                return new KopterPlane(x, y, kopterTexture, store);
+                return new KopterPlane(x, y, kopterTexture, store, script);
             default:
                 return null;
         }

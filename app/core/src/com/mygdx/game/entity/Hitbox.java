@@ -35,7 +35,7 @@ public class Hitbox {
         return size;
     }
 
-    public void move(float x, float y) {
+    public void setPosition(float x, float y) {
         this.position.x = x - size.x / 2;
         this.position.y = y - size.y / 2;
     }

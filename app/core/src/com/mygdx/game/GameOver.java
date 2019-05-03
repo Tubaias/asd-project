@@ -1,7 +1,5 @@
 package com.mygdx.game;
 
-import java.util.Arrays;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -22,7 +20,6 @@ public class GameOver implements Screen {
     private ScoringSystem score;
     private long timer;
     private Inputs inputs;
-
 
     public GameOver(AsdGame game, ScoringSystem score, Inputs inputs) {
         parent = game;
@@ -51,7 +48,6 @@ public class GameOver implements Screen {
         fontDisplay.drawFont("Game Over", 300, 700, batch);
         fontDisplay.drawFont("Score: " + score.getScore(), 300, 500, batch);
         fontDisplay.drawFont("Press Shoot\nto continue", 300, 100, batch);
-
 
         float x = 265;
         float y = 400;

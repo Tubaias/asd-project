@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import com.badlogic.gdx.Gdx;
-
 public class FileIO {
 
     public static String[] fileToArray(String path) throws IOException {
