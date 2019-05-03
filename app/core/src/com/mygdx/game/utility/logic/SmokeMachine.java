@@ -9,7 +9,7 @@ import com.mygdx.game.entity.Smoke;
 public class SmokeMachine {
     private ArrayList<Smoke> pool = new ArrayList<>();
     private ArrayList<Smoke> smokes = new ArrayList<>();
-    private Texture smokeTexture = new Texture("images/enemies/skull.png");
+    private Texture smokeTexture = new Texture("images/effects/smoke.png");
 
     public ArrayList<Smoke> getSmokes() {
         return smokes;
