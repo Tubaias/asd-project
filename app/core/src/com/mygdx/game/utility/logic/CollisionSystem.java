@@ -3,15 +3,14 @@ package com.mygdx.game.utility.logic;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Player;
-import com.mygdx.game.entity.bullet.BasicBullet;
 import com.mygdx.game.entity.bullet.Bullet;
+import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.entity.bullet.LargePlayerBullet;
 import com.mygdx.game.entity.bullet.PlayerBullet;
 import com.mygdx.game.entity.enemy.Enemy;
 
 public class CollisionSystem {
     EntityStore store;
-
 
     public CollisionSystem(EntityStore store) {
         this.store = store;
@@ -22,14 +21,13 @@ public class CollisionSystem {
         Vector2 playerC = getCenter(player.getSprite());
 
         for (Enemy e : store.enemies) {
-            Vector2 enemyC = getCenter(e.getSprite());
-
             if (e.collide(player)) {
-                System.out.println("OOF");
+                if (!player.die()) {
+                    return false;
+                }
             }
 
             for (Bullet b : store.bulletSystem.getBullets()) {
-                //Vector2 bulletC = getCenter(b.getSprite());
                 if ((b instanceof PlayerBullet || b instanceof LargePlayerBullet) && e.collide(b)) {
                     e.hit();
                     b.setDead(true);
@@ -38,11 +36,20 @@ public class CollisionSystem {
         }
 
         for (Bullet b : store.bulletSystem.getBullets()) {
-            if (b instanceof BasicBullet) {
-                Vector2 bulletC = getCenter(b.getSprite());
+            Vector2 bulletC = getCenter(b.getSprite());
+            BulletType type = b.getType();
 
-                if (playerC.dst(bulletC) < 10) {
-                    return player.die();
+            if (type == BulletType.BASIC || type == BulletType.MISSILE) {
+                if (playerC.dst(bulletC) < 12) {
+                    if (!player.die() ) {
+                        return false;
+                    }
+                }
+            } else if (type == BulletType.ANGLED) {
+                if (playerC.dst(bulletC) < 8) {
+                    if (!player.die()) {
+                        return false;
+                    }
                 }
             }
         }

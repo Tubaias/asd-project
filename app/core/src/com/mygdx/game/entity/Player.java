@@ -43,7 +43,9 @@ public class Player extends Entity {
     }
 
     public boolean die() {
-        if (invulnerabilityTimer > 0) return true;
+        if (invulnerabilityTimer > 0) {
+            return true;
+        }
 
         lives--;
 
