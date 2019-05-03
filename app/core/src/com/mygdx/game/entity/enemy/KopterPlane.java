@@ -116,8 +116,8 @@ public class KopterPlane extends Enemy {
 
     @Override
     public void hit() {
-        this.isHit = true;
-        this.hitpoints -= 1;
+        isHit = true;
+        hitpoints -= 1;
 
         if (!dead && hitpoints <= 0) {
             die();
@@ -126,7 +126,7 @@ public class KopterPlane extends Enemy {
 
     private void die() {
         dead = true;
-        this.hitbox.setPosition(-1000, -1000);
+        hitbox.setPosition(-1000, -1000);
         animation = new Animator(new Texture("images/effects/explosion256.png"), 11);
         store.scoring.increase(10000);
         store.screenShake.startShake(8, 0.3f);
@@ -136,8 +136,8 @@ public class KopterPlane extends Enemy {
     public void disappear() {
         dead = true;
         deadFrames = 11;
-        this.position = new Vector2(-1000,-1000);
-        this.hitbox.setPosition(-1000, -1000);
+        position = new Vector2(-1000,-1000);
+        hitbox.setPosition(-1000, -1000);
     }
 
     @Override

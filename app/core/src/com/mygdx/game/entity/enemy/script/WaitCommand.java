@@ -32,5 +32,4 @@ public class WaitCommand implements ActionCommand {
     public ActionCommand cpy() {
         return new WaitCommand(targetTime);
     }
-
 }
