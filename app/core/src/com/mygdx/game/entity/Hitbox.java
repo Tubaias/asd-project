@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Hitbox {
     private Vector2 position;
     private Vector2 size;
+    private boolean hit = false;
 
     public Hitbox(float centerX, float centerY, float width, float height) {
         this.position = new Vector2(centerX - width / 2, centerY - height / 2);
@@ -23,8 +24,12 @@ public class Hitbox {
     }
 
     public boolean collide(Vector2 point) {
-        return point.x < this.position.x + this.size.x && point.x > this.position.x &&
-               point.y < this.position.y + this.size.y && point.y > this.position.y;
+        if (point.x < this.position.x + this.size.x && point.x > this.position.x &&
+               point.y < this.position.y + this.size.y && point.y > this.position.y) {
+                   hit = true;
+                   return true;
+               }
+        return false;
     }
 
     public Vector2 getPosition() {
@@ -42,7 +47,12 @@ public class Hitbox {
 
     public void drawHitbox(ShapeRenderer shape) {
         shape.begin(ShapeType.Line);
-		shape.setColor(Color.RED);
+		if (hit) {
+            shape.setColor(Color.GREEN);
+            hit = false;
+        } else {
+            shape.setColor(Color.RED);
+        }
 		shape.rect(position.x, position.y, size.x, size.y);
 		shape.end();
     }

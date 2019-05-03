@@ -20,7 +20,7 @@ public abstract class Enemy extends Entity {
 
     public boolean collide(Entity other) {
         Vector2 otherPos = other.getPosition();
-        Vector2 adjustedPosition = new Vector2(otherPos.x + other.getSprite().getWidth() / 2, otherPos.y + other.getSprite().getHeight());
+        Vector2 adjustedPosition = new Vector2(otherPos.x + other.getSprite().getWidth() / 2, otherPos.y + other.getSprite().getHeight() / 2);
         return this.hitbox.collide(adjustedPosition);
     }
 }

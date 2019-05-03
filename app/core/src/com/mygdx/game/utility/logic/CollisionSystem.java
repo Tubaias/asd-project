@@ -24,7 +24,7 @@ public class CollisionSystem {
         for (Enemy e : store.enemies) {
             Vector2 enemyC = getCenter(e.getSprite());
 
-            if (enemyC.dst(playerC) < 20) {
+            if (e.collide(player)) {
                 System.out.println("OOF");
             }
 
