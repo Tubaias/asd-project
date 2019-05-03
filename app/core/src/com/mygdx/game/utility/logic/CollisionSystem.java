@@ -30,7 +30,7 @@ public class CollisionSystem {
 
             for (Bullet b : store.bulletSystem.getBullets()) {
                 //Vector2 bulletC = getCenter(b.getSprite());
-                if (e.collide(b) && (b instanceof PlayerBullet || b instanceof LargePlayerBullet)) {
+                if ((b instanceof PlayerBullet || b instanceof LargePlayerBullet) && e.collide(b)) {
                     e.hit();
                     b.setDead(true);
                 }
