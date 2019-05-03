@@ -23,6 +23,8 @@ public class ShootterTootter extends Enemy {
     private EntityStore store;
     private boolean dead = false;
 
+    private int deadFrames;
+
     public ShootterTootter(float x, float y, Texture texture, EntityStore store, ActionScript script) {
         this.store = store;
         this.position = new Vector2(x, y);
@@ -38,6 +40,12 @@ public class ShootterTootter extends Enemy {
     @Override
     public void step() {
         if (dead) {
+            if (deadFrames < 11) {
+                deadFrames++;
+            } else {
+                this.position = new Vector2(-1000,-1000);
+            }
+
             return;
         }
 
@@ -53,9 +61,9 @@ public class ShootterTootter extends Enemy {
 
         this.isHit = false;
 
-        while (shootAccumulator > 0.7) {
+        while (shootAccumulator > 0.5) {
             shoot();
-            shootAccumulator -= 0.7;
+            shootAccumulator -= 0.5;
         }
     }
 
@@ -70,19 +78,16 @@ public class ShootterTootter extends Enemy {
         this.isHit = true;
         this.hitpoints -= 1;
 
-        if (hitpoints <= 0) {
+        if (!dead && hitpoints <= 0) {
             die();
         }
     }
 
     private void die() {
-        if (!dead) {
-            store.scoring.increase(2000);
-        }
-
         dead = true;
-        position = new Vector2(-1000,-1000);
         hitbox.setPosition(-1000, -1000);
+        animation = new Animator(new Texture("images/effects/explosion128.png"), 11);
+        store.scoring.increase(2000);
     }
 
     @Override

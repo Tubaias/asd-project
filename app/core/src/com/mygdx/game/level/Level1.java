@@ -89,18 +89,16 @@ public class Level1 implements Level {
         events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 2.0f, 100, 800, store, factory, script1.cpy()));
         events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 2.2f, 0, 800, store, factory, script1.cpy()));
 
-        events.add(new EnemySpawnEvent(EnemyType.SHOOTTER, 4f, 700, 600, store, factory, script2.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.SHOOTTER, 4.5f, 700, 600, store, factory, script2.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.SHOOTTER, 5f, 700, 600, store, factory, script2.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.SHOOTTER, 5.5f, 700, 600, store, factory, script2.cpy()));
-        events.add(new EnemySpawnEvent(EnemyType.SHOOTTER, 6f, 700, 600, store, factory, script2.cpy()));
+        spawnShootterWave(3f, 10, 600, "left");
 
-        events.add(new EnemySpawnEvent(EnemyType.KOPTER, 10f, 200, 900, store, factory, script3.cpy()));
+        spawnShootterWave(7f, 10, 600, "right");
 
-        spawnBasicMine(15f, 75);
-        spawnBasicMine(15f, 215);
-        spawnBasicMine(15f, 385);
-        spawnBasicMine(15f, 525);
+        events.add(new EnemySpawnEvent(EnemyType.KOPTER, 9f, 200, 900, store, factory, script3.cpy()));
+
+        spawnBasicMine(12f, 75);
+        spawnBasicMine(12f, 215);
+        spawnBasicMine(12f, 385);
+        spawnBasicMine(12f, 525);
     }
 
     private void spawnBasicMine(float time, float x) {
@@ -109,5 +107,39 @@ public class Level1 implements Level {
         mineScript.addCommand(new DisappearCommand());
 
         events.add(new EnemySpawnEvent(EnemyType.MINE, time, x - 64, 800, store, factory, mineScript));
+    }
+
+    private void spawnShootterWave(float time, int amount, float y, String direction) {
+        boolean upDown = true;
+        float spawnX;
+        float destX;
+
+        if (direction == "left") {
+            destX = -200;
+            spawnX = 700;
+        } else {
+            destX = 700;
+            spawnX = -200;
+        }
+
+        ActionScript scriptUp = new ActionScript();
+        scriptUp.addCommand(new MoveCommand(destX, y + 32, 5));
+        scriptUp.addCommand(new DisappearCommand());
+
+        ActionScript scriptDown = new ActionScript();
+        scriptDown.addCommand(new MoveCommand(destX, y - 32, 5));
+        scriptDown.addCommand(new DisappearCommand());
+
+        for (int i = 0; i < amount; i++) {
+            float spawnTime = (float) (time + 0.2 * i);
+
+            if (upDown) {
+                events.add(new EnemySpawnEvent(EnemyType.SHOOTTER, spawnTime, spawnX, y + 32, store, factory, scriptUp.cpy()));
+                upDown = false;
+            } else {
+                events.add(new EnemySpawnEvent(EnemyType.SHOOTTER, spawnTime, spawnX, y - 32, store, factory, scriptDown.cpy()));
+                upDown = true;
+            }
+        }
     }
 }
