@@ -1,25 +1,22 @@
 package com.mygdx.game.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.mygdx.game.Config;
+import com.mygdx.game.utility.Inputs;
 
 public class Menu implements Screen {
     Stage stage;
@@ -34,8 +31,10 @@ public class Menu implements Screen {
 
     TextButtonStyle style;
 
+    Inputs inputs;
+
     public Menu() {
-        
+        inputs = new Inputs(new Config());
     }
 
     public void setupMenu(TextButton[] elements) {
@@ -83,7 +82,6 @@ public class Menu implements Screen {
             mainTable.row().pad(10, 0, 10, 0);
             i++;
         }
-
         
         stage.addActor(mainTable);
     }
@@ -94,7 +92,7 @@ public class Menu implements Screen {
 
     @Override
     public void show() {
-    
+        
     }
 
     @Override
@@ -106,18 +104,35 @@ public class Menu implements Screen {
         batch.end();
         stage.act();
         stage.draw();
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+        if (Gdx.input.isKeyJustPressed(inputs.getKey("down"))) {
             pointer++;
             if (pointer >= elements.length) {
                 pointer = 0;
+            };    
+        }
+
+        if (Gdx.input.isKeyJustPressed(inputs.getKey("up"))) {
+            pointer--;
+            if (pointer < 0) {
+                pointer = elements.length - 1;
             };
+        }
 
-            System.out.println(pointer);
-
+        if (Gdx.input.isKeyJustPressed(inputs.getKey("shoot"))) {
             TextButton t = elements[pointer];
+
+            InputEvent event1 = new InputEvent();
+            event1.setType(InputEvent.Type.touchDown);
+            t.fire(event1);
+
+            InputEvent event2 = new InputEvent();
+            event2.setType(InputEvent.Type.touchUp);
+            t.fire(event2);
+        }
+
+        TextButton t = elements[pointer];
             marker.x = t.getX()- 50;
             marker.y = t.getY();
-        }
     }
 
 
