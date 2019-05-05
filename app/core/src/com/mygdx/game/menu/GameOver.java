@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.io.FontDisplayer;
 import com.mygdx.game.utility.Inputs;
 import com.mygdx.game.utility.logic.ScoringSystem;
+import com.mygdx.game.AsdGame;
 
 public class GameOver implements Screen {
 

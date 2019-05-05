@@ -56,4 +56,22 @@ public class Config {
             }
         }
     }
+
+    public void updateKeys(String[] keys) {
+        try {
+            FileIO.createFile("config.txt", new String[]{
+                "width: " + confs.getOrDefault("width", 600),
+                "height: " + confs.getOrDefault("height", 800),
+                "up: " + keys[0],
+                "down: " + keys[1],
+                "left: " + keys[2],
+                "right: " + keys[3],
+                "shoot: " + keys[4],
+                "special: " + keys[5],
+                "focus: " + keys[6],
+            });
+        } catch (Exception e) {
+            System.out.println("Config creation failed: " + e.getMessage());
+        }
+    }
 }
