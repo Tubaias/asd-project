@@ -17,7 +17,7 @@ public class BossTootter extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private ActionScript script;
-    private int hitpoints = 5000;
+    private int hitpoints = 500;
     private float moveAccumulator;
     private float shootAccumulator;
     private EntityStore store;
@@ -29,7 +29,7 @@ public class BossTootter extends Enemy {
         this.store = store;
         this.position = new Vector2(x, y);
 
-        animation = new Animator(new Texture("images/enemies/bossTootter.png"), 3);
+        animation = new Animator(new Texture("images/enemies/bossTootter.png"), 3, 40);
         this.sprite = new Sprite(animation.getFrame());
         this.sprite.setPosition(x, y);
 
@@ -40,7 +40,7 @@ public class BossTootter extends Enemy {
     @Override
     public void step() {
         if (dead) {
-            if (deadFrames < 11) {
+            if (deadFrames < 39) {
                 deadFrames++;
             } else {
                 this.position = new Vector2(-1000,-1000);
@@ -86,8 +86,8 @@ public class BossTootter extends Enemy {
     private void die() {
         dead = true;
         hitbox.setPosition(-1000, -1000);
-        animation = new Animator(new Texture("images/effects/explosion128.png"), 11);
-        store.scoring.increase(2000);
+        animation = new Animator(new Texture("images/effects/explosion512.png"), 39);
+        store.scoring.increase(100_000);
     }
 
     @Override
