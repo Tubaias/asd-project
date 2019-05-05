@@ -16,6 +16,7 @@ public class BulletFactory {
     private EntityStore store;
 
     private Texture basicBulletTexture;
+    private Texture basicBulletTextureBlue;
     private Texture playerBulletTexture;
     private Texture largePlayerBulletTexture;
     private Texture angledBulletTexture;
@@ -25,6 +26,7 @@ public class BulletFactory {
         this.store = store;
 
         basicBulletTexture = new Texture("images/bullets/enemyroundbullet.png");
+        basicBulletTextureBlue = new Texture("images/bullets/enemyroundbullet-blue.png");
         playerBulletTexture = new Texture("images/bullets/playerbullet.png");
         largePlayerBulletTexture = new Texture("images/bullets/largeplayerbullet.png");
         angledBulletTexture = new Texture("images/bullets/enemybullet.png");
