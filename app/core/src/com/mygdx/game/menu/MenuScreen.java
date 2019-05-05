@@ -15,11 +15,11 @@ public class MenuScreen extends Menu {
     public MenuScreen(AsdGame game, Inputs inputs) {
         parent = game;
 
-        TextButtonStyle style = Style.getStyle();
+        
 
-        TextButton button1 = new TextButton("Play", style);
-        TextButton button2 = new TextButton("Options", style);
-        TextButton button3 = new TextButton("Exit", style);
+        TextButton button1 = new TextButton("Play", Style.getStyle());
+        TextButton button2 = new TextButton("Options", Style.getStyle());
+        TextButton button3 = new TextButton("Exit", Style.getStyle());
 
         button1.addListener(new ClickListener() {
             @Override
