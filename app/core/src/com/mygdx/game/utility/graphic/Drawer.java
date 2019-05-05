@@ -120,7 +120,7 @@ public class Drawer implements Disposable {
             }
             if (showHitboxes) {
                 batch.end();
-                e.hitbox.drawHitbox(shapeRenderer);
+                e.hitbox.drawHitbox(shapeRenderer, camera);
                 batch.begin();
             }
         }

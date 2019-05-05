@@ -5,7 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.io.FontDisplayer;
 import com.mygdx.game.utility.Inputs;
 import com.mygdx.game.utility.logic.ScoringSystem;
@@ -23,7 +26,16 @@ public class GameOver implements Screen {
     private Inputs inputs;
     private boolean victory;
 
+    private OrthographicCamera camera;
+    private Viewport viewport;
+
     public GameOver(AsdGame game, ScoringSystem score, Inputs inputs, boolean victory) {
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(600, 800, camera);
+        viewport.apply();
+
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+        camera.update();
         parent = game;
         batch = new SpriteBatch();
         fontDisplay = new FontDisplayer("fonts/vcr_mono.ttf", 63);
@@ -44,6 +56,13 @@ public class GameOver implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
+
+        camera.update();
+        int w = Gdx.graphics.getWidth();
+        int h = Gdx.graphics.getHeight();
+        viewport.update(w, h);
+        batch.setProjectionMatrix(camera.combined);
+
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

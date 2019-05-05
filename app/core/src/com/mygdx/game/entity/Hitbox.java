@@ -1,5 +1,6 @@
 package com.mygdx.game.entity;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -45,7 +46,8 @@ public class Hitbox {
         this.position.y = y - size.y / 2;
     }
 
-    public void drawHitbox(ShapeRenderer shape) {
+    public void drawHitbox(ShapeRenderer shape, Camera camera) {
+        shape.setProjectionMatrix(camera.combined);
         shape.begin(ShapeType.Line);
 		if (hit) {
             shape.setColor(Color.GREEN);

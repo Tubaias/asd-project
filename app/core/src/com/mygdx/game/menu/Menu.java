@@ -46,8 +46,8 @@ public class Menu implements Screen {
 
         marker = new Vector2(100, 100);
         batch = new SpriteBatch();
-        OrthographicCamera camera = new OrthographicCamera();
-        FitViewport viewport = new FitViewport(600, 800, camera);
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(600, 800, camera);
         viewport.apply();
 
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
@@ -110,10 +110,6 @@ public class Menu implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(.1f, .12f, .16f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        // batch.draw(new Texture("images/bullets/enemybullet.png"), marker.x,
-        // marker.y);
-        batch.end();
         stage.act();
         stage.draw();
         if (Gdx.input.isKeyJustPressed(inputs.getKey("down"))) {
@@ -173,7 +169,8 @@ public class Menu implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        camera.update();
+        viewport.update(width, height);
     }
 
     @Override
