@@ -72,18 +72,15 @@ public class Menu implements Screen {
                     marker.y = t.getY();
                     marker.x = t.getX() - 50;
                     setPointer(temp);
-                    t.getStyle().fontColor = Color.ORANGE;
+                    //t.getStyle().fontColor = Color.ORANGE;
                 }
 
                 @Override
                 public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                    t.getStyle().fontColor = Color.WHITE;
+                    //t.getStyle().fontColor = Color.WHITE;
                 }
 
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("Hello");
-                }
+
             });
             mainTable.add(t).fillX().uniformX();
             mainTable.row().pad(10, 0, 10, 0);
@@ -156,6 +153,14 @@ public class Menu implements Screen {
             InputEvent event2 = new InputEvent();
             event2.setType(InputEvent.Type.touchUp);
             t.fire(event2);
+        }
+
+        for (int i = 0; i < elements.length; i++) {
+            if (pointer == i) {
+                elements[i].getStyle().fontColor = Color.ORANGE;
+            } else {
+                elements[i].getStyle().fontColor = Color.WHITE;
+            }
         }
     }
 
