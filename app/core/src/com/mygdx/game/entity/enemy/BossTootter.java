@@ -17,7 +17,7 @@ public class BossTootter extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private ActionScript script;
-    private int maxHP = 15000;
+    private final int maxHP = 12000;
     private int hitpoints;
     private float moveAccumulator;
     private float shootAccumulator;
@@ -42,7 +42,6 @@ public class BossTootter extends Enemy {
 
     private float shootingAngle2;
     private float shootingAngle3;
-    private int burst2;
     private float waveAccumulator;
     private int waveAngle = 180;
     private boolean waveAngleDir;
