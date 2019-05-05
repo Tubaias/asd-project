@@ -64,6 +64,7 @@ public class Config {
                 "width: " + confs.getOrDefault("width", 600),
                 "height: " + confs.getOrDefault("height", 800),
                 "hitboxes: " + confs.getOrDefault("hitboxes", "off"),
+                "lives: " + confs.getOrDefault("lives", 3),
                 "up: " + confs.getOrDefault("up", "W"),
                 "down: " + confs.getOrDefault("down", "S"),
                 "left: " + confs.getOrDefault("left", "A"),
@@ -91,6 +92,11 @@ public class Config {
 
     public void updateHitboxStatus(String status) {
         confs.put("hitboxes", status);
+        update();
+    }
+
+    public void updateLives(Integer lives) {
+        confs.put("lives", lives);
         update();
     }
 }
