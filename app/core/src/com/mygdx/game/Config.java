@@ -43,6 +43,7 @@ public class Config {
                 FileIO.createFile("config.txt", new String[]{
                     "width: 600",
                     "height: 800",
+                    "hitboxes: off",
                     "up: W",
                     "down: S",
                     "left: A",
@@ -57,21 +58,45 @@ public class Config {
         }
     }
 
-    public void updateKeys(String[] keys) {
+    public void update() {
         try {
             FileIO.createFile("config.txt", new String[]{
                 "width: " + confs.getOrDefault("width", 600),
                 "height: " + confs.getOrDefault("height", 800),
-                "up: " + keys[0],
-                "down: " + keys[1],
-                "left: " + keys[2],
-                "right: " + keys[3],
-                "shoot: " + keys[4],
-                "special: " + keys[5],
-                "focus: " + keys[6],
+                "hitboxes: " + confs.getOrDefault("hitboxes", "off"),
+                "lives: " + confs.getOrDefault("lives", 3),
+                "up: " + confs.getOrDefault("up", "W"),
+                "down: " + confs.getOrDefault("down", "S"),
+                "left: " + confs.getOrDefault("left", "A"),
+                "right: " + confs.getOrDefault("right", "D"),
+                "shoot: " + confs.getOrDefault("shoot", "J"),
+                "special: " + confs.getOrDefault("special", "K"),
+                "focus: " + confs.getOrDefault("focus", "L-Ctrl"),
             });
         } catch (Exception e) {
             System.out.println("Config creation failed: " + e.getMessage());
         }
+    }
+
+    public void updateKeys(String[] keys) {
+        confs.put("up", keys[0]);
+        confs.put("down", keys[1]);
+        confs.put("left", keys[2]);
+        confs.put("right", keys[3]);
+        confs.put("shoot", keys[4]);
+        confs.put("special", keys[5]);
+        confs.put("focus", keys[6]);
+        update();
+        
+    }
+
+    public void updateHitboxStatus(String status) {
+        confs.put("hitboxes", status);
+        update();
+    }
+
+    public void updateLives(Integer lives) {
+        confs.put("lives", lives);
+        update();
     }
 }

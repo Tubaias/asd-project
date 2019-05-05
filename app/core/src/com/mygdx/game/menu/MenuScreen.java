@@ -15,11 +15,12 @@ public class MenuScreen extends Menu {
     public MenuScreen(AsdGame game, Inputs inputs) {
         parent = game;
 
-        TextButtonStyle style = Style.getStyle();
+        
 
-        TextButton button1 = new TextButton("Play", style);
-        TextButton button2 = new TextButton("Options", style);
-        TextButton button3 = new TextButton("Exit", style);
+        TextButton button1 = new TextButton("Play", Style.getStyle());
+        TextButton button2 = new TextButton("Options", Style.getStyle());
+        TextButton highscores = new TextButton("HighScores", Style.getStyle());
+        TextButton button3 = new TextButton("Exit", Style.getStyle());
 
         button1.addListener(new ClickListener() {
             @Override
@@ -35,6 +36,14 @@ public class MenuScreen extends Menu {
             }
         });
 
+        highscores.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                parent.changeScreen("highscores");
+            }
+        });
+
+
         button3.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -42,7 +51,7 @@ public class MenuScreen extends Menu {
             }
         });
 
-        this.setupMenu(new TextButton[] { button1, button2, button3 });
+        this.setupMenu(new TextButton[] { button1, button2, highscores, button3 });
     }
 
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Config;
 import com.mygdx.game.entity.Smoke;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.io.FontDisplayer;
@@ -28,6 +29,7 @@ public class Drawer implements Disposable {
     private float deltaAccumulator;
     private float animationAccumulator;
     private int fps;
+    private boolean showHitboxes;
 
     private OrthographicCamera camera;
     private Viewport viewport;
@@ -54,6 +56,7 @@ public class Drawer implements Disposable {
 
         whiteShader = new ShaderProgram(Gdx.files.internal("shaders/whiteshader.vs"), Gdx.files.internal("shaders/whiteshader.fs"));
         batch.setShader(whiteShader);
+        showHitboxes = new Config().getOption("hitboxes", "off").equals("on");
     }
 
     public void drawFrame(float delta) {
@@ -115,10 +118,11 @@ public class Drawer implements Disposable {
             } else {
                 batch.draw(e.getFrame(animationAccumulator), e.getPosition().x, e.getPosition().y);
             }
-
-            batch.end();
-            e.hitbox.drawHitbox(shapeRenderer);
-            batch.begin();
+            if (showHitboxes) {
+                batch.end();
+                e.hitbox.drawHitbox(shapeRenderer);
+                batch.begin();
+            }
         }
     }
 

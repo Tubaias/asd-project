@@ -7,6 +7,7 @@ import com.mygdx.game.menu.MenuScreen;
 import com.mygdx.game.menu.Options;
 import com.mygdx.game.menu.Controls;
 import com.mygdx.game.menu.GameOver;
+import com.mygdx.game.menu.HighscoresScreen;
 import com.mygdx.game.menu.Menu;
 
 
@@ -36,6 +37,9 @@ public class AsdGame extends Game {
                 break;
             case "controls":
                 this.setScreen(new Controls(this, config));
+                break;
+            case "highscores":
+                this.setScreen(new HighscoresScreen(this));
                 break;
         }
     }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Config;
 import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.utility.EntityStore;
 
@@ -16,7 +17,7 @@ public class Player extends Entity {
     private boolean focused;
     private int bulletFlipFlop;
 
-    private int lives = 3;
+    private Integer lives;
     private float invulnerabilityTimer = 0;
 
     public Player() {
@@ -32,6 +33,8 @@ public class Player extends Entity {
 
         this.bulletFlipFlop = 0;
         this.focused = false;
+
+        this.lives = (Integer) new Config().getOption("lives", 3);
     }
 
     public void setStore(EntityStore store) {

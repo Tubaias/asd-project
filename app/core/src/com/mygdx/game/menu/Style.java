@@ -11,19 +11,17 @@ public class Style {
     private static TextButtonStyle style;
 
     public static TextButtonStyle getStyle() {
-        if (style == null) {
-            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/vcr_mono.ttf"));
-            FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/vcr_mono.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 
-            parameter.size = 42; // font size
-            BitmapFont font = generator.generateFont(parameter);
-            generator.dispose();
+        parameter.size = 42; // font size
+        BitmapFont font = generator.generateFont(parameter);
+        generator.dispose();
 
-            style = new TextButtonStyle();
-            style.font = font;
-        }
+        style = new TextButtonStyle();
+        style.font = font;
+
         return style;
     }
-
 
 }
