@@ -34,6 +34,8 @@ public class Menu implements Screen {
 
     Inputs inputs;
 
+    Boolean bottom = false;
+
     public Menu() {
         inputs = new Inputs(new Config());
     }
@@ -58,7 +60,12 @@ public class Menu implements Screen {
         // Set table to fill stage
         mainTable.setFillParent(true);
         // Set alignment of contents in the table.
-        mainTable.center();
+        if (bottom) {
+            mainTable.bottom();
+            mainTable.pad(50);
+        } else {
+            mainTable.center();
+        }
 
         this.elements = elements;
 
