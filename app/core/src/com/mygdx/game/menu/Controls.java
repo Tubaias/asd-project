@@ -21,7 +21,7 @@ public class Controls implements Screen {
     private Config config;
 
     public Controls(AsdGame game, Config config) {
-        this.fontDisplay = new FontDisplayer("fonts/vcr_mono.ttf", 63);
+        this.fontDisplay = new FontDisplayer("fonts/vcr_mono.ttf", 42);
         this.batch = new SpriteBatch();
         keys = new String[]{"Up", "Down", "Left", "Right", "Shoot", "Special", "Focus"};
         assignedKeys = new String[7];
@@ -56,7 +56,7 @@ public class Controls implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         fontDisplay.drawFont("Press a button for:", 300, 500, batch);
-        fontDisplay.drawFont(keys[counter], 300, 500, batch);
+        fontDisplay.drawFont(keys[counter], 300, 400, batch);
         batch.end();
     }
 

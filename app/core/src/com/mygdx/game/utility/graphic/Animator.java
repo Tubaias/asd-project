@@ -15,6 +15,20 @@ public class Animator {
         accumulator = 0;
     }
 
+    public Animator(Texture sheet, int rows, int cols, float framerate) {
+        TextureRegion[] texture = new TextureRegion[rows * cols];
+
+        TextureRegion[][] split = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / cols);
+
+        for (int i = 0; i < cols; i++) {
+            for (int j = 0; j < rows; j++) {
+                texture[(i*rows)+j] = split[i][j];
+            }
+        }
+
+        animation = new Animation<>(1/framerate, texture);
+    }
+
     public Animator(Texture sheet, int amount) {
         this(sheet, amount, 60);
     }
