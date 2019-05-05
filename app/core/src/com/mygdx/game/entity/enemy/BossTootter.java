@@ -17,12 +17,16 @@ public class BossTootter extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private ActionScript script;
-    private int hitpoints = 500;
+    private int maxHP = 15000;
+    private int hitpoints;
     private float moveAccumulator;
     private float shootAccumulator;
     private float phaseAccumulator;
     private EntityStore store;
     private boolean dead = false;
+
+    private float centerX;
+    private float centerY;
 
     private Vector2 leftWing;
     private Vector2 rightWing;
@@ -33,11 +37,22 @@ public class BossTootter extends Enemy {
     private int burst;
     private float interval;
 
+    private int phase;
+    private float phaseChangePause;
+
+    private float shootingAngle2;
+    private float shootingAngle3;
+    private int burst2;
+    private float waveAccumulator;
+    private int waveAngle = 180;
+    private boolean waveAngleDir;
+
     private int deadFrames;
 
     public BossTootter(float x, float y, EntityStore store, ActionScript script) {
         this.store = store;
         this.position = new Vector2(x, y);
+        this.hitpoints = this.maxHP;
 
         animation = new Animator(new Texture("images/enemies/bossTootter.png"), 3, 40);
         this.sprite = new Sprite(animation.getFrame());
@@ -50,6 +65,8 @@ public class BossTootter extends Enemy {
         shootingPhase = 1;
 
         setWingPosition();
+        centerX = position.x + this.sprite.getWidth() / 2;
+        centerY =  position.y + this.sprite.getHeight() / 2;
     }
 
     @Override
@@ -69,7 +86,10 @@ public class BossTootter extends Enemy {
         interval += Gdx.graphics.getDeltaTime();
         phaseAccumulator += Gdx.graphics.getDeltaTime();
 
-        hitbox.setPosition(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2);
+        centerX = position.x + this.sprite.getWidth() / 2;
+        centerY =  position.y + this.sprite.getHeight() / 2;
+
+        hitbox.setPosition(centerX, centerY);
         setWingPosition();
 
         while (moveAccumulator > 0.0167) {
@@ -77,33 +97,24 @@ public class BossTootter extends Enemy {
             moveAccumulator -= 0.0167;
         }
 
-        this.isHit = false;
-        shoot();
+        isHit = false;
 
-        if (shootingPhase == 0) {
-            if (phaseAccumulator > 1) {
-                phaseAccumulator -= 1;
-                shootingPhase = 2;
+        if (hitpoints > maxHP / 3 * 2) {
+            shoot();
+            cycleShootingPhase();
+        } else if (hitpoints > 750) {
+            if (phase == 0) {
+                phaseChangePause += Gdx.graphics.getDeltaTime();
+
+                if (phaseChangePause > 1) {
+                    phase = 1;
+                    shootAccumulator = 0;
+                }
+            } else {
+                shoot2();
             }
-        } else if (shootingPhase == 2) {
-            if (phaseAccumulator > 1) {
-                phaseAccumulator -= 1;
-                interval = 0;
-                shootAccumulator = 2;
-                shootingPhase = 1;
-            } 
-        } else if (shootingPhase == 1) {
-            if (phaseAccumulator > 1) {
-                phaseAccumulator -= 1;
-                shootingPhase = 3;
-            } 
-        } else if (shootingPhase == 3) {
-            if (phaseAccumulator > 1) {
-                phaseAccumulator -= 1;
-                interval = 0;
-                shootAccumulator = 0;
-                shootingPhase = 0;
-            } 
+        } else {
+            shoot3();
         }
         
     }
@@ -131,11 +142,106 @@ public class BossTootter extends Enemy {
         }
     }
 
+    private void shoot2() {
+        waveAccumulator += Gdx.graphics.getDeltaTime();
+
+        while (shootAccumulator > 0.03) {
+            doubleLineSpirals();
+            shootAccumulator -= 0.03;
+        }
+
+        while (waveAccumulator > 0.1) {
+            waveCheck();
+            waveAccumulator -= 0.1;
+        }
+    }
+
+    private void shoot3() {
+        while (shootAccumulator > 0.002) {
+            doubleSpirals();
+            shootAccumulator -= 0.002;
+        }
+    }
+
+    private void cycleShootingPhase() {
+        if (shootingPhase == 0) {
+            if (phaseAccumulator > 1) {
+                phaseAccumulator -= 1;
+                shootingPhase = 2;
+            }
+        } else if (shootingPhase == 2) {
+            if (phaseAccumulator > 1) {
+                phaseAccumulator -= 1;
+                interval = 0;
+                shootAccumulator = 2;
+                shootingPhase = 1;
+            } 
+        } else if (shootingPhase == 1) {
+            if (phaseAccumulator > 1) {
+                phaseAccumulator -= 1;
+                shootingPhase = 3;
+            } 
+        } else if (shootingPhase == 3) {
+            if (phaseAccumulator > 1) {
+                phaseAccumulator -= 1;
+                interval = 0;
+                shootAccumulator = 0;
+                shootingPhase = 0;
+            } 
+        }
+    }
+
     private void spirals() {
-        store.bulletSystem.newBullet(BulletType.BASIC, position.x + this.sprite.getWidth() / 2, position.y + this.sprite.getHeight() / 2, shootingAngle);
-        store.bulletSystem.newBullet(BulletType.BASIC, position.x + this.sprite.getWidth() / 2, position.y + this.sprite.getHeight() / 2, shootingAngle + 180);
+        store.bulletSystem.newBullet(BulletType.BASIC, centerX, centerY, shootingAngle);
+        store.bulletSystem.newBullet(BulletType.BASIC, centerX, centerY, shootingAngle + 180);
 
         shootingAngle += 8.7;
+    }
+
+    private void doubleSpirals() {
+        store.bulletSystem.newBullet(BulletType.BASIC, leftWing.x, leftWing.y, shootingAngle);
+        store.bulletSystem.newBullet(BulletType.BASIC, leftWing.x, leftWing.y, shootingAngle + 180);
+
+        store.bulletSystem.newBullet(BulletType.BASIC, rightWing.x, rightWing.y, shootingAngle);
+        store.bulletSystem.newBullet(BulletType.BASIC, rightWing.x, rightWing.y, shootingAngle + 180);
+
+        shootingAngle += 28;
+    }
+
+    private void doubleLineSpirals() {
+        if (burst >= 2) {
+            burst = 0;
+            shootingAngle2 += 28;
+            shootingAngle3 += 28;
+        } else {
+            burst++;
+        }
+
+        store.bulletSystem.newBullet(BulletType.BASIC, leftWing.x, leftWing.y, shootingAngle2);
+        store.bulletSystem.newBullet(BulletType.BASIC, leftWing.x, leftWing.y, shootingAngle2 + 180);
+
+        store.bulletSystem.newBullet(BulletType.BASIC, rightWing.x, rightWing.y, shootingAngle3);
+        store.bulletSystem.newBullet(BulletType.BASIC, rightWing.x, rightWing.y, shootingAngle3 + 180);
+    }
+
+    private void waveCheck() {
+        store.bulletSystem.newBullet(BulletType.ANGLED, centerX, centerY - 8, waveAngle - 30);
+        store.bulletSystem.newBullet(BulletType.ANGLED, centerX, centerY - 8, waveAngle);
+        store.bulletSystem.newBullet(BulletType.ANGLED, centerX, centerY - 8, waveAngle + 30);
+
+        if (waveAngleDir) {
+            if (waveAngle >= 220) {
+                waveAngleDir = false;
+            } else {
+                waveAngle += 12;
+            }
+        } else {
+            if (waveAngle <= 140) {
+                waveAngleDir = true;
+            } else {
+                waveAngle -= 12;
+            }
+        }
     }
 
     private void burst() {
@@ -146,14 +252,14 @@ public class BossTootter extends Enemy {
         int angleL = (int) playerPos.cpy().sub(leftWing).angle(new Vector2(0, 1));
         int angleR = (int) playerPos.cpy().sub(rightWing).angle(new Vector2(0, 1));
         
-        store.bulletSystem.newBullet(BulletType.ANGLED, leftWing.x, leftWing.y, angleL);
-        store.bulletSystem.newBullet(BulletType.ANGLED, rightWing.x, rightWing.y, angleR);
+        store.bulletSystem.newBullet(BulletType.MISSILE, leftWing.x, leftWing.y, angleL);
+        store.bulletSystem.newBullet(BulletType.MISSILE, rightWing.x, rightWing.y, angleR);
 
     }
 
     private void setWingPosition() {
-        leftWing = new Vector2(position.x + 100, position.y + sprite.getHeight() / 2);
-        rightWing = new Vector2(position.x + sprite.getWidth() - 100, position.y + sprite.getHeight() / 2);
+        leftWing = new Vector2(position.x + 124, centerY - 32);
+        rightWing = new Vector2(position.x + sprite.getWidth() - 124, centerY - 32);
     }
 
     @Override
@@ -170,7 +276,9 @@ public class BossTootter extends Enemy {
         dead = true;
         hitbox.setPosition(-1000, -1000);
         animation = new Animator(new Texture("images/effects/explosion512alt.png"), 6, 7, 60);
+        store.screenShake.startShake(70, 1);
         store.scoring.increase(100_000);
+        store.bulletSystem.clearEnemyBullets();
     }
 
     @Override

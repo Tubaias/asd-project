@@ -108,8 +108,6 @@ public class BulletSystem {
         System.out.println("bullets list size: " + bullets.size());
         System.out.println("plaýer pool zise: " + playerBulletPool.size());
         System.out.println("L pool zise: " + largePlayerBulletPool.size());
-
-
     }
 
     public void draw(SpriteBatch batch) {
@@ -121,6 +119,7 @@ public class BulletSystem {
     private void cleanup() {
         ArrayList<Bullet> alive = new ArrayList<>();
         ArrayList<Bullet> dead = new ArrayList<>();
+
         for (Bullet b : bullets) {
             if (inPlayField(b) && !b.isDead()) {
                 alive.add(b);
@@ -139,5 +138,24 @@ public class BulletSystem {
     private boolean inPlayField(Bullet b) {
         Vector2 position = b.getPosition();
         return position.x < WIDTH+64 && position.x > -64 && position.y < HEIGHT+64 && position.y > -64;
+    }
+
+    public void clearEnemyBullets() {
+        ArrayList<Bullet> alive = new ArrayList<>();
+        ArrayList<Bullet> dead = new ArrayList<>();
+
+        for (Bullet b : bullets) {
+            if (b.getType() == BulletType.BASIC || b.getType() == BulletType.ANGLED || b.getType() == BulletType.MISSILE) {
+                dead.add(b);
+            } else {
+                alive.add(b);
+            }
+        }
+
+        bullets = alive;
+
+        for (Bullet d : dead) {
+            pools.get(d.getType()).put(d);
+        }
     }
 }
