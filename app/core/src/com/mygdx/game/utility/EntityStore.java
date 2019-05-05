@@ -3,6 +3,7 @@ package com.mygdx.game.utility;
 
 import java.util.ArrayList;
 
+import com.mygdx.game.AsdGame;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.level.Level;
@@ -19,8 +20,9 @@ public class EntityStore {
     public ScoringSystem scoring;
     public ScreenShake screenShake;
     public SmokeMachine smokes;
+    public AsdGame game;
 
-    public EntityStore(Player player, BulletSystem bulletSystem, Level level, ScoringSystem scoring, ScreenShake screenShake) {
+    public EntityStore(Player player, BulletSystem bulletSystem, Level level, ScoringSystem scoring, ScreenShake screenShake, AsdGame game) {
         this.player = player;
         this.bulletSystem = bulletSystem;
         this.enemies = new ArrayList<>();
@@ -28,5 +30,6 @@ public class EntityStore {
         this.scoring = scoring;
         this.screenShake = screenShake;
         this.smokes = new SmokeMachine();
+        this.game = game;
     }
 }

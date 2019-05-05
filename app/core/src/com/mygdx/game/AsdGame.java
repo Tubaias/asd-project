@@ -30,7 +30,10 @@ public class AsdGame extends Game {
                 this.setScreen(new MenuScreen(this, inputs));
                 break;
             case "over":
-                this.setScreen(new GameOver(this, scoring, inputs));
+                this.setScreen(new GameOver(this, scoring, inputs, false));
+                break;
+            case "victory":
+                this.setScreen(new GameOver(this, scoring, inputs, true));
                 break;
             case "options":
                 this.setScreen(new Options(this, inputs));

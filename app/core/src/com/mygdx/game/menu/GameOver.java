@@ -21,15 +21,18 @@ public class GameOver implements Screen {
     private ScoringSystem score;
     private long timer;
     private Inputs inputs;
+    private boolean victory;
 
-    public GameOver(AsdGame game, ScoringSystem score, Inputs inputs) {
+    public GameOver(AsdGame game, ScoringSystem score, Inputs inputs, boolean victory) {
         parent = game;
         batch = new SpriteBatch();
         fontDisplay = new FontDisplayer("fonts/vcr_mono.ttf", 63);
         this.score = score;
         timer = System.currentTimeMillis();
         this.inputs = inputs;
+        this.victory = victory;
     }
+    
 
     @Override
     public void show() {
@@ -45,8 +48,11 @@ public class GameOver implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-
-        fontDisplay.drawFont("Game Over", 300, 700, batch);
+        if (victory) {
+            fontDisplay.drawFont("YOU WON!", 300, 700, batch);
+        } else {
+            fontDisplay.drawFont("Game Over", 300, 700, batch);
+        }
         fontDisplay.drawFont("Score: " + score.getScore(), 300, 500, batch);
         fontDisplay.drawFont("Press Shoot\nto continue", 300, 100, batch);
 

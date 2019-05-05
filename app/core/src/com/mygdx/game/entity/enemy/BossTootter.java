@@ -46,6 +46,8 @@ public class BossTootter extends Enemy {
     private int waveAngle = 180;
     private boolean waveAngleDir;
 
+    private float gameOverTimer = 0;
+
     private int deadFrames;
 
     public BossTootter(float x, float y, EntityStore store, ActionScript script) {
@@ -65,7 +67,7 @@ public class BossTootter extends Enemy {
 
         setWingPosition();
         centerX = position.x + this.sprite.getWidth() / 2;
-        centerY =  position.y + this.sprite.getHeight() / 2;
+        centerY = position.y + this.sprite.getHeight() / 2;
     }
 
     @Override
@@ -74,7 +76,13 @@ public class BossTootter extends Enemy {
             if (deadFrames < 36) {
                 deadFrames++;
             } else {
-                this.position = new Vector2(-1000,-1000);
+                this.position = new Vector2(-1000, -1000);
+            }
+
+            gameOverTimer += Gdx.graphics.getDeltaTime();
+
+            if (gameOverTimer > 5) {
+                store.game.changeScreen("victory", store.scoring);
             }
 
             return;
@@ -86,7 +94,7 @@ public class BossTootter extends Enemy {
         phaseAccumulator += Gdx.graphics.getDeltaTime();
 
         centerX = position.x + this.sprite.getWidth() / 2;
-        centerY =  position.y + this.sprite.getHeight() / 2;
+        centerY = position.y + this.sprite.getHeight() / 2;
 
         hitbox.setPosition(centerX, centerY);
         setWingPosition();
@@ -115,7 +123,7 @@ public class BossTootter extends Enemy {
         } else {
             shoot3();
         }
-        
+
     }
 
     private void shoot() {
@@ -174,19 +182,19 @@ public class BossTootter extends Enemy {
                 interval = 0;
                 shootAccumulator = 2;
                 shootingPhase = 1;
-            } 
+            }
         } else if (shootingPhase == 1) {
             if (phaseAccumulator > 1) {
                 phaseAccumulator -= 1;
                 shootingPhase = 3;
-            } 
+            }
         } else if (shootingPhase == 3) {
             if (phaseAccumulator > 1) {
                 phaseAccumulator -= 1;
                 interval = 0;
                 shootAccumulator = 0;
                 shootingPhase = 0;
-            } 
+            }
         }
     }
 
@@ -247,10 +255,10 @@ public class BossTootter extends Enemy {
         Vector2 playerPos = store.player.getPosition().cpy();
         playerPos.x = playerPos.x + store.player.getSprite().getWidth() / 2;
         playerPos.y = playerPos.y + store.player.getSprite().getHeight() / 2;
-        
+
         int angleL = (int) playerPos.cpy().sub(leftWing).angle(new Vector2(0, 1));
         int angleR = (int) playerPos.cpy().sub(rightWing).angle(new Vector2(0, 1));
-        
+
         store.bulletSystem.newBullet(BulletType.MISSILE, leftWing.x, leftWing.y, angleL);
         store.bulletSystem.newBullet(BulletType.MISSILE, rightWing.x, rightWing.y, angleR);
 
@@ -283,7 +291,7 @@ public class BossTootter extends Enemy {
     @Override
     public void disappear() {
         dead = true;
-        position = new Vector2(-1000,-1000);
+        position = new Vector2(-1000, -1000);
         hitbox.setPosition(-1000, -1000);
     }
 

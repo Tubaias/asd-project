@@ -47,7 +47,7 @@ public class GameScreen implements Screen {
         scoring = new ScoringSystem();
         ScreenShake screenShake = new ScreenShake();
 
-        store = new EntityStore(player, bulletSystem, level, scoring, screenShake);
+        store = new EntityStore(player, bulletSystem, level, scoring, screenShake, parent);
         collisionSystem = new CollisionSystem(store);
         inputHandler = new InputHandler(player);
         drawer = new Drawer(store, screenShake);
