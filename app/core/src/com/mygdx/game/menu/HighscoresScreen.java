@@ -1,5 +1,7 @@
 package com.mygdx.game.menu;
 
+import java.util.Arrays;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -58,7 +60,11 @@ public class HighscoresScreen extends Menu {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        fontDisplay.drawMultiline(Highscores.getScores(),300, 700, batch);
+
+        String[] highscores = Highscores.getScores();
+
+        int max = highscores.length > 15 ? 15 : highscores.length;
+        fontDisplay.drawMultiline(Arrays.copyOfRange(highscores, 0, max),300, 700, batch);
         batch.end();
     }
 

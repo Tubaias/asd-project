@@ -50,6 +50,7 @@ public class GameScreen implements Screen {
         store = new EntityStore(player, bulletSystem, level, scoring, screenShake, parent);
         collisionSystem = new CollisionSystem(store);
         inputHandler = new InputHandler(player);
+        inputHandler.setStore(store);
         drawer = new Drawer(store, screenShake);
 
         player.setStore(store);

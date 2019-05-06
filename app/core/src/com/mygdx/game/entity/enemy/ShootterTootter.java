@@ -68,6 +68,9 @@ public class ShootterTootter extends Enemy {
     }
 
     private void shoot() {
+        if (store.player.getPosition().y > position.y) {
+            return;
+        }
         int angle = (int) store.player.getPosition().cpy().sub(position).angle(new Vector2(0, 1));
         store.bulletSystem.newBullet(BulletType.BASIC, position.x + 64, position.y + 64 - 16, angle);
 

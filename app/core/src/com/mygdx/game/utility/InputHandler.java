@@ -10,15 +10,20 @@ import com.mygdx.game.entity.Player;
 public class InputHandler {
     private Player player;
     private Inputs inputs;
+    private EntityStore store;
 
     public InputHandler(Player player) {
         this.player = player;
         this.inputs = new Inputs(new Config());
     }
 
+    public void setStore(EntityStore store) {
+        this.store = store;
+    }
+
     public void handleSystemKeys() {
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
+            store.game.changeScreen("main");
         }
     }
 

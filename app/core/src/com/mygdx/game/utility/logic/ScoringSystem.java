@@ -36,8 +36,6 @@ public class ScoringSystem {
 
         try {
             FileIO.createFile("highscores.txt", newScoreStrings);
-            System.out.println("WRITTEN");
-
         } catch (Exception e) {
             System.out.println("Error writing highscores");
             return;
