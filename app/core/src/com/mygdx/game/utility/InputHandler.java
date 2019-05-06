@@ -12,13 +12,10 @@ public class InputHandler {
     private Inputs inputs;
     private EntityStore store;
 
-    public InputHandler(Player player) {
+    public InputHandler(Player player, EntityStore store) {
         this.player = player;
-        this.inputs = new Inputs(new Config());
-    }
-
-    public void setStore(EntityStore store) {
         this.store = store;
+        this.inputs = new Inputs(new Config());
     }
 
     public void handleSystemKeys() {

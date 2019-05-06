@@ -11,7 +11,6 @@ public class PlayerBullet extends Bullet {
         this.angle = angle;
         this.initialSpeed = 50;
         this.speed = 50;
-        this.acceleration = 0;
         this.texture = texture;
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
@@ -21,8 +20,6 @@ public class PlayerBullet extends Bullet {
 
     @Override
     public void move() {
-        speed += acceleration;
-
         position.x += speed * Math.sin(Math.toRadians(angle));
         position.y += speed * Math.cos(Math.toRadians(angle));
 

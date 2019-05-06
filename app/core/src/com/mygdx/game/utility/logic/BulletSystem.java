@@ -27,6 +27,7 @@ public class BulletSystem {
     private BulletPool missilePool;
     private BulletPool playerBulletPool;
     private BulletPool largePlayerBulletPool;
+    private BulletPool specialBulletPool;
 
     private Texture playerBulletTexture;
     private Texture largePlayerBulletTexture;
@@ -50,6 +51,7 @@ public class BulletSystem {
         basicBulletPool = new BulletPool(BulletType.BASIC, factory);
         angledBulletPool = new BulletPool(BulletType.ANGLED, factory);
         missilePool = new BulletPool(BulletType.MISSILE, factory);
+        specialBulletPool = new BulletPool(BulletType.SPECIAL, factory);
 
         pools = new HashMap<>();
         pools.put(BulletType.PLAYER, playerBulletPool);
@@ -58,6 +60,7 @@ public class BulletSystem {
         pools.put(BulletType.ANGLED, angledBulletPool);
         pools.put(BulletType.MISSILE, missilePool);
         pools.put(BulletType.STAR, starBulletPool);
+        pools.put(BulletType.SPECIAL, specialBulletPool);
     }
 
     public void initPool() {
@@ -86,6 +89,9 @@ public class BulletSystem {
                 break;
             case MISSILE:
                 bullets.add(missilePool.newObj(x, y, angle));
+                break;
+            case SPECIAL:
+                bullets.add(specialBulletPool.newObj(x, y, angle));
                 break;
             default:
                 return;

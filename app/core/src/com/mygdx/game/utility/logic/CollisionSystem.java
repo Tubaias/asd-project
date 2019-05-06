@@ -5,8 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.bullet.Bullet;
 import com.mygdx.game.entity.bullet.BulletType;
-import com.mygdx.game.entity.bullet.LargePlayerBullet;
-import com.mygdx.game.entity.bullet.PlayerBullet;
 import com.mygdx.game.entity.enemy.Enemy;
 import com.mygdx.game.utility.EntityStore;
 
@@ -29,9 +27,11 @@ public class CollisionSystem {
             }
 
             for (Bullet b : store.bulletSystem.getBullets()) {
-                if ((b instanceof PlayerBullet || b instanceof LargePlayerBullet) && e.collide(b)) {
-                    e.hit();
+                if ((b.getType() == BulletType.PLAYER || b.getType() == BulletType.PLAYERLARGE) && e.collide(b)) {
+                    e.hit(1);
                     b.setDead(true);
+                } else if (b.getType() == BulletType.SPECIAL && e.collide(b)) {
+                    e.hit(5);
                 }
             }
         }

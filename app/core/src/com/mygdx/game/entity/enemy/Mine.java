@@ -62,9 +62,9 @@ public class Mine extends Enemy {
     }
 
     @Override
-    public void hit() {
+    public void hit(int damage) {
         this.isHit = true;
-        this.hitpoints -= 1;
+        this.hitpoints -= damage;
 
         if (!dead && hitpoints <= 0) {
             die();

@@ -115,9 +115,9 @@ public class KopterPlane extends Enemy {
     }
 
     @Override
-    public void hit() {
+    public void hit(int damage) {
         isHit = true;
-        hitpoints -= 1;
+        hitpoints -= damage;
 
         if (!dead && hitpoints <= 0) {
             die();

@@ -8,8 +8,6 @@ import com.mygdx.game.menu.Options;
 import com.mygdx.game.menu.Controls;
 import com.mygdx.game.menu.GameOver;
 import com.mygdx.game.menu.HighscoresScreen;
-import com.mygdx.game.menu.Menu;
-
 
 public class AsdGame extends Game {
     private GameScreen game;
@@ -64,7 +62,7 @@ public class AsdGame extends Game {
     public void create() {
         config = new Config();
         inputs = new Inputs(config);
-        
+
         this.setScreen(new MenuScreen(this, inputs));
     }
 }

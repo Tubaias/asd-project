@@ -136,11 +136,14 @@ public class Player extends Entity {
     }
 
     public void special() {
-        float playerY = position.y + 80;
+        float spawnX = position.x + 64;
+        float spawnY = position.y + 80;
 
-        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), playerY, 0f);
-        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), playerY, -15);
-        store.bulletSystem.newBullet(BulletType.STAR, position.x + (64 - 8), playerY, 15);
+        // store.bulletSystem.newBullet(BulletType.STAR, spawnX, spawnY, 0f);
+        // store.bulletSystem.newBullet(BulletType.STAR, spawnX, spawnY, -15);
+        // store.bulletSystem.newBullet(BulletType.STAR, spawnX, spawnY, 15);
+
+        store.bulletSystem.newBullet(BulletType.SPECIAL, spawnX, spawnY, 0f);
     }
 
     public int getLives() {

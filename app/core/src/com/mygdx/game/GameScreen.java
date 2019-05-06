@@ -14,20 +14,14 @@ import com.mygdx.game.utility.InputHandler;
 import com.mygdx.game.utility.logic.ScoringSystem;
 
 public class GameScreen implements Screen {
-    float width;
-    float height;
+    private EntityStore store;
+    private Drawer drawer;
+    private InputHandler inputHandler;
+    private BulletSystem bulletSystem;
+    private CollisionSystem collisionSystem;
+    private ScoringSystem scoring;
 
-    EntityStore store;
-    Drawer drawer;
-    InputHandler inputHandler;
-    BulletSystem bulletSystem;
-    CollisionSystem collisionSystem;
-    ScoringSystem scoring;
-
-    Player player;
-
-    float tootterDeltaAccumulator = 0;
-    float planeDeltaAccumulator = 0;
+    private Player player;
 
     private AsdGame parent;
 
@@ -37,20 +31,15 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        width = 600;
-        height = 800;
-
-        Level level = new Level1();
-
         player = new Player();
         bulletSystem = new BulletSystem();
         scoring = new ScoringSystem();
         ScreenShake screenShake = new ScreenShake();
+        Level level = new Level1();
 
         store = new EntityStore(player, bulletSystem, level, scoring, screenShake, parent);
         collisionSystem = new CollisionSystem(store);
-        inputHandler = new InputHandler(player);
-        inputHandler.setStore(store);
+        inputHandler = new InputHandler(player, store);
         drawer = new Drawer(store, screenShake);
 
         player.setStore(store);
@@ -60,14 +49,11 @@ public class GameScreen implements Screen {
 
         bulletSystem.setStore(store);
         bulletSystem.createPools();
-        bulletSystem.initPool();
+        //bulletSystem.initPool();
     }
 
     @Override
     public void render(float delta) {
-        tootterDeltaAccumulator += delta;
-        planeDeltaAccumulator += delta;
-
         inputHandler.handleSystemKeys();
         inputHandler.handlePlayerInputs();
         moveEntities();

@@ -11,7 +11,7 @@ public abstract class Enemy extends Entity {
     public Hitbox hitbox;
 
     public abstract void step();
-    public abstract void hit();
+    public abstract void hit(int damage);
     public abstract void disappear();
     public abstract TextureRegion getFrame(float accumulator);
 

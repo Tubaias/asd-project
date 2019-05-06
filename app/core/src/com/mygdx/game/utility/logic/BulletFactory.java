@@ -9,6 +9,7 @@ import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.entity.bullet.LargePlayerBullet;
 import com.mygdx.game.entity.bullet.Missile;
 import com.mygdx.game.entity.bullet.PlayerBullet;
+import com.mygdx.game.entity.bullet.SpecialBullet;
 import com.mygdx.game.entity.bullet.StarBullet;
 import com.mygdx.game.utility.EntityStore;
 
@@ -21,6 +22,7 @@ public class BulletFactory {
     private Texture largePlayerBulletTexture;
     private Texture angledBulletTexture;
     private Texture missileTexture;
+    private Texture specialBulletTexture;
 
     public BulletFactory(EntityStore store) {
         this.store = store;
@@ -31,6 +33,7 @@ public class BulletFactory {
         largePlayerBulletTexture = new Texture("images/bullets/largeplayerbullet.png");
         angledBulletTexture = new Texture("images/bullets/enemybullet.png");
         missileTexture = new Texture("images/bullets/missile.png");
+        specialBulletTexture = new Texture("images/bullets/star.png");
     }
 
     public Bullet createBullet(BulletType type, float x, float y, float angle) {
@@ -47,6 +50,8 @@ public class BulletFactory {
                 return new AngledBullet(x, y, angle, angledBulletTexture);
             case MISSILE:
                 return new Missile(x, y, angle, missileTexture, store);
+            case SPECIAL:
+                return new SpecialBullet(x, y, angle, specialBulletTexture);
             default:
                 return null;
         }

@@ -2,7 +2,6 @@
 package com.mygdx.game.level;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -109,7 +108,7 @@ public class Level1 implements Level {
         spawnShootterWave(7.3f, 10, 400, "right");
 
         int popcornCycle = 50;
-        
+
         for (float t = 0; t < 3; t += 0.1) {
             popcornCycle += 156;
 

@@ -5,12 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
-public class LargePlayerBullet extends Bullet {
+public class SpecialBullet extends Bullet {
+    private float rotationAngle;
 
-    public LargePlayerBullet(float x, float y, float angle, Texture texture) {
+    public SpecialBullet(float x, float y, float angle, Texture texture) {
         this.angle = angle;
-        this.initialSpeed = 50;
-        this.speed = 50;
+        this.initialSpeed = 1;
+        this.speed = this.initialSpeed;
+        this.acceleration = 0.1;
         this.texture = texture;
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
@@ -20,14 +22,19 @@ public class LargePlayerBullet extends Bullet {
 
     @Override
     public void move() {
+        speed += acceleration;
+
         position.x += speed * Math.sin(Math.toRadians(angle));
         position.y += speed * Math.cos(Math.toRadians(angle));
 
         sprite.setPosition(position.x, position.y);
+        sprite.setRotation(rotationAngle);
+
+        rotationAngle += 5;
     }
 
     @Override
     public BulletType getType() {
-        return BulletType.PLAYERLARGE;
+        return BulletType.SPECIAL;
     }
 }
