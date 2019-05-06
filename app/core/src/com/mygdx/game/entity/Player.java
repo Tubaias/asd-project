@@ -56,7 +56,7 @@ public class Player extends Entity {
             return false;
         }
 
-        invulnerabilityTimer = 1.5f;
+        invulnerabilityTimer = 2.5f;
 
         float x = 600 / 2 - sprite.getWidth() / 2;
         float y = 100;
