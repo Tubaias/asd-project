@@ -16,7 +16,7 @@ public class Highscores {
         }
     }
 
-    private static void createHighScores() {
+    public static void createHighScores() {
         if (!new File("highscores.txt").exists()) {
             try {
                 FileIO.createFile("highscores.txt", new String[]{});

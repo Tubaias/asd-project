@@ -2,6 +2,7 @@ package com.mygdx.game.utility.logic;
 
 import java.util.ArrayList;
 
+import com.mygdx.game.Highscores;
 import com.mygdx.game.io.FileIO;
 
 public class ScoringSystem {
@@ -17,6 +18,7 @@ public class ScoringSystem {
 
     public void save(String player) {
         String[] scores;
+        new Highscores().createHighScores();
         try {
             scores = FileIO.fileToArray("highscores.txt");
         } catch (Exception e) {
