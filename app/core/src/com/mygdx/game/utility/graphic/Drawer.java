@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -30,6 +32,8 @@ public class Drawer implements Disposable {
     private float animationAccumulator;
     private int fps;
     private boolean showHitboxes;
+    private Sprite specialAvailable;
+    private Sprite specialUnavailable;
 
     private OrthographicCamera camera;
     private Viewport viewport;
@@ -46,6 +50,18 @@ public class Drawer implements Disposable {
 
         this.fontDisplayer = new FontDisplayer("fonts/vcr_mono.ttf", 42);
         fontDisplayer.setColor(Color.valueOf("f4b342"));
+
+        this.specialAvailable = new Sprite(new Texture("images/specialSymbol-2.png"));
+        this.specialUnavailable = new Sprite(new Texture("images/specialSymbol-1.png"));
+
+        this.specialAvailable.setScale(1.5f, 1.5f);
+        this.specialUnavailable.setScale(1.5f, 1.5f);
+        
+
+        this.specialAvailable.setPosition(550, 750);
+        this.specialUnavailable.setPosition(550, 750);
+        
+        
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);
@@ -95,6 +111,12 @@ public class Drawer implements Disposable {
 
         fontDisplayer.drawFont(Integer.toString(store.scoring.getScore()), 75, 750, batch);
         fontDisplayer.drawFont(Integer.toString(store.player.getLives()), 75, 50, batch);
+
+        if (store.player.getSpecialTimer() > 0) {
+            specialUnavailable.draw(batch);
+        } else {
+            specialAvailable.draw(batch);
+        }
 
         updateFPS();
         font.draw(batch, "" + fps, 10, 20);

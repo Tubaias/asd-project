@@ -160,4 +160,8 @@ public class Player extends Entity {
     public int getLives() {
         return lives;
     }
+
+    public float getSpecialTimer() {
+        return specialTimer;
+    }
 }
