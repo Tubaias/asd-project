@@ -51,7 +51,7 @@ public class BulletFactory {
             case MISSILE:
                 return new Missile(x, y, angle, missileTexture, store);
             case SPECIAL:
-                return new SpecialBullet(x, y, angle, specialBulletTexture);
+                return new SpecialBullet(x, y, angle, specialBulletTexture, store);
             default:
                 return null;
         }

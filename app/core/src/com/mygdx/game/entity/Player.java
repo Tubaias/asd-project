@@ -18,7 +18,9 @@ public class Player extends Entity {
     private int bulletFlipFlop;
 
     private Integer lives;
-    private float invulnerabilityTimer = 0;
+    private boolean isInvuln;
+    private float invulnerabilityTimer;
+    private float specialTimer;
 
     public Player() {
         this.sprite = new Sprite(new Texture("images/ship.png"));
@@ -35,6 +37,7 @@ public class Player extends Entity {
         this.focused = false;
 
         this.lives = (Integer) new Config().getOption("lives", 3);
+        this.isInvuln = false;
     }
 
     public void setStore(EntityStore store) {
@@ -56,6 +59,7 @@ public class Player extends Entity {
             return false;
         }
 
+        isInvuln = true;
         invulnerabilityTimer = 2.5f;
 
         float x = 600 / 2 - sprite.getWidth() / 2;
@@ -68,16 +72,21 @@ public class Player extends Entity {
     }
 
     public void move() {
-        invulnerabilityTimer -= Gdx.graphics.getDeltaTime();
+        specialTimer -= Gdx.graphics.getDeltaTime();
 
-        if (invulnerabilityTimer > 0) {
-            this.sprite.setColor(1f, 1f, 1f, 0.5f);
-            this.podL.sprite.setColor(1f, 1f, 1f, 0.5f);
-            this.podR.sprite.setColor(1f, 1f, 1f, 0.5f);
-        } else {
-            this.sprite.setColor(1f, 1f, 1f, 1f);
-            this.podL.sprite.setColor(1f, 1f, 1f, 1f);
-            this.podR.sprite.setColor(1f, 1f, 1f, 1f);
+        if (isInvuln) {
+            invulnerabilityTimer -= Gdx.graphics.getDeltaTime();
+
+            if (invulnerabilityTimer > 0) {
+                this.sprite.setColor(1f, 1f, 1f, 0.5f);
+                this.podL.sprite.setColor(1f, 1f, 1f, 0.5f);
+                this.podR.sprite.setColor(1f, 1f, 1f, 0.5f);
+            } else {
+                this.sprite.setColor(1f, 1f, 1f, 1f);
+                this.podL.sprite.setColor(1f, 1f, 1f, 1f);
+                this.podR.sprite.setColor(1f, 1f, 1f, 1f);
+                isInvuln = false;
+            }
         }
 
         sprite.setPosition(position.x, position.y);
@@ -136,12 +145,14 @@ public class Player extends Entity {
     }
 
     public void special() {
+        if (specialTimer > 0) {
+            return;
+        } else {
+            specialTimer = 1;
+        }
+
         float spawnX = position.x + 64;
         float spawnY = position.y + 80;
-
-        // store.bulletSystem.newBullet(BulletType.STAR, spawnX, spawnY, 0f);
-        // store.bulletSystem.newBullet(BulletType.STAR, spawnX, spawnY, -15);
-        // store.bulletSystem.newBullet(BulletType.STAR, spawnX, spawnY, 15);
 
         store.bulletSystem.newBullet(BulletType.SPECIAL, spawnX, spawnY, 0f);
     }

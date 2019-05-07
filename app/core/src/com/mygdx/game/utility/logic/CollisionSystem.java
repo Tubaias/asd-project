@@ -31,7 +31,7 @@ public class CollisionSystem {
                     e.hit(1);
                     b.setDead(true);
                 } else if (b.getType() == BulletType.SPECIAL && e.collide(b)) {
-                    e.hit(5);
+                    e.hit(50);
                 }
             }
         }

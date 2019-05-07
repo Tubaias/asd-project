@@ -99,7 +99,7 @@ public class BulletSystem {
     }
 
     public void step() {
-        for (Bullet b : bullets) {
+        for (Bullet b : new ArrayList<Bullet>(bullets)) {
             b.move();
         }
 

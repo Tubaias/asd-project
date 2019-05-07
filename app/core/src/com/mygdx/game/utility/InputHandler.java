@@ -43,9 +43,6 @@ public class InputHandler {
     private void playerMovement() {
         Vector2 movement = new Vector2(0, 0);
         Vector2 playerPos = player.getPosition();
-        if (playerPos.x > 60) {
-
-        }
 
         if (Gdx.input.isKeyPressed(inputs.getKey("left")) && playerPos.x > -60) {
             movement.add(-1, 0);
