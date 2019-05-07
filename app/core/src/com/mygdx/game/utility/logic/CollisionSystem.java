@@ -30,8 +30,6 @@ public class CollisionSystem {
                 if ((b.getType() == BulletType.PLAYER || b.getType() == BulletType.PLAYERLARGE) && e.collide(b)) {
                     e.hit(1);
                     b.setDead(true);
-                } else if (b.getType() == BulletType.SPECIAL && e.collide(b)) {
-                    e.hit(50);
                 }
             }
         }

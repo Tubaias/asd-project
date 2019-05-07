@@ -148,7 +148,7 @@ public class Player extends Entity {
         if (specialTimer > 0) {
             return;
         } else {
-            specialTimer = 1;
+            specialTimer = 5;
         }
 
         float spawnX = position.x + 64;

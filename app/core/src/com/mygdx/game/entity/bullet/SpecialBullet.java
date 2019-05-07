@@ -20,7 +20,7 @@ public class SpecialBullet extends Bullet {
         this.texture = texture;
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
-        this.sprite.setColor(0.7f, 1f, 0.7f, 0.5f);
+        this.sprite.setColor(1f, 1f, 1f, 0.7f);
         this.position = new Vector2(x - this.sprite.getWidth() / 2, y);
     }
 
