@@ -65,7 +65,7 @@ public class InputHandler {
         if (Gdx.input.isKeyPressed(inputs.getKey("focus"))) {
             movement.scl(3.5f);
         } else {
-            movement.scl(7f);
+            movement.scl(9f);
         }
 
         player.getPosition().add(movement);
