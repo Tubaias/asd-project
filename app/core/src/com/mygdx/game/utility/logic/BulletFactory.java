@@ -33,7 +33,7 @@ public class BulletFactory {
         largePlayerBulletTexture = new Texture("images/bullets/largeplayerbullet.png");
         angledBulletTexture = new Texture("images/bullets/enemybullet.png");
         missileTexture = new Texture("images/bullets/missile.png");
-        specialBulletTexture = new Texture("images/bullets/star.png");
+        specialBulletTexture = new Texture("images/bullets/fidgetSpinner.png");
     }
 
     public Bullet createBullet(BulletType type, float x, float y, float angle) {
