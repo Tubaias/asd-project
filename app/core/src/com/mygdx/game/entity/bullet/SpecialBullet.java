@@ -59,9 +59,6 @@ public class SpecialBullet extends Bullet {
         float spawnX = position.x + sprite.getWidth() / 2;
         float spawnY = position.y + sprite.getHeight() / 2 - 16;
 
-        // store.bulletSystem.newBullet(BulletType.PLAYERLARGE, spawnX, spawnY, rotationAngle);
-        // store.bulletSystem.newBullet(BulletType.PLAYERLARGE, spawnX, spawnY, rotationAngle - 180);
-
         for (int i = 0; i < 8; i++) {
             store.bulletSystem.newBullet(BulletType.PLAYERLARGE, spawnX, spawnY, rotationAngle + i * 45);
             store.bulletSystem.newBullet(BulletType.PLAYERLARGE, spawnX, spawnY, rotationAngle - 180 + i * 45);

@@ -25,11 +25,14 @@ public class Hitbox {
     }
 
     public boolean collide(Vector2 point) {
-        if (point.x < this.position.x + this.size.x && point.x > this.position.x &&
-               point.y < this.position.y + this.size.y && point.y > this.position.y) {
-                   hit = true;
-                   return true;
-               }
+        if (point.x < this.position.x + this.size.x
+            && point.x > this.position.x
+            && point.y < this.position.y + this.size.y
+            && point.y > this.position.y) {
+                hit = true;
+                return true;
+        }
+
         return false;
     }
 
@@ -49,12 +52,14 @@ public class Hitbox {
     public void drawHitbox(ShapeRenderer shape, Camera camera) {
         shape.setProjectionMatrix(camera.combined);
         shape.begin(ShapeType.Line);
+
 		if (hit) {
             shape.setColor(Color.GREEN);
             hit = false;
         } else {
             shape.setColor(Color.RED);
         }
+
 		shape.rect(position.x, position.y, size.x, size.y);
 		shape.end();
     }

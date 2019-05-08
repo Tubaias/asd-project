@@ -25,5 +25,4 @@ public class DisappearCommand implements ActionCommand {
     public ActionCommand cpy() {
         return new DisappearCommand();
     }
-
 }

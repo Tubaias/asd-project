@@ -6,13 +6,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Config;
@@ -20,19 +18,13 @@ import com.mygdx.game.utility.Inputs;
 
 public class Menu implements Screen {
     Stage stage;
-
-    Vector2 marker;
     SpriteBatch batch;
-    int pointer = 0;
     TextButton[] elements;
-
     OrthographicCamera camera;
     FitViewport viewport;
-
-    TextButtonStyle style;
-
     Inputs inputs;
 
+    int pointer = 0;
     Boolean bottom = false;
 
     public Menu() {
@@ -43,7 +35,6 @@ public class Menu implements Screen {
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);
 
-        marker = new Vector2(100, 100);
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);
@@ -54,11 +45,9 @@ public class Menu implements Screen {
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
 
-        // Create Table
         Table mainTable = new Table();
-        // Set table to fill stage
         mainTable.setFillParent(true);
-        // Set alignment of contents in the table.
+
         if (bottom) {
             mainTable.bottom();
             mainTable.pad(50);
@@ -74,18 +63,8 @@ public class Menu implements Screen {
             t.addListener(new ClickListener() {
                 @Override
                 public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    marker.y = t.getY();
-                    marker.x = t.getX() - 50;
                     setPointer(temp);
-                    //t.getStyle().fontColor = Color.ORANGE;
                 }
-
-                @Override
-                public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                    //t.getStyle().fontColor = Color.WHITE;
-                }
-
-
             });
             mainTable.add(t).fillX().uniformX();
             mainTable.row().pad(10, 0, 10, 0);
@@ -101,7 +80,6 @@ public class Menu implements Screen {
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -173,22 +151,17 @@ public class Menu implements Screen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override
     public void dispose() {
-
     }
-
 }

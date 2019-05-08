@@ -87,7 +87,6 @@ public class Config {
         confs.put("special", keys[5]);
         confs.put("focus", keys[6]);
         update();
-        
     }
 
     public void updateHitboxStatus(String status) {

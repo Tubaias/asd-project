@@ -17,7 +17,7 @@ public class BossTootter extends Enemy {
     private Sprite sprite;
     private Animator animation;
     private ActionScript script;
-    private final int maxHP = 12000;
+    private final int maxHP = 15000;
     private int hitpoints;
     private float moveAccumulator;
     private float shootAccumulator;

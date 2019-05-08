@@ -21,7 +21,6 @@ public class BulletSystem {
     private BulletFactory factory;
     private EntityStore store;
 
-    private BulletPool starBulletPool;
     private BulletPool basicBulletPool;
     private BulletPool angledBulletPool;
     private BulletPool missilePool;
@@ -45,7 +44,6 @@ public class BulletSystem {
     public void createPools() {
         factory = new BulletFactory(store);
 
-        starBulletPool = new BulletPool(BulletType.STAR, factory);
         playerBulletPool = new BulletPool(BulletType.PLAYER, factory);
         largePlayerBulletPool = new BulletPool(BulletType.PLAYERLARGE, factory);
         basicBulletPool = new BulletPool(BulletType.BASIC, factory);
@@ -59,7 +57,6 @@ public class BulletSystem {
         pools.put(BulletType.BASIC, basicBulletPool);
         pools.put(BulletType.ANGLED, angledBulletPool);
         pools.put(BulletType.MISSILE, missilePool);
-        pools.put(BulletType.STAR, starBulletPool);
         pools.put(BulletType.SPECIAL, specialBulletPool);
     }
 
@@ -81,9 +78,6 @@ public class BulletSystem {
             case BASIC:
                 bullets.add(basicBulletPool.newObj(x, y, angle));
                 break;
-            case STAR:
-                bullets.add(starBulletPool.newObj(x, y, angle));
-                break;
             case ANGLED:
                 bullets.add(angledBulletPool.newObj(x, y, angle));
                 break;
@@ -92,9 +86,6 @@ public class BulletSystem {
                 break;
             case SPECIAL:
                 bullets.add(specialBulletPool.newObj(x, y, angle));
-                break;
-            default:
-                return;
         }
     }
 
@@ -108,12 +99,6 @@ public class BulletSystem {
 
     public ArrayList<Bullet> getBullets() {
         return bullets;
-    }
-
-    public void big_oof() {
-        System.out.println("bullets list size: " + bullets.size());
-        System.out.println("plaýer pool zise: " + playerBulletPool.size());
-        System.out.println("L pool zise: " + largePlayerBulletPool.size());
     }
 
     public void draw(SpriteBatch batch) {

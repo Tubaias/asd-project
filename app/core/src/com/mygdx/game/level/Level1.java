@@ -43,11 +43,6 @@ public class Level1 implements Level {
         background.move();
         foreground.move();
 
-        // if (eventIndex >= events.size()) {
-        //     eventIndex = 0;
-        //     deltaTimer = 0;
-        // }
-
         while (eventIndex < events.size() && events.get(eventIndex).isTime(deltaTimer)) {
             events.get(eventIndex).execute();
             eventIndex++;
@@ -87,8 +82,7 @@ public class Level1 implements Level {
 
         ActionScript bossScript = new ActionScript();
         bossScript.addCommand(new MoveCommand(300 - 256, 300, 2));
-        bossScript.addCommand(new WaitCommand(120));
-        //bossScript.addCommand(new DisappearCommand());
+        bossScript.addCommand(new WaitCommand(300));
 
         events.add(new EnemySpawnEvent(EnemyType.TOOTTER, 0.5f, 300 - 64, 800, store, factory, tootterScript.cpy()));
 
@@ -108,7 +102,6 @@ public class Level1 implements Level {
         spawnShootterWave(7.3f, 10, 400, "right");
 
         int popcornCycle = 50;
-
         for (float t = 0; t < 3; t += 0.1) {
             popcornCycle += 156;
 
@@ -140,7 +133,6 @@ public class Level1 implements Level {
         }
 
         popcornCycle = 50;
-
         for (float t = 0; t < 3; t += 0.1) {
             popcornCycle += 172;
 

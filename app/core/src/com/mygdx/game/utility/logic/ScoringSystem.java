@@ -18,7 +18,7 @@ public class ScoringSystem {
 
     public void save(String player) {
         String[] scores;
-        new Highscores().createHighScores();
+        Highscores.createHighScores();
         try {
             scores = FileIO.fileToArray("highscores.txt");
         } catch (Exception e) {

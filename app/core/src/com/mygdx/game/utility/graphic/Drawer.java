@@ -56,12 +56,12 @@ public class Drawer implements Disposable {
 
         this.specialAvailable.setScale(1.5f, 1.5f);
         this.specialUnavailable.setScale(1.5f, 1.5f);
-        
+
 
         this.specialAvailable.setPosition(550, 750);
         this.specialUnavailable.setPosition(550, 750);
-        
-        
+
+
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);
@@ -127,15 +127,19 @@ public class Drawer implements Disposable {
         for (Enemy e : store.enemies) {
             if (e.isHit()) {
                 batch.end();
+
                 whiteShader.begin();
                 whiteShader.setUniformi("white", 1);
                 whiteShader.end();
+
                 batch.begin();
                 batch.draw(e.getFrame(animationAccumulator), e.getPosition().x, e.getPosition().y);
                 batch.end();
+
                 whiteShader.begin();
                 whiteShader.setUniformi("white", 0);
                 whiteShader.end();
+
                 batch.begin();
             } else {
                 batch.draw(e.getFrame(animationAccumulator), e.getPosition().x, e.getPosition().y);

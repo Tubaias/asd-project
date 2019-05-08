@@ -1,11 +1,13 @@
 
-package com.mygdx.game.utility;
+package com.mygdx.game.io;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Config;
 import com.mygdx.game.entity.Player;
+import com.mygdx.game.utility.EntityStore;
+import com.mygdx.game.utility.Inputs;
 
 public class InputHandler {
     private Player player;

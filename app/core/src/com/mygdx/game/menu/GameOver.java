@@ -15,7 +15,6 @@ import com.mygdx.game.utility.logic.ScoringSystem;
 import com.mygdx.game.AsdGame;
 
 public class GameOver implements Screen {
-
     private AsdGame parent;
     private SpriteBatch batch;
     private FontDisplayer fontDisplay;
@@ -44,11 +43,9 @@ public class GameOver implements Screen {
         this.inputs = inputs;
         this.victory = victory;
     }
-    
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -62,7 +59,6 @@ public class GameOver implements Screen {
         int h = Gdx.graphics.getHeight();
         viewport.update(w, h);
         batch.setProjectionMatrix(camera.combined);
-
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -129,22 +125,18 @@ public class GameOver implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override
