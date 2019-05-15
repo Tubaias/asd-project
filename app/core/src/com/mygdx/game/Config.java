@@ -1,8 +1,6 @@
 package com.mygdx.game;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -43,11 +41,12 @@ public class Config {
     }
 
 
-    private void createConfig() throws IOException {
-        conf.options.put("width", 600);
-        conf.options.put("height", 800);
+    private void createConfig() {
+        conf.options.put("width", 600L);
+        conf.options.put("height", 800L);
         conf.options.put("hitboxes", "off");
         conf.options.put("lives", 3);
+
         conf.player1.put("up", "W");
         conf.player1.put("down", "S");
         conf.player1.put("left", "A");
@@ -56,8 +55,7 @@ public class Config {
         conf.player1.put("special", "K");
         conf.player1.put("focus", "L-Ctrl");
 
-
-        tomlWriter.write(conf, configFile);
+        update();
     }
 
     public void update(){   
@@ -76,6 +74,7 @@ public class Config {
         conf.player1.put("shoot", keys[4]);
         conf.player1.put("special", keys[5]);
         conf.player1.put("focus", keys[6]);
+
         update();
     }
 
