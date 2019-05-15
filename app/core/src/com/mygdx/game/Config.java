@@ -3,6 +3,7 @@ package com.mygdx.game;
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
@@ -18,17 +19,27 @@ public class Config {
 
         configFile = new File("config.toml");
 
+        createConfig();
+
         if (!configFile.exists()) {
             try {
-                createConfig();
+                update();
             } catch(Exception e) {
                 System.err.println("FAIL: " + e);
             }
         } else {
             Toml toml = new Toml().read(configFile);
 
-            conf.options = toml.getTable("options").toMap();
-            conf.player1 = toml.getTable("player1").toMap();
+            Toml options = toml.getTable("options");
+            Toml player1 = toml.getTable("player1");
+
+            for (Entry<String, Object> e : options.entrySet()) {
+                conf.options.put(e.getKey(), e.getValue());
+            }
+
+            for (Entry<String, Object> e : player1.entrySet()) {
+                conf.player1.put(e.getKey(), e.getValue());
+            }
         }
     }
 
@@ -54,11 +65,9 @@ public class Config {
         conf.player1.put("shoot", "J");
         conf.player1.put("special", "K");
         conf.player1.put("focus", "L-Ctrl");
-
-        update();
     }
 
-    public void update(){   
+    public void update(){
         try {
             tomlWriter.write(conf, configFile);
         } catch (Exception e) {
