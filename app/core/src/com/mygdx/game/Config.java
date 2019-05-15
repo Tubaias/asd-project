@@ -10,14 +10,12 @@ import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
 
 public class Config {
-    private Map<String, Object> confs;
     private TomlWriter tomlWriter;
     private File configFile;
     private ConfigObject conf;
 
     public Config() {
         tomlWriter = new TomlWriter.Builder().indentTablesBy(1).indentValuesBy(2).build();
-        confs = new HashMap<>();
         conf = new ConfigObject();
 
         configFile = new File("config.toml");
