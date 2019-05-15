@@ -127,4 +127,5 @@ Thumbs.db
 ## other stuff
 .vscode/
 config.txt
+config.toml
 highscores.txt

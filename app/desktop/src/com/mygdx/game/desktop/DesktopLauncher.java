@@ -9,8 +9,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		Config conf = new Config();
-		config.height = (Integer) conf.getOption("height", 800);
-		config.width = (Integer) conf.getOption("width", 600);
+		config.height = conf.getInteger("height", 800);
+		config.width = conf.getInteger("width", 600);
 		config.resizable = true;
 
 		int resolutionmode = 0; // for quick resolution swaps while developing
