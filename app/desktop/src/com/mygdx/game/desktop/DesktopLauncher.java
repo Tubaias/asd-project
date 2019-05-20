@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		Config conf = new Config();
 
-		config.setWindowedMode((Integer) conf.getOption("width", 600), (Integer) conf.getOption("height", 800));
+		config.setWindowedMode(conf.getInteger("width", 600), conf.getInteger("height", 800));
 		config.setResizable(true);
 		config.useVsync(false);
 

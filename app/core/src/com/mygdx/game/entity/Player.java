@@ -37,7 +37,7 @@ public class Player extends Entity {
         this.bulletFlipFlop = 0;
         this.focused = false;
 
-        this.lives = (Integer) new Config().getOption("lives", 3);
+        this.lives = new Config().getInteger("lives", 3);
         this.isInvuln = false;
     }
 

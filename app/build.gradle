@@ -11,7 +11,6 @@ buildscript {
     }
     dependencies {
 
-
     }
 }
 
@@ -51,6 +50,8 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
+        compile 'com.moandjiezana.toml:toml4j:0.7.2'
+
 
     }
 }
@@ -64,7 +65,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-
+        compile 'com.moandjiezana.toml:toml4j:0.7.2'
     }
 }
 

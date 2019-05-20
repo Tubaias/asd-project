@@ -1,0 +1,74 @@
+.
+├── com
+│   └── mygdx
+│       └── game
+│           ├── AsdGame.java
+│           ├── Config.java
+│           ├── entity
+│           │   ├── bullet
+│           │   │   ├── AngledBullet.java
+│           │   │   ├── BasicBullet.java
+│           │   │   ├── Bullet.java
+│           │   │   ├── BulletType.java
+│           │   │   ├── LargePlayerBullet.java
+│           │   │   ├── Missile.java
+│           │   │   ├── PlayerBullet.java
+│           │   │   └── SpecialBullet.java
+│           │   ├── enemy
+│           │   │   ├── BossTootter.java
+│           │   │   ├── Enemy.java
+│           │   │   ├── EnemyType.java
+│           │   │   ├── KopterPlane.java
+│           │   │   ├── Mine.java
+│           │   │   ├── RootterTootter.java
+│           │   │   ├── script
+│           │   │   │   ├── ActionCommand.java
+│           │   │   │   ├── ActionScript.java
+│           │   │   │   ├── DisappearCommand.java
+│           │   │   │   ├── MoveCommand.java
+│           │   │   │   └── WaitCommand.java
+│           │   │   └── ShootterTootter.java
+│           │   ├── Entity.java
+│           │   ├── Hitbox.java
+│           │   ├── Player.java
+│           │   ├── Pod.java
+│           │   └── Smoke.java
+│           ├── GameScreen.java
+│           ├── Highscores.java
+│           ├── io
+│           │   ├── FileIO.java
+│           │   ├── FontDisplayer.java
+│           │   └── InputHandler.java
+│           ├── level
+│           │   ├── Background.java
+│           │   ├── event
+│           │   │   ├── EnemySpawnEvent.java
+│           │   │   └── LevelEvent.java
+│           │   ├── Level1.java
+│           │   └── Level.java
+│           ├── menu
+│           │   ├── Controls.java
+│           │   ├── GameOver.java
+│           │   ├── HighscoresScreen.java
+│           │   ├── Menu.java
+│           │   ├── MenuScreen.java
+│           │   ├── Options.java
+│           │   └── Style.java
+│           └── utility
+│               ├── EntityStore.java
+│               ├── graphic
+│               │   ├── Animator.java
+│               │   ├── Drawer.java
+│               │   └── ScreenShake.java
+│               ├── Inputs.java
+│               └── logic
+│                   ├── BulletFactory.java
+│                   ├── BulletPool.java
+│                   ├── BulletSystem.java
+│                   ├── CollisionSystem.java
+│                   ├── EnemyFactory.java
+│                   ├── ScoringSystem.java
+│                   └── SmokeMachine.java
+└── tree.txt
+
+14 directories, 57 files
