@@ -20,9 +20,7 @@ public class GameScreen implements Screen {
     private BulletSystem bulletSystem;
     private CollisionSystem collisionSystem;
     private ScoringSystem scoring;
-
     private Player player;
-
     private AsdGame parent;
 
     public GameScreen(AsdGame game) {

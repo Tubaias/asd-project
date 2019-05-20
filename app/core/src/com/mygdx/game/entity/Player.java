@@ -21,6 +21,7 @@ public class Player extends Entity {
     private boolean isInvuln;
     private float invulnerabilityTimer;
     private float specialTimer;
+    private float shootTimer;
 
     public Player() {
         this.sprite = new Sprite(new Texture("images/ship.png"));
@@ -108,6 +109,11 @@ public class Player extends Entity {
     }
 
     public void shoot() {
+        if (shootTimer > 0) {
+            shootTimer -= Gdx.graphics.getDeltaTime();
+            return;
+        }
+
         float podLX = podL.getPosition().x + 16;
         float podRX = podR.getPosition().x + 16;
         float podY = position.y + 48 + bulletFlipFlop;
@@ -142,6 +148,8 @@ public class Player extends Entity {
         } else {
             bulletFlipFlop = 0;
         }
+
+        shootTimer = 1f / 60f;
     }
 
     public void special() {
