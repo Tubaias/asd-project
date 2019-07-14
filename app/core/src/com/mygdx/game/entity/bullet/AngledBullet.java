@@ -1,6 +1,7 @@
 
 package com.mygdx.game.entity.bullet;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -21,8 +22,10 @@ public class AngledBullet extends Bullet {
 
     @Override
     public void move() {
-        position.x += speed * Math.sin(Math.toRadians(angle));
-        position.y += speed * Math.cos(Math.toRadians(angle));
+        double speedTimesDelta = speed * (Gdx.graphics.getDeltaTime() / (1f / 60f));
+
+        position.x += speedTimesDelta * Math.sin(Math.toRadians(angle));
+        position.y += speedTimesDelta * Math.cos(Math.toRadians(angle));
 
         sprite.setPosition(position.x, position.y);
     }

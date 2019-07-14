@@ -70,6 +70,8 @@ public class InputHandler {
             movement.scl(9f);
         }
 
+        movement.scl(Gdx.graphics.getDeltaTime() / (1f / 60f));
+
         player.getPosition().add(movement);
     }
 }

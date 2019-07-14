@@ -28,7 +28,7 @@ public class Missile extends Bullet {
     @Override
     public void move() {
         if (speed < 16) {
-            speed++;
+            speed += (Gdx.graphics.getDeltaTime() / (1f / 60f));
         }
 
         Vector2 playerPosCopy = store.player.getPosition().cpy();
@@ -37,13 +37,15 @@ public class Missile extends Bullet {
         playerPosCopy.y = playerPosCopy.y + store.player.getSprite().getHeight() / 2;
 
         float angleToPlayer = playerPosCopy.sub(position).angle(new Vector2(0, 1));
-        angle += turnAmount(angleToPlayer);
+        angle += turnAmount(angleToPlayer) * (Gdx.graphics.getDeltaTime() / (1f / 60f));
         normalizeAngle();
 
         emitSmoke();
 
-        position.x += speed * Math.sin(Math.toRadians(angle));
-        position.y += speed * Math.cos(Math.toRadians(angle));
+        double speedTimesDelta = speed * (Gdx.graphics.getDeltaTime() / (1f / 60f));
+
+        position.x += speedTimesDelta * Math.sin(Math.toRadians(angle));
+        position.y += speedTimesDelta * Math.cos(Math.toRadians(angle));
 
         sprite.setPosition(position.x, position.y);
         sprite.setRotation((float) -angle);
@@ -62,7 +64,7 @@ public class Missile extends Bullet {
         double b = Math.signum(angle);
 
         if (a > 0 && b < 0) {
-            return -1* turnAmount;
+            return -1 * turnAmount;
         } else if (a < 0 && b > 0){
             return turnAmount;
         }

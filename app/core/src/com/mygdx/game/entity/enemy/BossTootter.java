@@ -21,6 +21,7 @@ public class BossTootter extends Enemy {
     private int hitpoints;
     private float moveAccumulator;
     private float shootAccumulator;
+    private float hitAccumulator;
     private float phaseAccumulator;
     private EntityStore store;
     private boolean dead = false;
@@ -104,7 +105,14 @@ public class BossTootter extends Enemy {
             moveAccumulator -= 0.0167;
         }
 
-        isHit = false;
+        if (isHit) {
+            hitAccumulator += Gdx.graphics.getDeltaTime();
+
+            if (hitAccumulator > 0.03) {
+                isHit = false;
+                hitAccumulator = 0;
+            }
+        }
 
         if (hitpoints > maxHP / 3 * 2) {
             shoot();

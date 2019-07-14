@@ -1,6 +1,7 @@
 
 package com.mygdx.game.entity.bullet;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -9,7 +10,8 @@ import com.mygdx.game.utility.EntityStore;
 public class SpecialBullet extends Bullet {
     private EntityStore store;
     private float rotationAngle;
-    private int lifeTime;
+    private float lifeTime;
+    private float bulletAccumulator;
 
     public SpecialBullet(float x, float y, float angle, Texture texture, EntityStore store) {
         this.store = store;
@@ -26,13 +28,15 @@ public class SpecialBullet extends Bullet {
 
     @Override
     public void move() {
-        if (lifeTime > 120) {
+        float delta = Gdx.graphics.getDeltaTime();
+
+        if (lifeTime > 2) {
             lifeTime = 0;
         }
 
-        lifeTime++;
+        lifeTime += delta;
 
-        if (lifeTime > 120) {
+        if (lifeTime > 2) {
             dead = true;
         }
 
@@ -40,15 +44,22 @@ public class SpecialBullet extends Bullet {
             speed += acceleration;
         }
 
-        position.x += speed * Math.sin(Math.toRadians(angle));
-        position.y += speed * Math.cos(Math.toRadians(angle));
+        double speedTimesDelta = speed * (delta / (1f / 60f));
+
+        position.x += speedTimesDelta * Math.sin(Math.toRadians(angle));
+        position.y += speedTimesDelta * Math.cos(Math.toRadians(angle));
 
         sprite.setPosition(position.x, position.y);
         sprite.setRotation(rotationAngle);
 
-        moreBullets();
+        bulletAccumulator += delta;
 
-        rotationAngle += 5;
+        while (bulletAccumulator > (1f / 60f)) {
+            moreBullets();
+            bulletAccumulator -= 1f / 60f;
+        }
+
+        rotationAngle += 5 * (delta / (1f / 60f));
 
         if (rotationAngle > 180) {
             rotationAngle -= 360;

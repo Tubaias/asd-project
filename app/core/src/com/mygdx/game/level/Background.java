@@ -1,6 +1,7 @@
 
 package com.mygdx.game.level;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -38,8 +39,10 @@ public class Background {
     }
 
     public void move() {
-        y1 -= speed;
-        y2 -= speed;
+        double speedTimesDelta = speed * (Gdx.graphics.getDeltaTime() / (1f / 60f));
+
+        y1 -= speedTimesDelta;
+        y2 -= speedTimesDelta;
 
         if (y1 <= -height) {
             y1 += 2 * height;

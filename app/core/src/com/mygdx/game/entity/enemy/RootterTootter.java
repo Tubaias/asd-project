@@ -19,6 +19,7 @@ public class RootterTootter extends Enemy {
     private ActionScript script;
     private int hitpoints = 30;
     private float moveAccumulator;
+    private float hitAccumulator;
     private EntityStore store;
     private boolean dead = false;
 
@@ -49,7 +50,14 @@ public class RootterTootter extends Enemy {
             moveAccumulator -= 0.0167;
         }
 
-        this.isHit = false;
+        if (isHit) {
+            hitAccumulator += Gdx.graphics.getDeltaTime();
+
+            if (hitAccumulator > 0.03) {
+                isHit = false;
+                hitAccumulator = 0;
+            }
+        }
     }
 
     @Override
