@@ -25,7 +25,7 @@ public class Controls implements Screen {
     private OrthographicCamera camera;
     private Viewport viewport;
 
-    public Controls(AsdGame game, Config config) {
+    public Controls(AsdGame game) {
         camera = new OrthographicCamera();
         viewport = new FitViewport(600, 800, camera);
         viewport.apply();
@@ -38,7 +38,7 @@ public class Controls implements Screen {
         keys = new String[]{"Up", "Down", "Left", "Right", "Shoot", "Special", "Focus"};
         assignedKeys = new String[7];
         parent = game;
-        this.config = config;
+        this.config = new Config();
     }
 
     private void handle(int code) {

@@ -25,7 +25,10 @@ public class AsdGame extends Game {
                 this.setScreen(game);
                 break;
             case "main":
-                this.setScreen(new MenuScreen(this, inputs));
+                if (menu == null) {
+                    menu = new MenuScreen(this, inputs);
+                }
+                this.setScreen(menu);
                 break;
             case "over":
                 this.setScreen(new GameOver(this, scoring, inputs, false));
@@ -37,7 +40,7 @@ public class AsdGame extends Game {
                 this.setScreen(new Options(this, inputs));
                 break;
             case "controls":
-                this.setScreen(new Controls(this, config));
+                this.setScreen(new Controls(this));
                 break;
             case "highscores":
                 this.setScreen(new HighscoresScreen(this));
