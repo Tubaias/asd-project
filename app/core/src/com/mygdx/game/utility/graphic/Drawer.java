@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Disposable;
@@ -107,6 +108,16 @@ public class Drawer implements Disposable {
         for (Smoke s : store.smokes.getSmokes()) {
             s.getSprite().draw(batch);
             s.Fade();
+        }
+
+        for (SingleUseAnimation animation : store.animations) {
+            TextureRegion frame = animation.getFrame();
+            System.out.println("HALooo");
+
+            if (frame != null) {
+                System.out.println("HALUUU");
+                batch.draw(frame, animation.getPosition().x, animation.getPosition().y);
+            }
         }
 
         fontDisplayer.drawFont(Integer.toString(store.scoring.getScore()), 75, 750, batch);

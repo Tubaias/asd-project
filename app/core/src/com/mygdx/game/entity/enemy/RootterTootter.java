@@ -10,6 +10,7 @@ import com.mygdx.game.entity.Hitbox;
 import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.entity.enemy.script.ActionScript;
 import com.mygdx.game.utility.graphic.Animator;
+import com.mygdx.game.utility.graphic.SingleUseAnimation;
 
 public class RootterTootter extends Enemy {
     private Vector2 position;
@@ -20,8 +21,6 @@ public class RootterTootter extends Enemy {
     private float moveAccumulator;
     private EntityStore store;
     private boolean dead = false;
-
-    private int deadFrames;
 
     public RootterTootter(float x, float y, Texture texture, EntityStore store, ActionScript script) {
         this.store = store;
@@ -38,15 +37,9 @@ public class RootterTootter extends Enemy {
     @Override
     public void step() {
         if (dead) {
-            if (deadFrames < 11) {
-                deadFrames++;
-            } else {
-                this.position = new Vector2(-1000,-1000);
-            }
-
             return;
         }
-
+        
         moveAccumulator += Gdx.graphics.getDeltaTime();
 
         hitbox.setPosition(position.x + sprite.getWidth() / 2, position.y + sprite.getHeight() / 2 + 25);
@@ -70,10 +63,14 @@ public class RootterTootter extends Enemy {
     }
 
     private void die() {
-        dead = true;
-        hitbox.setPosition(-1000, -1000);
-        animation = new Animator(new Texture("images/effects/explosion128.png"), 11);
         store.scoring.increase(1000);
+
+        float x = position.x;
+        float y = position.y;
+
+        this.disappear();
+
+        store.animations.add(new SingleUseAnimation(new Texture("images/effects/explosion128.png"), 11, 60, x, y));
     }
 
     @Override

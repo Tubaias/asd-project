@@ -39,13 +39,6 @@ public class Mine extends Enemy {
     @Override
     public void step() {
         if (dead) {
-            if (deadFrames < 14) {
-                deadFrames++;
-            } else {
-                deathBullets();
-                this.position = new Vector2(-1000,-1000);
-            }
-
             return;
         }
 

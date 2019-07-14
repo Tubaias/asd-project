@@ -11,6 +11,7 @@ import com.mygdx.game.entity.bullet.BulletType;
 import com.mygdx.game.entity.enemy.script.ActionScript;
 import com.mygdx.game.utility.EntityStore;
 import com.mygdx.game.utility.graphic.Animator;
+import com.mygdx.game.utility.graphic.SingleUseAnimation;
 
 public class KopterPlane extends Enemy {
     private Vector2 position;
@@ -27,7 +28,6 @@ public class KopterPlane extends Enemy {
 
     private int burst;
     private int interval;
-    private int deadFrames;
 
     public KopterPlane(float x, float y, Texture texture, EntityStore store, ActionScript script) {
         this.store = store;
@@ -44,15 +44,9 @@ public class KopterPlane extends Enemy {
     @Override
     public void step() {
         if (dead) {
-            if (deadFrames < 11) {
-                deadFrames++;
-            } else {
-                this.position = new Vector2(-1000,-1000);
-            }
-
             return;
         }
-
+        
         moveAccumulator += Gdx.graphics.getDeltaTime();
         shootAccumulator += Gdx.graphics.getDeltaTime();
         missileAccumulator += Gdx.graphics.getDeltaTime();
@@ -125,17 +119,19 @@ public class KopterPlane extends Enemy {
     }
 
     private void die() {
-        dead = true;
-        hitbox.setPosition(-1000, -1000);
-        animation = new Animator(new Texture("images/effects/explosion256.png"), 11);
         store.scoring.increase(10000);
-        store.screenShake.startShake(8, 0.3f);
+
+        float x = position.x;
+        float y = position.y;
+
+        this.disappear();
+
+        store.animations.add(new SingleUseAnimation(new Texture("images/effects/explosion256.png"), 11, 60, x, y));
     }
 
     @Override
     public void disappear() {
         dead = true;
-        deadFrames = 11;
         position = new Vector2(-1000,-1000);
         hitbox.setPosition(-1000, -1000);
     }
